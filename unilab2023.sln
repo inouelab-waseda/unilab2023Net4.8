@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unilab2023", "unilab2023.csproj", "{0752372C-BA75-4062-8CB5-08BDE1B8B7FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0752372C-BA75-4062-8CB5-08BDE1B8B7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0752372C-BA75-4062-8CB5-08BDE1B8B7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0752372C-BA75-4062-8CB5-08BDE1B8B7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0752372C-BA75-4062-8CB5-08BDE1B8B7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74482E85-0ED9-44E2-B7FC-213D6A557554}
+	EndGlobalSection
+EndGlobal
