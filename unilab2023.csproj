@@ -84,6 +84,23 @@
     <EmbeddedResource Include="スタート画面.resx">
       <DependentUpon>スタート画面.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\Debug\map1.csv" />
+    <None Include="bin\Debug\Map52201.csv" />
+    <None Include="bin\Debug\Map52202.csv" />
+    <None Include="bin\Debug\Map52203.csv" />
+    <None Include="bin\Debug\MapIandJ_for.csv" />
+    <None Include="bin\Debug\MapIce_Saiki.csv" />
+    <None Include="bin\Debug\MaPJump_for.csv" />
+    <None Include="bin\Debug\stage1.csv" />
+    <None Include="bin\Debug\stage10.csv" />
+    <None Include="bin\Debug\stage2.csv" />
+    <None Include="bin\Debug\stage3.csv" />
+    <None Include="bin\Debug\stage4.csv" />
+    <None Include="bin\Debug\stage5.csv" />
+    <None Include="bin\Debug\stage6.csv" />
+    <None Include="bin\Debug\stage7.csv" />
+    <None Include="bin\Debug\stage8.csv" />
+    <None Include="bin\Debug\stage9.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -96,6 +113,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\character.jpg" />
+    <Content Include="bin\Debug\green.jpg" />
+    <Content Include="bin\Debug\green1.jpg" />
+    <Content Include="bin\Debug\sea.jpg" />
+    <Content Include="bin\Debug\white.jpg" />
+    <Content Include="bin\Debug\たぬき.png" />
+    <Content Include="bin\Debug\たぬき2.png" />
+    <Content Include="bin\Debug\ふくろう.png" />
+    <Content Include="bin\Debug\動く床_上.gif" />
+    <Content Include="bin\Debug\動く床_下.gif" />
+    <Content Include="bin\Debug\動く床_右.gif" />
+    <Content Include="bin\Debug\動く床_左.gif" />
+    <Content Include="bin\Debug\右.gif" />
+    <Content Include="bin\Debug\岩場.jpg" />
+    <Content Include="bin\Debug\氷.png" />
+    <Content Include="bin\Debug\草原 %281%29.jpg" />
+    <Content Include="bin\Debug\草原 %282%29.jpg" />
+    <Content Include="bin\Debug\草原.jpg" />
+    <Content Include="bin\Debug\跳.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
