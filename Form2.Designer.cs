@@ -55,9 +55,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(638, 233);
+            this.button1.Location = new System.Drawing.Point(637, 219);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 26);
+            this.button1.Size = new System.Drawing.Size(195, 52);
             this.button1.TabIndex = 2;
             this.button1.Text = "ゲームスタート";
             this.button1.UseVisualStyleBackColor = true;

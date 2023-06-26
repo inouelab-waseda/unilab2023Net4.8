@@ -45,6 +45,7 @@ namespace unilab2023
             Graphics g2 = Graphics.FromImage(bmp2);
             pictureBox1.Image = bmp1;
             pictureBox2.Image = bmp2;
+            this.Load += Form1_Load;
         }
 
         public class Global //グローバル変数格納
