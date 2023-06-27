@@ -95,6 +95,8 @@
     <None Include="bin\Debug\stage10.csv" />
     <None Include="bin\Debug\stage2.csv" />
     <None Include="bin\Debug\stage3.csv" />
+    <None Include="bin\Debug\stage4-1.csv" />
+    <None Include="bin\Debug\stage4-2.csv" />
     <None Include="bin\Debug\stage4.csv" />
     <None Include="bin\Debug\stage5.csv" />
     <None Include="bin\Debug\stage6.csv" />
