@@ -11,6 +11,7 @@ using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Collections;
 
 
 namespace unilab2023
@@ -381,23 +382,37 @@ namespace unilab2023
             var get_move_a_list = new List<string>();
             var get_move_b_list = new List<string>();
 
-            //get_move_b_list.AddRange(get_move_b);
+            get_move_a_list.AddRange(get_move_a);
+            get_move_b_list.AddRange(get_move_b);
+
             int loop_count = 0;
-            while (get_move_a_list.Count <= 50)
+            while (get_move_a_list.Count <= 30)
             {
                 
-                for (int i = 0; i < get_move_a.Length; i++)
+                for(int i=0; i<get_move_a_list.Count; i++)
                 {
-                    if (get_move_a[i] == "B")
+                    var get_move_a_list_copy = new List<string>(get_move_a_list);
+                    get_move_a_list.Clear();
+                    if (get_move_a_list_copy[i] == "B")
                     {
                         get_move_a_list.AddRange(get_move_b);
 
-                    }
-                    else
+                    }else if (get_move_a_list_copy[i] == "A")
                     {
-                        get_move_a_list.Add(get_move_a[i]);
+                        get_move_a_list.AddRange(get_move_a_list_copy);
+
+                    }else
+                    {
+                        get_move_a_list.Add(get_move_a_list_copy[i]);
                     }
                 }
+                loop_count++;
+
+                if(loop_count > 5)
+                {
+                    break;
+                }
+
             }
             
 
