@@ -154,7 +154,7 @@
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(146, 166);
             this.listBox2.TabIndex = 7;
-            this.listBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox_MouseDown);
+            //this.listBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox_MouseDown);
             // 
             // listBox5
             // 
@@ -169,7 +169,7 @@
             this.listBox5.Size = new System.Drawing.Size(146, 112);
             this.listBox5.TabIndex = 8;
             this.listBox5.SelectedIndexChanged += new System.EventHandler(this.listBox5_SelectedIndexChanged);
-            this.listBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox_MouseDown);
+            //this.listBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox_MouseDown);
             // 
             // pictureBox3
             // 

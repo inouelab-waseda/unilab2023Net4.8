@@ -185,7 +185,7 @@ namespace unilab2023
 
 
 
-
+        bool Is_enable_drop = true;
         /*******関数******/
 
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
@@ -208,6 +208,8 @@ namespace unilab2023
                 ////ドロップ効果がMoveの時はもとのアイテムを削除する
                 //if (dde == DragDropEffects.Move)
                 //    lbx.Items.RemoveAt(itemIndex);
+
+                Is_enable_drop = true;
             }
         }
 
@@ -227,7 +229,7 @@ namespace unilab2023
         private void ListBox_DragDrop(object sender, DragEventArgs e)
         {
             //ドロップされたデータがstring型か調べる
-            if (e.Data.GetDataPresent(typeof(string)))
+            if (e.Data.GetDataPresent(typeof(string)) && Is_enable_drop)
             {
                 ListBox target = (ListBox)sender;
                 //ドロップされたデータ(string型)を取得
@@ -235,6 +237,8 @@ namespace unilab2023
                     (string)e.Data.GetData(typeof(string));
                 //ドロップされたデータをリストボックスに追加する
                 target.Items.Add(itemText);
+
+                Is_enable_drop = false;
             }
         }
 
