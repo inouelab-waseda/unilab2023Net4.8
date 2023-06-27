@@ -12,24 +12,18 @@ namespace unilab2023
 {
     public partial class ステージ選択画面 : Form
     {
-        Form1 f1 = new Form1();
+        Form1 form1 = new Form1();
 
         public ステージ選択画面()
         {
             InitializeComponent();
         }
 
-        private void ステージ選択画面_load(object sender, EventArgs e)
-        {
-            //Form1 f1 = new Form1();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            string str = comboBox1.SelectedItem.ToString();
-            f1.stageName = str;
-            f1.Show();
-            this.Close();
+            string selectedStageName = comboBox1.SelectedItem.ToString();
+            form1.stageName = selectedStageName;
+            form1.Show();
         }
     }
 }
