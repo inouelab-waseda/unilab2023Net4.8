@@ -385,14 +385,18 @@ namespace unilab2023
             get_move_a_list.AddRange(get_move_a);
             get_move_b_list.AddRange(get_move_b);
 
+
             int loop_count = 0;
-            while (get_move_a_list.Count <= 30)
+            while (get_move_a_list.Count <= 30 || get_move_b_list.Count <= 30)
             {
-                
-                for(int i=0; i<get_move_a_list.Count; i++)
+                var get_move_a_list_copy = new List<string>(get_move_a_list);
+                var get_move_b_list_copy = new List<string>(get_move_b_list);
+                get_move_a_list.Clear();
+                get_move_b_list.Clear();
+
+                for (int i=0; i<get_move_a_list_copy.Count; i++)
                 {
-                    var get_move_a_list_copy = new List<string>(get_move_a_list);
-                    get_move_a_list.Clear();
+                    
                     if (get_move_a_list_copy[i] == "B")
                     {
                         get_move_a_list.AddRange(get_move_b);
@@ -404,6 +408,25 @@ namespace unilab2023
                     }else
                     {
                         get_move_a_list.Add(get_move_a_list_copy[i]);
+                    }
+                }
+
+                for (int i = 0; i < get_move_b_list_copy.Count; i++)
+                {
+
+                    if (get_move_b_list_copy[i] == "B")
+                    {
+                        get_move_b_list.AddRange(get_move_b);
+
+                    }
+                    else if (get_move_b_list_copy[i] == "A")
+                    {
+                        get_move_b_list.AddRange(get_move_b_list_copy);
+
+                    }
+                    else
+                    {
+                        get_move_b_list.Add(get_move_b_list_copy[i]);
                     }
                 }
                 loop_count++;
