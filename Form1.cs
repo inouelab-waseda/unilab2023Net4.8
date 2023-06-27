@@ -408,6 +408,8 @@ namespace unilab2023
             var move_b = new List<int[]>();
             string[] get_move_a = this.listBox1.Items.Cast<string>().ToArray();
             string[] get_move_b = this.listBox3.Items.Cast<string>().ToArray();
+            get_move_a = exchange_move(get_move_a, get_move_a.Length);
+            get_move_b = exchange_move(get_move_b, get_move_b.Length);
             var get_move_a_list = new List<string>();
             var get_move_b_list = new List<string>();
 
@@ -620,6 +622,33 @@ namespace unilab2023
 
             return move;
         }
+
+        //矢印変換の関数
+        public string[] exchange_move(string[] get_move, int l)
+        {
+            List<string> newget_move = get_move.ToList();
+            for (int i = 0; i < l; i++)
+            {
+                if (newget_move[i] == "↑")
+                {
+                    newget_move[i] = "up";
+                }
+                if (newget_move[i] == "→")
+                {
+                    newget_move[i] = "right";
+                }
+                if (newget_move[i] == "←")
+                {
+                    newget_move[i] = "left";
+                }
+                if (newget_move[i] == "↓")
+                {
+                    newget_move[i] = "down";
+                }
+            }
+            return newget_move.ToArray();
+        }
+
 
         //当たり判定
         public bool Colision_detection(int x, int y, int[,] Map, List<int[]> move)
