@@ -107,6 +107,8 @@ namespace unilab2023
         /****button****/
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Visible = false;
+            button1.Enabled = false;
             Global.move = Movement(); //ユーザーの入力を読み取る
             label6.Visible = false;
             SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
@@ -130,15 +132,36 @@ namespace unilab2023
 
         private void button2_Click(object sender, EventArgs e) //リストボックス内の動き削除
         {
-            listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            if (listBox1.SelectedIndex > -1)
+            {
+                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            }
+            else
+            {
+                listBox1.Items.Clear();
+            }
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            listBox3.Items.RemoveAt(listBox3.SelectedIndex);
+            if (listBox1.SelectedIndex > -1)
+            {
+                listBox3.Items.RemoveAt(listBox3.SelectedIndex);
+            }
+            else
+            {
+                listBox3.Items.Clear();
+            }
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            listBox4.Items.RemoveAt(listBox4.SelectedIndex);
+            if (listBox4.SelectedIndex > -1)
+            {
+                listBox4.Items.RemoveAt(listBox4.SelectedIndex);
+            }
+            else
+            {
+                listBox4.Items.Clear();
+            }
         }
 
 
@@ -179,7 +202,29 @@ namespace unilab2023
         //}
         private void button6_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            //初期位置に戻す
+            Global.x_now = Global.x_start; 
+            Global.y_now = Global.y_start;
+
+            //初期位置に書き換え
+            Graphics g2 = Graphics.FromImage(bmp2);
+            g2.Clear(Color.Transparent);
+            Image character_me = Image.FromFile("たぬき.png");
+            Image character_enemy = Image.FromFile("ふくろう.png");
+            int cell_length = pictureBox1.Width / 10;
+            g2.DrawImage(character_me, Global.x_now * cell_length, Global.y_now * cell_length, cell_length, cell_length);
+            g2.DrawImage(character_enemy, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+            this.Invoke((MethodInvoker)delegate
+            {
+                // pictureBox2を同期的にRefreshする
+                pictureBox2.Refresh();
+            });
+
+            //初期設定に戻す
+            button1.Visible = true;
+            button1.Enabled = true;
+            Global.count = 0;
+
         }
 
         /******button fin******/
