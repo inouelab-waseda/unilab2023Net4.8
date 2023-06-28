@@ -18,8 +18,36 @@ namespace unilab2023
 {
     public partial class Form1 : Form
     {
-        Bitmap bmp1, bmp2;
+        Bitmap bmp1, bmp2, bmp3;
 
+        Brush goalBackgroundColor = new SolidBrush(Color.Yellow);
+        Brush startBackgroundColor = new SolidBrush(Color.Blue);
+
+        Image img_tanuki = Image.FromFile("たぬき.png");
+
+        Image character_me = Image.FromFile("たぬき.png");
+        Image character_enemy = Image.FromFile("ふくろう.png");
+
+        Image img_green = Image.FromFile("草原.jpg");
+        Image img_white = Image.FromFile("岩場.jpg");
+        Image img_ice = Image.FromFile("氷.png");
+        Image img_jump = Image.FromFile("跳.png");
+        Image animatedImage_up = Image.FromFile("動く床_上.gif");
+        Image animatedImage_right = Image.FromFile("動く床_右.gif");
+        Image animatedImage_down = Image.FromFile("動く床_下.gif");
+        Image animatedImage_left = Image.FromFile("動く床_左.gif");
+
+        //MemoryStream stream = new MemoryStream();
+        //byte[] bytes = File.ReadAllBytes("右.gif");
+        //stream.Write(bytes, 0, bytes.Length);
+        //Bitmap animatedImage_right = new Bitmap(stream);
+
+        //アニメ開始
+        //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
+        //DoubleBuffered = true;
+
+
+        //ステージ名の受け渡し
         private string _stageName;
         public string stageName
         {
@@ -30,22 +58,22 @@ namespace unilab2023
         public Form1()
         {
             InitializeComponent();
-            //pictureBox2の設定
+
+            //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
             pictureBox1.Location = new Point(600, 50);
             pictureBox2.Location = new Point(0, 0);
             pictureBox1.ClientSize = new Size(350, 350);
             pictureBox2.ClientSize = new Size(350, 350);
-
             pictureBox2.BackColor = Color.Transparent;
-
 
             bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             bmp2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
-            Graphics g = Graphics.FromImage(bmp1);
-            Graphics g2 = Graphics.FromImage(bmp2);
+            bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
             pictureBox1.Image = bmp1;
             pictureBox2.Image = bmp2;
+            pictureBox3.Image = bmp3;
+
             this.Load += Form1_Load;
         }
 
@@ -62,46 +90,31 @@ namespace unilab2023
             public static int count = 0; //試行回数カウント
             public static int miss_count = 0; //ミスカウント
 
-            public static List<int[]> move;
+            public static List<int[]> move;  //プレイヤーの移動指示を入れるリスト
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void Form1_Load(object sender, EventArgs e)
         {
-            //Global.map = CreateStage("Map52203"); //ステージ作成
             Global.map = CreateStage(stageName); //ステージ作成
 
-
-            //ListBox1のイベントハンドラを追加
+            //ListBoxのイベントハンドラを追加
             listBox1.SelectionMode = SelectionMode.One;
-            listBox2.MouseDown += new MouseEventHandler(ListBox_MouseDown);
-            //ListBox2のイベントハンドラを追加
             listBox1.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox1.DragDrop += new DragEventHandler(ListBox_DragDrop);
-
+            listBox2.MouseDown += new MouseEventHandler(ListBox_MouseDown);
             listBox3.SelectionMode = SelectionMode.One;
-            //ListBox3のイベントハンドラを追加
             listBox3.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox3.DragDrop += new DragEventHandler(ListBox_DragDrop);
-
-            //ListBox4のイベントハンドラを追加
-            listBox5.MouseDown += new MouseEventHandler(ListBox_MouseDown);
             listBox4.SelectionMode = SelectionMode.One;
             listBox4.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox4.DragDrop += new DragEventHandler(ListBox_DragDrop);
+            listBox5.MouseDown += new MouseEventHandler(ListBox_MouseDown);
 
             //ヒントを教えるキャラのアイコンを表示
-            Image img_tanuki = Image.FromFile("たぬき.png");
-
-            Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
             Graphics g3 = Graphics.FromImage(bmp3);
-
             g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-
-            pictureBox3.Image = bmp3;
             g3.Dispose();
-
         }
 
         /****button****/
@@ -130,7 +143,7 @@ namespace unilab2023
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) //リストボックス内の動き削除
+        private void button2_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex > -1)
             {
@@ -163,7 +176,6 @@ namespace unilab2023
                 listBox4.Items.Clear();
             }
         }
-
 
         //A, Bボタン削除
         //private void button4_Click(object sender, EventArgs e)
@@ -200,6 +212,7 @@ namespace unilab2023
         //        button5.Enabled = false;
         //    }
         //}
+
         private void button6_Click(object sender, EventArgs e)
         {
             //初期位置に戻す
@@ -209,8 +222,6 @@ namespace unilab2023
             //初期位置に書き換え
             Graphics g2 = Graphics.FromImage(bmp2);
             g2.Clear(Color.Transparent);
-            Image character_me = Image.FromFile("たぬき.png");
-            Image character_enemy = Image.FromFile("ふくろう.png");
             int cell_length = pictureBox1.Width / 10;
             g2.DrawImage(character_me, Global.x_now * cell_length, Global.y_now * cell_length, cell_length, cell_length);
             g2.DrawImage(character_enemy, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
@@ -224,16 +235,14 @@ namespace unilab2023
             button1.Visible = true;
             button1.Enabled = true;
             Global.count = 0;
-
         }
 
         /******button fin******/
 
 
-
-        bool Is_enable_drop = true;
         /*******関数******/
-
+        //ListBox要素操作
+        bool isEnableDrop = true;
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
         {
             //マウスの左ボタンだけが押されている時のみドラッグできるようにする
@@ -255,11 +264,9 @@ namespace unilab2023
                 //if (dde == DragDropEffects.Move)
                 //    lbx.Items.RemoveAt(itemIndex);
 
-                Is_enable_drop = true;
+                isEnableDrop = true;
             }
         }
-
-        //ListBox2内にドラッグされた時
         private void ListBox_DragEnter(object sender, DragEventArgs e)
         {
             //ドラッグされているデータがstring型か調べ、
@@ -270,12 +277,10 @@ namespace unilab2023
                 //string型でなければ受け入れない
                 e.Effect = DragDropEffects.None;
         }
-
-        //ListBox2にドロップされたとき
         private void ListBox_DragDrop(object sender, DragEventArgs e)
         {
             //ドロップされたデータがstring型か調べる
-            if (e.Data.GetDataPresent(typeof(string)) && Is_enable_drop)
+            if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
             {
                 ListBox target = (ListBox)sender;
                 //ドロップされたデータ(string型)を取得
@@ -284,10 +289,11 @@ namespace unilab2023
                 //ドロップされたデータをリストボックスに追加する
                 target.Items.Add(itemText);
 
-                Is_enable_drop = false;
+                isEnableDrop = false;
             }
         }
 
+        //これなに
         void Image_FrameChanged(object sender, EventArgs e)
         {
             this.Invalidate();
@@ -304,6 +310,7 @@ namespace unilab2023
             base.OnPaint(e);
         }
         */
+
         //ステージ描写
         private int[,] CreateStage(string stage_name)
         {
@@ -333,28 +340,6 @@ namespace unilab2023
 
             Graphics g1 = Graphics.FromImage(bmp1);
             Graphics g2 = Graphics.FromImage(bmp2);
-            Brush Y = new SolidBrush(Color.Yellow);
-            Brush B = new SolidBrush(Color.Blue);
-
-            Image img_green = Image.FromFile("草原.jpg");
-            Image img_white = Image.FromFile("岩場.jpg");
-            Image character_me = Image.FromFile("たぬき.png");
-            Image character_enemy = Image.FromFile("ふくろう.png");
-            Image img_ice = Image.FromFile("氷.png");
-            Image img_jump = Image.FromFile("跳.png");
-            Image animatedImage_up = Image.FromFile("動く床_上.gif");
-            Image animatedImage_right = Image.FromFile("動く床_右.gif");
-            Image animatedImage_down = Image.FromFile("動く床_下.gif");
-            Image animatedImage_left = Image.FromFile("動く床_左.gif");
-
-            //MemoryStream stream = new MemoryStream();
-            //byte[] bytes = File.ReadAllBytes("右.gif");
-            //stream.Write(bytes, 0, bytes.Length);
-            //Bitmap animatedImage_right = new Bitmap(stream);
-
-            //アニメ開始
-            //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
-            //DoubleBuffered = true;
 
             int cell_length = pictureBox1.Width / 10;
 
@@ -396,7 +381,7 @@ namespace unilab2023
                         //    g1.DrawImage(img_tree, x * cell_length, y * cell_length, cell_length, cell_length);
                         //    break;
                         case 100:
-                            g1.FillRectangle(B, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g1.FillRectangle(startBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_start = x;
                             Global.y_start = y;
                             Global.x_now = x;
@@ -404,7 +389,7 @@ namespace unilab2023
                             g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
                         case 101:
-                            g1.FillRectangle(Y, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             g2.DrawImage(character_enemy, x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
@@ -416,7 +401,6 @@ namespace unilab2023
             return map;
         }
 
-        //ユーザーの入力を変換
         //ユーザーの入力を変換
         public List<int[]> Movement()
         {
@@ -431,7 +415,6 @@ namespace unilab2023
 
             get_move_a_list.AddRange(get_move_a);
             get_move_b_list.AddRange(get_move_b);
-
 
             int loop_count = 0;
             while (get_move_a_list.Count <= 30 || get_move_b_list.Count <= 30)
@@ -482,18 +465,14 @@ namespace unilab2023
                 {
                     break;
                 }
-
             }
-            
 
             get_move_b_list.AddRange(get_move_b);
-
-
-
 
             if (get_move_a.Length != 0)
             {
                 //string[] get_move_a = this.listBox1.Items.Cast<string>().ToArray();
+
                 for (int i = 0; i < get_move_a_list.Count; i++)
                 {
                     if (get_move_a_list[i].StartsWith("for"))
@@ -561,7 +540,6 @@ namespace unilab2023
             {
                 //string[] get_move_b = this.listBox3.Items.Cast<string>().ToArray();
 
-
                 for (int i = 0; i < get_move_b_list.Count; i++)
                 {
                     if (get_move_b_list[i].StartsWith("for"))
@@ -626,8 +604,10 @@ namespace unilab2023
                 }
 
             }
+
             string[] get_move_main = this.listBox4.Items.Cast<string>().ToArray();
             var move = new List<int[]>();
+
             for (int i = 0; i < get_move_main.Length; i++)
             {
                 if (get_move_main[i] == "A")
@@ -639,7 +619,6 @@ namespace unilab2023
                     move.AddRange(move_b);
                 }
             }
-
 
             return move;
         }
@@ -681,7 +660,6 @@ namespace unilab2023
             int new_y = y + move[0][1];
 
             if ((new_x + 1) <= 0 || (max_x - new_x) <= 0 || (new_y + 1) <= 0 || (max_y - new_y) <= 0) return false;
-            //else if (Map[new_x, new_y] == 0) return false;
             else if (Map[new_y, new_x] == 0) return false;
             else
             {
@@ -739,8 +717,6 @@ namespace unilab2023
                 Global.y_now = y;
 
                 g2.Clear(Color.Transparent);
-                Image character_me = Image.FromFile("たぬき.png");
-                Image character_enemy = Image.FromFile("ふくろう.png");
                 g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
                 g2.DrawImage(character_enemy, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
 
@@ -834,12 +810,41 @@ namespace unilab2023
             Global.count += 1;
         }
 
-
         /*******関数 fin******/
-        /******つかわない******/
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
 
+
+        /******つかわない******/
+        //作業中？
+        bool visible = false;
+        private void pictureBox3_MouseClick(object sender, MouseEventArgs e)
+        {
+            //アイコンをクリックすることでヒントを表示（アイコン以外を押しても表示されない）
+            if (e.X < pictureBox3.Height)
+            {
+                Font fnt = new Font("MS UI Gothic", 15);
+                int sp = 8;
+
+                Bitmap bmp3 = new Bitmap(pictureBox3.Image);
+                Graphics g3 = Graphics.FromImage(bmp3);
+
+                if (!visible)
+                {
+                    if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+                    else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+                }
+                else
+                {
+                    bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+                    g3 = Graphics.FromImage(bmp3);
+                    g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+                    g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+                }
+
+                visible = !visible;
+
+                pictureBox3.Image = bmp3;
+                g3.Dispose();
+            }
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -860,7 +865,6 @@ namespace unilab2023
                 }
             }
         }
-
         private void listBox3_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (listBox3.SelectedItem != null)
@@ -880,70 +884,35 @@ namespace unilab2023
             }
         }
 
+        //以下空の関数（消さない）
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
         private void pictureBox3_Click(object sender, EventArgs e)
         {
 
         }
-
-        bool visible = false;
-        private void pictureBox3_MouseClick(object sender, MouseEventArgs e)
-        {
-            //アイコンをクリックすることでヒントを表示（アイコン以外を押しても表示されない）
-            if (e.X < pictureBox3.Height)
-            {
-                Font fnt = new Font("MS UI Gothic", 15);
-                int sp = 8;
-
-                Bitmap bmp3 = new Bitmap(pictureBox3.Image);
-                Graphics g3 = Graphics.FromImage(bmp3);
-
-                if (!visible)
-                {
-                    if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-                    else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-                }
-                else
-                {
-                    Image img_tanuki = Image.FromFile("たぬき.png");
-                    bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-                    g3 = Graphics.FromImage(bmp3);
-
-                    g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-
-                    g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-                }
-                visible = !visible; ;
-
-                pictureBox3.Image = bmp3;
-                g3.Dispose();
-            }
-        }
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
         private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
 
         }
-
         private void listBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ここに処理を書く
