@@ -21,9 +21,8 @@ namespace unilab2023
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ステージ選択画面 form = new ステージ選択画面();
-            form.Show();
-            //this.Close();  //画面遷移すると自動的に閉じる設定にするならコメントイン、ただし現設定だとプロジェクトが終了してしまう
+            ステージ選択画面 form2 = new ステージ選択画面();
+            form2.Show();
         }
 
         private void スタート画面_Load(object sender, EventArgs e)
