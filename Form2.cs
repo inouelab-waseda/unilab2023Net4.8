@@ -25,5 +25,10 @@ namespace unilab2023
             form1.stageName = selectedStageName;
             form1.Show();
         }
+
+        private void ステージ選択画面_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

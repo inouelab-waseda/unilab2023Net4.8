@@ -111,14 +111,14 @@ namespace unilab2023
             int name_x = 150;
             int name_y = 40;
 
-            int dia_x = 600;
-            int dia_y = 150;
+            int dia_x = 1500;
+            int dia_y = 200;
 
-            g1.FillRectangle(Brushes.Black, 0, face, name_x, name_y);
-            g1.DrawRectangle(pen, 0, face, name_x, name_y);
+            g1.FillRectangle(Brushes.Black, 15, 500+face, name_x, name_y);
+            g1.DrawRectangle(pen, 15, 500+face, name_x, name_y);
 
-            g1.FillRectangle(Brushes.Black, 0, face + name_y, dia_x, dia_y);
-            g1.DrawRectangle(pen, 0, face + name_y, dia_x, dia_y);
+            g1.FillRectangle(Brushes.Black, 15, 500+face + name_y, dia_x, dia_y);
+            g1.DrawRectangle(pen, 15, 500+face + name_y, dia_x, dia_y);
 
             Font fnt = new Font("MS UI Gothic", 20);
             int sp = 5;
@@ -129,15 +129,15 @@ namespace unilab2023
             if (conv.name == (int)chara.shizu)
             {
                 talker = "しずちゃん";
-                g1.DrawImage(img_shizu, 0, 0, face, face);
+                g1.DrawImage(img_shizu, 15, 500, face, face);
             }
             if (conv.name == (int)chara.ikaP)
             {
                 talker = "イカピー";
-                g1.DrawImage(img_ikaP, 0, 0, face, face);
+                g1.DrawImage(img_ikaP, 15, 500, face, face);
             }
-            g1.DrawString(talker, fnt, Brushes.White, 0 + sp, face + sp);
-            g1.DrawString(conv.dialogue, fnt, Brushes.White, 0 + sp, face + name_y + sp);
+            g1.DrawString(talker, fnt, Brushes.White, 15 + sp, 500+face + sp);
+            g1.DrawString(conv.dialogue, fnt, Brushes.White, 15 + sp, 500+face + name_y + sp);
 
             pictureBox1.Image = bmp1;
             g1.Dispose();
