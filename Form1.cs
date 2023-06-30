@@ -63,8 +63,8 @@ namespace unilab2023
             pictureBox2.Parent = pictureBox1;
             pictureBox1.Location = new Point(600, 50);
             pictureBox2.Location = new Point(0, 0);
-            pictureBox1.ClientSize = new Size(350, 350);
-            pictureBox2.ClientSize = new Size(350, 350);
+            pictureBox1.ClientSize = new Size(600, 600);
+            pictureBox2.ClientSize = new Size(600, 600);
             pictureBox2.BackColor = Color.Transparent;
 
             bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -816,35 +816,33 @@ namespace unilab2023
         /******つかわない******/
         //作業中？
         bool visible = false;
-        private void pictureBox3_MouseClick(object sender, MouseEventArgs e)
-        {
-            //アイコンをクリックすることでヒントを表示（アイコン以外を押しても表示されない）
-            if (e.X < pictureBox3.Height)
-            {
-                Font fnt = new Font("MS UI Gothic", 15);
-                int sp = 8;
+        private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
+        {   
+               Font fnt = new Font("MS UI Gothic", 15);
+               int sp = 8;
 
-                Bitmap bmp3 = new Bitmap(pictureBox3.Image);
-                Graphics g3 = Graphics.FromImage(bmp3);
+               Bitmap bmp3 = new Bitmap(pictureBox3.Image);
+               Graphics g3 = Graphics.FromImage(bmp3);
 
-                if (!visible)
-                {
-                    if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-                    else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-                }
-                else
-                {
-                    bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-                    g3 = Graphics.FromImage(bmp3);
-                    g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-                    g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-                }
+               if (!visible)
+               {
+                   g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
+                   if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+                   else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+               }
+               else
+               {
+                   bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+                   g3 = Graphics.FromImage(bmp3);
+                   g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+                   g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+               }
 
-                visible = !visible;
+               visible = !visible;
 
-                pictureBox3.Image = bmp3;
-                g3.Dispose();
-            }
+               pictureBox3.Image = bmp3;
+               g3.Dispose();
+            
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -909,6 +907,37 @@ namespace unilab2023
         {
 
         }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
 
