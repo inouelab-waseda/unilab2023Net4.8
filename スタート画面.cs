@@ -108,8 +108,8 @@ namespace unilab2023
             Pen pen = new Pen(Color.FromArgb(100, 255, 100), 2);
 
             int face = 100;
-            int name_x = 150;
-            int name_y = 40;
+            int name_x = 300;
+            int name_y = 60;
 
             int dia_x = 1500;
             int dia_y = 200;
@@ -120,7 +120,7 @@ namespace unilab2023
             g1.FillRectangle(Brushes.Black, 15, 500+face + name_y, dia_x, dia_y);
             g1.DrawRectangle(pen, 15, 500+face + name_y, dia_x, dia_y);
 
-            Font fnt = new Font("MS UI Gothic", 20);
+            Font fnt = new Font("MS UI Gothic", 30);
             int sp = 5;
 
             Conversion conv = making_dia(num);
