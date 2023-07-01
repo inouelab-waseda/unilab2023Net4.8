@@ -134,34 +134,33 @@ namespace unilab2023
             Graphics g1 = Graphics.FromImage(bmp1);
 
             Pen pen = new Pen(Color.FromArgb(100, 255, 100), 2);
-            Font fnt = new Font("MS UI Gothic", 20);
+            Font fnt = new Font("MS UI Gothic", 30);
             int sp = 5;
 
             int face = 100;
-            int name_x = 150;
-            int name_y = 40;
+            int name_x = 300;
+            int name_y = 60;
 
-            int dia_x = 600;
-            int dia_y = 150;
+            int dia_x = 1500;
+            int dia_y = 200;
 
-            //描画
-            g1.FillRectangle(Brushes.Black, 0, face, name_x, name_y);
-            g1.DrawRectangle(pen, 0, face, name_x, name_y);
+            g1.FillRectangle(Brushes.Black, 15, 500 + face, name_x, name_y);
+            g1.DrawRectangle(pen, 15, 500 + face, name_x, name_y);
 
-            g1.FillRectangle(Brushes.Black, 0, face + name_y, dia_x, dia_y);
-            g1.DrawRectangle(pen, 0, face + name_y, dia_x, dia_y);
+            g1.FillRectangle(Brushes.Black, 15, 500+face + name_y, dia_x, dia_y);
+            g1.DrawRectangle(pen, 15, 500 + face + name_y, dia_x, dia_y);
 
             if (Global.Conversations[conversationCounter].img == "img_shizu")
             {
                 //switch文の方がいいかもしれない、あるいはdictionaryなど
-                g1.DrawImage(img_shizu, 0, 0, face, face);
+                g1.DrawImage(img_shizu, 15, 500, face, face);
             }
             else if (Global.Conversations[conversationCounter].img == "img_ikaP")
             {
-                g1.DrawImage(img_ikaP, 0, 0, face, face);
+                g1.DrawImage(img_ikaP, 15, 500, face, face);
             }
-            g1.DrawString(Global.Conversations[conversationCounter].character, fnt, Brushes.White, 0 + sp, face + sp);
-            g1.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.White, 0 + sp, face + name_y + sp);
+            g1.DrawString(Global.Conversations[conversationCounter].character, fnt, Brushes.White, 15 + sp, 500 + face + sp);
+            g1.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.White, 15 + sp, 500 + face + name_y + sp);
 
             pictureBox1.Image = bmp1;
             g1.Dispose();
