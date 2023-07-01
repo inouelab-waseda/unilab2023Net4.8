@@ -67,6 +67,51 @@ namespace unilab2023
                         continue;
                     }
 
+                    //改行文字のための処理；文字列の中に\nが出てきたら切ってつなげる
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        string searchWord = "\\n";
+                        int foundIndex = values[j].IndexOf(searchWord);
+                        List<int> newlineIndex = new List<int>();
+                        while (0 <= foundIndex)
+                        {
+                            //indexを格納
+                            newlineIndex.Add(foundIndex);
+                            int nextIndex = foundIndex + searchWord.Length;
+                            if (nextIndex < values[j].Length)
+                            {
+                                foundIndex = values[j].IndexOf(searchWord, nextIndex);
+                            }
+                            else
+                            {
+                                //最後まで検索したら終了
+                                break;                                
+                            }
+                        }
+                        //改行文字が無かったら無視
+                        if (newlineIndex.Count > 0)
+                        {
+                            string originalValue = values[j];
+                            values[j] = "";
+                            int startIndex = 0;
+                            int endIndex = newlineIndex[0];
+                            for (int k = 0; k < newlineIndex.Count + 1; k++)
+                            {
+                                values[j] = values[j] + originalValue.Substring(startIndex, endIndex - startIndex) + "\n";
+                                startIndex = endIndex + 2;
+                                if (k < newlineIndex.Count - 1)
+                                {
+                                    endIndex = newlineIndex[k+1];
+                                }
+                                else
+                                {
+                                    endIndex = originalValue.Length;
+                                }
+
+                            }
+                        }
+                    }
+
                     conversations.Add(new Conversation());
 
                     i -= 1;
@@ -99,8 +144,6 @@ namespace unilab2023
             int dia_x = 600;
             int dia_y = 150;
 
-            //Conversationsの内容と画像パスを紐づける表を辞書型として作っておく
-
             //描画
             g1.FillRectangle(Brushes.Black, 0, face, name_x, name_y);
             g1.DrawRectangle(pen, 0, face, name_x, name_y);
@@ -108,11 +151,12 @@ namespace unilab2023
             g1.FillRectangle(Brushes.Black, 0, face + name_y, dia_x, dia_y);
             g1.DrawRectangle(pen, 0, face + name_y, dia_x, dia_y);
 
-            if (Global.Conversations[conversationCounter].character == "しずちゃん")
+            if (Global.Conversations[conversationCounter].img == "img_shizu")
             {
+                //switch文の方がいいかもしれない、あるいはdictionaryなど
                 g1.DrawImage(img_shizu, 0, 0, face, face);
             }
-            if (Global.Conversations[conversationCounter].character == "イカピー")
+            else if (Global.Conversations[conversationCounter].img == "img_ikaP")
             {
                 g1.DrawImage(img_ikaP, 0, 0, face, face);
             }
@@ -149,46 +193,5 @@ namespace unilab2023
         }
 
         /* button fin */
-
-        //conv[0].name = I;
-        //conv[0].dialogue = "メッセージウィンドウ!\n" +
-        //    "ステージをクリアするごとに物語を展開することで\n" +
-        //    "ゲームにストーリ性を持たせることができるっピ！";
-
-        //conv[1].name = S;
-        //conv[1].dialogue = "ストーリーは誰が書くの？\n" +
-        //    "こんな寒いパロディネタでいいの？\n" +
-        //    "諸原はこのレベルの脚本しか作れないよ?";
-
-        //conv[2].name = I;
-        //conv[2].dialogue = "しずちゃ（イカピーを踏む音）\n";
-
-        //conv[3].name = S;
-        //conv[3].dialogue = "ウィンドのデザインは誰がやるの？\n" +
-        //    "こんなクソダサデザインで許してくれるの？\n";
-
-        //conv[4].name = I;
-        //conv[4].dialogue = "しずちゃ\n" +
-        //    "いた（さらに強くイカピーを踏む音）\n";
-
-        //conv[5].name = S;
-        //conv[5].dialogue = "会話システムをゲームに実装するのは誰がやるの？\n" +
-        //    "言い出しっぺの諸原がやればいいの？\n";
-
-        //conv[6].name = S;
-        //conv[6].dialogue = "いったいどうすればいいって\n" +
-        //    "お前に言ってんだよ!!\n";
-
-        //conv[7].name = I;
-        //conv[7].dialogue = "……\n";
-
-        //conv[8].name = I;
-        //conv[8].dialogue = "……\n";
-
-        //conv[9].name = I;
-        //conv[9].dialogue = "わかんないっピ…\n";
-
-        //conv[10].name = -1;
-        //conv[10].dialogue = "デモ終了\n";
     }
 }
