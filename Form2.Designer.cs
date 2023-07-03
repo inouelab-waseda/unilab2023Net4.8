@@ -36,9 +36,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(374, 233);
+            this.label1.Location = new System.Drawing.Point(299, 194);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 18);
+            this.label1.Size = new System.Drawing.Size(68, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "ステージ名";
             // 
@@ -55,29 +56,35 @@
             "stage4-2"});
             this.comboBox1.Location = new System.Drawing.Point(475, 233);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 26);
+            this.comboBox1.Size = new System.Drawing.Size(98, 23);
             this.comboBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(637, 219);
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.button1.Font = new System.Drawing.Font("BIZ UDPゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(1600, 900);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(195, 52);
+            this.button1.Size = new System.Drawing.Size(400, 100);
             this.button1.TabIndex = 2;
-            this.button1.Text = "ゲームスタート";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Text = "スタート！";
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ステージ選択画面
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1185, 634);
+            this.ClientSize = new System.Drawing.Size(1842, 961);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ステージ選択画面";
             this.Text = "ステージ選択画面";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.ステージ選択画面_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
