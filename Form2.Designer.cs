@@ -47,7 +47,12 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "stage1",
-            "stage2"});
+            "stage2",
+            "stage1-1",
+            "stage1-2",
+            "stage1-3",
+            "stage4-1",
+            "stage4-2"});
             this.comboBox1.Location = new System.Drawing.Point(475, 233);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 26);
