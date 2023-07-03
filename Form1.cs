@@ -937,7 +937,6 @@ namespace unilab2023
         {
 
         }
-
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
 

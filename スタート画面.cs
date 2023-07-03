@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,99 +14,128 @@ namespace unilab2023
 {
     public partial class スタート画面 : Form
     {
+        Bitmap bmp1;
+
+        Image img_shizu = Image.FromFile("氷.png");
+        Image img_ikaP = Image.FromFile("草原.jpg");
+
         public スタート画面()
         {
             InitializeComponent();
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ステージ選択画面 form2 = new ステージ選択画面();
-            form2.Show();
+            // pictureBoxの設定
+            bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = bmp1;
         }
 
         private void スタート画面_Load(object sender, EventArgs e)
         {
-            //デバッグのたびに寒いパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
-            button1.Enabled = true;
+            button1.Enabled = true;  //デバッグのたびに寒いパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
+            Global.Conversations = LoadConversation("conversation_demo.csv");
         }
 
-        enum chara : int { shizu, ikaP };
-
-        public class Conversion
+        public class Global
         {
-            public int name = 0;
+            public static List<Conversation> Conversations = new List<Conversation>();
+        }
+
+        public class Conversation
+        {
+            public string character = "";
             public string dialogue = "";
+            public string img = "";
         }
 
-        Conversion making_dia(int i)
+        /* function */
+
+        private List<Conversation> LoadConversation(string conv_stagename)
         {
-            Conversion[] conv = new Conversion[20];
-
-            int S = (int)chara.shizu;
-            int I = (int)chara.ikaP;
-
-            for (int j = 0; j < 20; j++)
+            List<Conversation> conversations = new List<Conversation>();
+            
+            using (StreamReader sr = new StreamReader($"{conv_stagename}"))
             {
-                conv[j] = new Conversion();
+                int i = 0;
+
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] values = line.Split(',');
+
+                    if (i == 0)  //escape 1st row
+                    {
+                        i += 1;
+                        continue;
+                    }
+
+                    //改行文字のための処理；文字列の中に\nが出てきたら切ってつなげる
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        string searchWord = "\\n";
+                        int foundIndex = values[j].IndexOf(searchWord);
+                        List<int> newlineIndex = new List<int>();
+                        while (0 <= foundIndex)
+                        {
+                            //indexを格納
+                            newlineIndex.Add(foundIndex);
+                            int nextIndex = foundIndex + searchWord.Length;
+                            if (nextIndex < values[j].Length)
+                            {
+                                foundIndex = values[j].IndexOf(searchWord, nextIndex);
+                            }
+                            else
+                            {
+                                //最後まで検索したら終了
+                                break;                                
+                            }
+                        }
+                        //改行文字が無かったら無視
+                        if (newlineIndex.Count > 0)
+                        {
+                            string originalValue = values[j];
+                            values[j] = "";
+                            int startIndex = 0;
+                            int endIndex = newlineIndex[0];
+                            for (int k = 0; k < newlineIndex.Count + 1; k++)
+                            {
+                                values[j] = values[j] + originalValue.Substring(startIndex, endIndex - startIndex) + "\n";
+                                startIndex = endIndex + 2;
+                                if (k < newlineIndex.Count - 1)
+                                {
+                                    endIndex = newlineIndex[k+1];
+                                }
+                                else
+                                {
+                                    endIndex = originalValue.Length;
+                                }
+
+                            }
+                        }
+                    }
+
+                    conversations.Add(new Conversation());
+
+                    i -= 1;
+
+                    conversations[i].character = values[0];
+                    conversations[i].dialogue = values[1];
+                    conversations[i].img = values[2];
+
+                    i += 2;
+                }
             }
-
-            conv[0].name = I;
-            conv[0].dialogue = "メッセージウィンドウ!\n" +
-                "ステージをクリアするごとに物語を展開することで\n" +
-                "ゲームにストーリ性を持たせることができるっピ！";
-
-            conv[1].name = S;
-            conv[1].dialogue = "ストーリーは誰が書くの？\n" +
-                "こんな寒いパロディネタでいいの？\n" +
-                "諸原はこのレベルの脚本しか作れないよ?";
-
-            conv[2].name = I;
-            conv[2].dialogue = "しずちゃ（イカピーを踏む音）\n";
-
-            conv[3].name = S;
-            conv[3].dialogue = "ウィンドのデザインは誰がやるの？\n" +
-                "こんなクソダサデザインで許してくれるの？\n";
-
-            conv[4].name = I;
-            conv[4].dialogue = "しずちゃ\n" +
-                "いた（さらに強くイカピーを踏む音）\n";
-
-            conv[5].name = S;
-            conv[5].dialogue = "会話システムをゲームに実装するのは誰がやるの？\n" +
-                "言い出しっぺの諸原がやればいいの？\n";
-
-            conv[6].name = S;
-            conv[6].dialogue = "いったいどうすればいいって\n" +
-                "お前に言ってんだよ!!\n";
-
-            conv[7].name = I;
-            conv[7].dialogue = "……\n";
-
-            conv[8].name = I;
-            conv[8].dialogue = "……\n";
-
-            conv[9].name = I;
-            conv[9].dialogue = "わかんないっピ…\n";
-
-            conv[10].name = -1;
-            conv[10].dialogue = "デモ終了\n";
-
-            return conv[i];
+            return conversations;
         }
 
-        int num = 0;
-        int max_num = 10;
+        int conversationCounter = 0;  // 脚本のカウンタ
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void drawConversation()
         {
-            Image img_shizu = Image.FromFile("氷.png");
-            Image img_ikaP = Image.FromFile("草原.jpg");
-
-            Bitmap bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            //描画準備
             Graphics g1 = Graphics.FromImage(bmp1);
 
             Pen pen = new Pen(Color.FromArgb(100, 255, 100), 2);
+            Font fnt = new Font("MS UI Gothic", 30);
+            int sp = 5;
 
             int face = 100;
             int name_x = 300;
@@ -114,36 +144,53 @@ namespace unilab2023
             int dia_x = 1500;
             int dia_y = 200;
 
-            g1.FillRectangle(Brushes.Black, 15, 500+face, name_x, name_y);
-            g1.DrawRectangle(pen, 15, 500+face, name_x, name_y);
+            g1.FillRectangle(Brushes.Black, 15, 500 + face, name_x, name_y);
+            g1.DrawRectangle(pen, 15, 500 + face, name_x, name_y);
 
             g1.FillRectangle(Brushes.Black, 15, 500+face + name_y, dia_x, dia_y);
-            g1.DrawRectangle(pen, 15, 500+face + name_y, dia_x, dia_y);
+            g1.DrawRectangle(pen, 15, 500 + face + name_y, dia_x, dia_y);
 
-            Font fnt = new Font("MS UI Gothic", 30);
-            int sp = 5;
-
-            Conversion conv = making_dia(num);
-
-            string talker = "";
-            if (conv.name == (int)chara.shizu)
+            if (Global.Conversations[conversationCounter].img == "img_shizu")
             {
-                talker = "しずちゃん";
+                //switch文の方がいいかもしれない、あるいはdictionaryなど
                 g1.DrawImage(img_shizu, 15, 500, face, face);
             }
-            if (conv.name == (int)chara.ikaP)
+            else if (Global.Conversations[conversationCounter].img == "img_ikaP")
             {
-                talker = "イカピー";
                 g1.DrawImage(img_ikaP, 15, 500, face, face);
             }
-            g1.DrawString(talker, fnt, Brushes.White, 15 + sp, 500+face + sp);
-            g1.DrawString(conv.dialogue, fnt, Brushes.White, 15 + sp, 500+face + name_y + sp);
+            g1.DrawString(Global.Conversations[conversationCounter].character, fnt, Brushes.White, 15 + sp, 500 + face + sp);
+            g1.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.White, 15 + sp, 500 + face + name_y + sp);
 
             pictureBox1.Image = bmp1;
             g1.Dispose();
 
-            if (num < max_num) num = num + 1;
-            else button1.Enabled = true;
+            if (conversationCounter < Global.Conversations.Count - 1)
+            {
+                conversationCounter += 1;
+            }
+            else
+            {
+                button1.Enabled = true;
+                return;
+            }
         }
+
+        /* function fin */
+
+        /* button */
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ステージ選択画面 form2 = new ステージ選択画面();
+            form2.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            drawConversation();
+        }
+
+        /* button fin */
     }
 }
