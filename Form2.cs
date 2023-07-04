@@ -21,6 +21,7 @@ namespace unilab2023
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Form1 form1 = new Form1();
             string selectedStageName = comboBox1.SelectedItem.ToString();
             form1.stageName = selectedStageName;
             form1.Show();
