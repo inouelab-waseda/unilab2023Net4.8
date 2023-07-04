@@ -64,7 +64,7 @@
             this.label1.Location = new System.Drawing.Point(47, 52);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 15);
+            this.label1.Size = new System.Drawing.Size(84, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "ステージ名";
             // 
@@ -72,7 +72,6 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "stage1",
             "stage1-1",
             "stage1-2",
             "stage1-3",
@@ -92,7 +91,7 @@
             this.comboBox1.Location = new System.Drawing.Point(50, 69);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(98, 23);
+            this.comboBox1.Size = new System.Drawing.Size(122, 26);
             this.comboBox1.TabIndex = 1;
             // 
             // button1
@@ -323,7 +322,7 @@
             // 
             // ステージ選択画面
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1842, 961);
             this.Controls.Add(this.groupBox3);
