@@ -508,7 +508,6 @@ namespace unilab2023
                 }
             }
 
-            get_move_b_list.AddRange(get_move_b);
 
             if (get_move_a.Length != 0)
             {
@@ -919,6 +918,25 @@ namespace unilab2023
                     listBox3.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
 
                     listBox3.Refresh();
+                }
+            }
+        }
+
+        private void listBox4_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox4.SelectedItem != null)
+            {
+                string command = listBox4.SelectedItem.ToString();
+
+                if (command.StartsWith("for"))
+                {
+                    string str_num = Regex.Replace(command, @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+
+                    int id = listBox4.SelectedIndex;
+                    listBox4.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+
+                    listBox4.Refresh();
                 }
             }
         }

@@ -70,6 +70,7 @@
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox_DragDrop);
             this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox_DragEnter);
+            this.listBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_DoubleClick);
             // 
             // listBox3
             // 
@@ -84,6 +85,7 @@
             this.listBox3.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
             this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox_DragDrop);
             this.listBox3.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox_DragEnter);
+            this.listBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox3_MouseDoubleClick);
             // 
             // listBox4
             // 
@@ -98,6 +100,7 @@
             this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
             this.listBox4.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox_DragDrop);
             this.listBox4.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox_DragEnter);
+            this.listBox4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox4_MouseDoubleClick);
             // 
             // pictureBox2
             // 
