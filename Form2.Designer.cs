@@ -36,10 +36,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(299, 194);
+            this.label1.Location = new System.Drawing.Point(374, 233);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 15);
+            this.label1.Size = new System.Drawing.Size(84, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "ステージ名";
             // 
@@ -47,26 +47,36 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "stage1",
-            "stage2",
             "stage1-1",
             "stage1-2",
             "stage1-3",
+            "stage1-4",
+            "stage2-1",
+            "stage2-2",
+            "stage2-3",
+            "stage3-1",
+            "stage3-2",
+            "stage3-3",
             "stage4-1",
-            "stage4-2"});
-            this.comboBox1.Location = new System.Drawing.Point(475, 233);
+            "stage4-2",
+            "stage4-3",
+            "stage5-1",
+            "stage5-2",
+            "stage5-3"});
+            this.comboBox1.Location = new System.Drawing.Point(594, 280);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(98, 23);
+            this.comboBox1.Size = new System.Drawing.Size(122, 26);
             this.comboBox1.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.button1.Font = new System.Drawing.Font("BIZ UDPゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1600, 900);
+            this.button1.Location = new System.Drawing.Point(2000, 1080);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(400, 100);
+            this.button1.Size = new System.Drawing.Size(500, 120);
             this.button1.TabIndex = 2;
             this.button1.Text = "スタート！";
             this.button1.UseVisualStyleBackColor = false;
@@ -74,9 +84,9 @@
             // 
             // ステージ選択画面
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1842, 961);
+            this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);

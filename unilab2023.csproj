@@ -94,12 +94,13 @@
     <None Include="bin\Debug\stage1-1.csv" />
     <None Include="bin\Debug\stage1-2.csv" />
     <None Include="bin\Debug\stage1-3.csv" />
+    <None Include="bin\Debug\stage1-4.csv" />
     <None Include="bin\Debug\stage1.csv" />
     <None Include="bin\Debug\stage10.csv" />
     <None Include="bin\Debug\stage2.csv" />
     <None Include="bin\Debug\stage3.csv" />
-    <None Include="bin\Debug\stage4-1.csv" />
-    <None Include="bin\Debug\stage4-2.csv" />
+    <None Include="bin\Debug\stage5-1.csv" />
+    <None Include="bin\Debug\stage5-2.csv" />
     <None Include="bin\Debug\stage4.csv" />
     <None Include="bin\Debug\stage5.csv" />
     <None Include="bin\Debug\stage6.csv" />

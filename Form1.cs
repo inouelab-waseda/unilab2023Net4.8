@@ -98,7 +98,7 @@ namespace unilab2023
             Global.map = CreateStage(stageName); //ステージ作成
 
             // 1行文の高さ
-            int element_height = 13;
+            int element_height = listBox1.ItemHeight;
 
             // それぞれの枠の高さ
             int height_LB1 = 0;
@@ -115,12 +115,24 @@ namespace unilab2023
 
                     if (values[0] == _stageName)
                     {
-                        height_LB1 = int.Parse(values[1]);
-                        height_LB3 = int.Parse(values[2]);
-                        height_LB4 = int.Parse(values[3]);
+                        height_LB1 = int.Parse(values[1]) + 1;
+                        height_LB3 = int.Parse(values[2]) + 1;
+                        height_LB4 = int.Parse(values[3]) + 1;
+                        break;
                     }
                 }
             }
+
+            if (height_LB1 == 1)
+            {
+                listBox1.Visible = false;
+            }
+
+            if (height_LB3 == 1)
+            {
+                listBox3.Visible = false;
+            }
+
 
             listBox1.Height = element_height * height_LB1;
             listBox3.Height = element_height * height_LB3;
