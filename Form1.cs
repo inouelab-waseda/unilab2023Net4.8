@@ -97,7 +97,36 @@ namespace unilab2023
         {
             Global.map = CreateStage(stageName); //ステージ作成
 
-            //ListBoxのイベントハンドラを追加
+            // 1行文の高さ
+            int element_height = 13;
+
+            // それぞれの枠の高さ
+            int height_LB1 = 0;
+            int height_LB3 = 0;
+            int height_LB4 = 0;
+
+            using (StreamReader sr = new StreamReader($"stage_frame.csv"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] values = line.Split(',');
+
+
+                    if (values[0] == _stageName)
+                    {
+                        height_LB1 = int.Parse(values[1]);
+                        height_LB3 = int.Parse(values[2]);
+                        height_LB4 = int.Parse(values[3]);
+                    }
+                }
+            }
+
+            listBox1.Height = element_height * height_LB1;
+            listBox3.Height = element_height * height_LB3;
+            listBox4.Height = element_height * height_LB4;
+
+            //ListBox1のイベントハンドラを追加
             listBox1.SelectionMode = SelectionMode.One;
             listBox1.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox1.DragDrop += new DragEventHandler(ListBox_DragDrop);
