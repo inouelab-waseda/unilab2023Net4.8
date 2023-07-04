@@ -107,6 +107,9 @@
     <None Include="bin\Debug\MapIandJ_for.csv" />
     <None Include="bin\Debug\MapIce_Saiki.csv" />
     <None Include="bin\Debug\MaPJump_for.csv" />
+    <None Include="bin\Debug\stage1-1.csv" />
+    <None Include="bin\Debug\stage1-2.csv" />
+    <None Include="bin\Debug\stage1-3.csv" />
     <None Include="bin\Debug\stage1.csv" />
     <None Include="bin\Debug\stage10.csv" />
     <None Include="bin\Debug\stage2.csv" />
@@ -119,6 +122,7 @@
     <None Include="bin\Debug\stage7.csv" />
     <None Include="bin\Debug\stage8.csv" />
     <None Include="bin\Debug\stage9.csv" />
+    <None Include="bin\Debug\stage_frame.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

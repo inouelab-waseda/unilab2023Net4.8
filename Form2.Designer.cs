@@ -73,16 +73,10 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "stage1",
+            "stage2",
             "stage1-1",
             "stage1-2",
             "stage1-3",
-            "stage1-4",
-            "stage2-1",
-            "stage2-2",
-            "stage2-3",
-            "stage3-1",
-            "stage3-2",
-            "stage3-3",
             "stage4-1",
             "stage4-2",
             "stage4-3",
