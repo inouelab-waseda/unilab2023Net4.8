@@ -235,41 +235,43 @@ namespace unilab2023
             }
         }
 
-        //A, Bボタン削除
-        //private void button4_Click(object sender, EventArgs e)
-        //{
-        //    label6.Visible = false;
-        //    SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move.Item1); //キャラ動かす
-        //    label3.Text = Global.count.ToString(); //試行回数の表示
+        /*
+        A, Bボタン削除
+        private void button4_Click(object sender, EventArgs e)
+        {
+            label6.Visible = false;
+            SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move.Item1); //キャラ動かす
+            label3.Text = Global.count.ToString(); //試行回数の表示
 
-        //    if(Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
-        //    {
-        //        label6.Text = "成功！！";
-        //        label6.Visible = true;
-        //        button4.Visible = false;
-        //        button4.Enabled = false;
-        //        button5.Visible = false;
-        //        button5.Enabled = false;
-        //    }
-        //}
+            if(Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
+            {
+                label6.Text = "成功！！";
+                label6.Visible = true;
+                button4.Visible = false;
+                button4.Enabled = false;
+                button5.Visible = false;
+                button5.Enabled = false;
+            }
+        }
 
-        //private void button5_Click(object sender, EventArgs e)
-        //{
-        //    label6.Visible = false;
-        //    var move = Global.move.Item2;
-        //    SquareMovement(Global.x_now, Global.y_now, Global.map, move); //キャラ動かす
-        //    label3.Text = Global.count.ToString(); //試行回数の表示
+        private void button5_Click(object sender, EventArgs e)
+        {
+            label6.Visible = false;
+            var move = Global.move.Item2;
+            SquareMovement(Global.x_now, Global.y_now, Global.map, move); //キャラ動かす
+            label3.Text = Global.count.ToString(); //試行回数の表示
 
-        //    if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
-        //    {
-        //        label6.Text = "クリア！！";
-        //        label6.Visible = true;
-        //        button4.Visible = false;
-        //        button4.Enabled = false;
-        //        button5.Visible = false;
-        //        button5.Enabled = false;
-        //    }
-        //}
+            if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
+            {
+                label6.Text = "クリア！！";
+                label6.Visible = true;
+                button4.Visible = false;
+                button4.Enabled = false;
+                button5.Visible = false;
+                button5.Enabled = false;
+            }
+        }
+        */
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -292,6 +294,7 @@ namespace unilab2023
             //初期設定に戻す
             button1.Visible = true;
             button1.Enabled = true;
+            label6.Visible = false;
             Global.count = 0;
         }
 
