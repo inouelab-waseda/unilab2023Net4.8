@@ -126,11 +126,26 @@ namespace unilab2023
             if (height_LB1 == 1)
             {
                 listBox1.Visible = false;
+                textBox1.Visible = false;
+                listBox5.Items.Remove("A");
+                button2.Visible = false;
+                button2.Enabled = false;
+
             }
 
             if (height_LB3 == 1)
             {
                 listBox3.Visible = false;
+                textBox2.Visible = false;
+                listBox5.Items.Remove("B");
+                button3.Visible = false;
+                button3.Enabled = false;
+            }
+
+            if(height_LB1 == 1 && height_LB3 == 1)
+            {
+                listBox5.Visible = false;
+                listBox2.Location = new Point(listBox4.Location.X, listBox4.Location.Y + 300);
             }
 
 
