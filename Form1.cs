@@ -126,11 +126,26 @@ namespace unilab2023
             if (height_LB1 == 1)
             {
                 listBox1.Visible = false;
+                textBox1.Visible = false;
+                listBox5.Items.Remove("A");
+                button2.Visible = false;
+                button2.Enabled = false;
+
             }
 
             if (height_LB3 == 1)
             {
                 listBox3.Visible = false;
+                textBox2.Visible = false;
+                listBox5.Items.Remove("B");
+                button3.Visible = false;
+                button3.Enabled = false;
+            }
+
+            if(height_LB1 == 1 && height_LB3 == 1)
+            {
+                listBox5.Visible = false;
+                listBox2.Location = new Point(listBox4.Location.X, listBox4.Location.Y + 300);
             }
 
 
@@ -646,18 +661,82 @@ namespace unilab2023
             }
 
             string[] get_move_main = this.listBox4.Items.Cast<string>().ToArray();
+            get_move_main = exchange_move(get_move_main, get_move_main.Length);
             var move = new List<int[]>();
 
-            for (int i = 0; i < get_move_main.Length; i++)
+            if (get_move_main.Length != 0)
             {
-                if (get_move_main[i] == "A")
+                for (int i = 0; i < get_move_main.Length; i++)
                 {
-                    move.AddRange(move_a);
+                    if (get_move_main[i].StartsWith("for"))
+                    {
+                        int start = i + 1;
+                        int trial = int.Parse(Regex.Replace(get_move_main[i], @"[^0-9]", ""));
+
+                        int goal = 0; //後で設定
+
+                        for (int j = 0; j < trial; j++)
+                        {
+                            int k = start;
+                            do
+                            {
+                                if (get_move_main[k] == "endfor")
+                                {
+                                    goal = k;
+                                    break;
+                                }
+
+                                else if (get_move_main[k] == "up")
+                                {
+                                    move.Add(new int[2] { 0, -1 });
+                                }
+                                else if (get_move_main[k] == "down")
+                                {
+                                    move.Add(new int[2] { 0, 1 });
+                                }
+                                else if (get_move_main[k] == "right")
+                                {
+                                    move.Add(new int[2] { 1, 0 });
+                                }
+                                else if (get_move_main[k] == "left")
+                                {
+                                    move.Add(new int[2] { -1, 0 });
+                                }
+
+                                k++;
+                            } while (true);
+                        }
+                        i = goal;
+                    }
+                    else
+                    {
+                        if (get_move_main[i] == "up")
+                        {
+                            move.Add(new int[2] { 0, -1 });
+                        }
+                        else if (get_move_main[i] == "down")
+                        {
+                            move.Add(new int[2] { 0, 1 });
+                        }
+                        else if (get_move_main[i] == "right")
+                        {
+                            move.Add(new int[2] { 1, 0 });
+                        }
+                        else if (get_move_main[i] == "left")
+                        {
+                            move.Add(new int[2] { -1, 0 });
+                        }
+                        else if (get_move_main[i] == "A")
+                        {
+                            move.AddRange(move_a);
+                        }
+                        else if (get_move_main[i] == "B")
+                        {
+                            move.AddRange(move_b);
+                        }
+                    }
                 }
-                else if (get_move_main[i] == "B")
-                {
-                    move.AddRange(move_b);
-                }
+
             }
 
             return move;
