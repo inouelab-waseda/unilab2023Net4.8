@@ -93,11 +93,21 @@ namespace unilab2023
             public static int miss_count = 0; //ミスカウント
 
             public static List<int[]> move;  //プレイヤーの移動指示を入れるリスト
+
+            public static List<Conversation> Conversations = new List<Conversation>();  //会話文を入れるリスト
+        }
+
+        public class Conversation
+        {
+            public string character = "";
+            public string dialogue = "";
+            public string img = "";
         }
 
         public void Form1_Load(object sender, EventArgs e)
         {
             Global.map = CreateStage(stageName); //ステージ作成
+            Global.Conversations = LoadConversation("conversation_demo.csv"); //会話読み込み
 
             // 1行文の高さ
             int element_height = listBox1.ItemHeight;
@@ -936,6 +946,85 @@ namespace unilab2023
             Global.count += 1;
         }
 
+        //会話文読み込み
+        private List<Conversation> LoadConversation(string conv_stagename)
+        {
+            List<Conversation> conversations = new List<Conversation>();
+
+            using (StreamReader sr = new StreamReader($"{conv_stagename}"))
+            {
+                int i = 0;
+
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] values = line.Split(',');
+
+                    if (i == 0)  //escape 1st row
+                    {
+                        i += 1;
+                        continue;
+                    }
+
+                    //改行文字のための処理；文字列の中に\nが出てきたら切ってつなげる
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        string searchWord = "\\n";
+                        int foundIndex = values[j].IndexOf(searchWord);
+                        List<int> newlineIndex = new List<int>();
+                        while (0 <= foundIndex)
+                        {
+                            //indexを格納
+                            newlineIndex.Add(foundIndex);
+                            int nextIndex = foundIndex + searchWord.Length;
+                            if (nextIndex < values[j].Length)
+                            {
+                                foundIndex = values[j].IndexOf(searchWord, nextIndex);
+                            }
+                            else
+                            {
+                                //最後まで検索したら終了
+                                break;
+                            }
+                        }
+                        //改行文字が無かったら無視
+                        if (newlineIndex.Count > 0)
+                        {
+                            string originalValue = values[j];
+                            values[j] = "";
+                            int startIndex = 0;
+                            int endIndex = newlineIndex[0];
+                            for (int k = 0; k < newlineIndex.Count + 1; k++)
+                            {
+                                values[j] = values[j] + originalValue.Substring(startIndex, endIndex - startIndex) + "\n";
+                                startIndex = endIndex + 2;
+                                if (k < newlineIndex.Count - 1)
+                                {
+                                    endIndex = newlineIndex[k + 1];
+                                }
+                                else
+                                {
+                                    endIndex = originalValue.Length;
+                                }
+
+                            }
+                        }
+                    }
+
+                    conversations.Add(new Conversation());
+
+                    i -= 1;
+
+                    conversations[i].character = values[0];
+                    conversations[i].dialogue = values[1];
+                    conversations[i].img = values[2];
+
+                    i += 2;
+                }
+            }
+            return conversations;
+        }
+
         /*******関数 fin******/
 
 
@@ -943,31 +1032,31 @@ namespace unilab2023
         //作業中？
         bool visible = false;
         private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
-        {   
-               Font fnt = new Font("MS UI Gothic", 15);
-               int sp = 8;
+        {
+            Font fnt = new Font("MS UI Gothic", 15);
+            int sp = 8;
 
-               Bitmap bmp3 = new Bitmap(pictureBox3.Image);
-               Graphics g3 = Graphics.FromImage(bmp3);
+            Bitmap bmp3 = new Bitmap(pictureBox3.Image);
+            Graphics g3 = Graphics.FromImage(bmp3);
 
-               if (!visible)
-               {
-                   g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
-                   if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-                   else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-               }
-               else
-               {
-                   bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-                   g3 = Graphics.FromImage(bmp3);
-                   g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-                   g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-               }
+            if (!visible)
+            {
+                g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
+                if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+                else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+            }
+            else
+            {
+                bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+                g3 = Graphics.FromImage(bmp3);
+                g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+                g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            }
 
-               visible = !visible;
+            visible = !visible;
 
-               pictureBox3.Image = bmp3;
-               g3.Dispose();
+            pictureBox3.Image = bmp3;
+            g3.Dispose();
             
         }
 
