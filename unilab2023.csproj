@@ -100,28 +100,19 @@
     <EmbeddedResource Include="スタート画面.resx">
       <DependentUpon>スタート画面.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="bin\Debug\map1.csv" />
-    <None Include="bin\Debug\Map52201.csv" />
-    <None Include="bin\Debug\Map52202.csv" />
-    <None Include="bin\Debug\Map52203.csv" />
-    <None Include="bin\Debug\MapIandJ_for.csv" />
-    <None Include="bin\Debug\MapIce_Saiki.csv" />
-    <None Include="bin\Debug\MaPJump_for.csv" />
+    <None Include="bin\Debug\stage4-2.csv" />
+    <None Include="bin\Debug\stage3-2.csv" />
+    <None Include="bin\Debug\stage3-3.csv" />
+    <None Include="bin\Debug\stage2-3.csv" />
     <None Include="bin\Debug\stage1-1.csv" />
     <None Include="bin\Debug\stage1-2.csv" />
     <None Include="bin\Debug\stage1-3.csv" />
-    <None Include="bin\Debug\stage1.csv" />
-    <None Include="bin\Debug\stage10.csv" />
-    <None Include="bin\Debug\stage2.csv" />
-    <None Include="bin\Debug\stage3.csv" />
-    <None Include="bin\Debug\stage4-1.csv" />
-    <None Include="bin\Debug\stage4-2.csv" />
-    <None Include="bin\Debug\stage4.csv" />
-    <None Include="bin\Debug\stage5.csv" />
-    <None Include="bin\Debug\stage6.csv" />
-    <None Include="bin\Debug\stage7.csv" />
-    <None Include="bin\Debug\stage8.csv" />
-    <None Include="bin\Debug\stage9.csv" />
+    <None Include="bin\Debug\stage1-4.csv" />
+    <None Include="bin\Debug\stage5-1.csv" />
+    <None Include="bin\Debug\stage5-2.csv" />
+    <None Include="bin\Debug\stage3-1.csv" />
+    <None Include="bin\Debug\stage2-1.csv" />
+    <None Include="bin\Debug\stage2-2.csv" />
     <None Include="bin\Debug\stage_frame.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
