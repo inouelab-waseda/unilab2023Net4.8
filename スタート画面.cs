@@ -16,8 +16,8 @@ namespace unilab2023
     {
         Bitmap bmp1;
 
-        Image img_shizu = Image.FromFile("氷.png");
-        Image img_ikaP = Image.FromFile("草原.jpg");
+        Image img_shizu = Image.FromFile("マップ_氷.png");
+        Image img_ikaP = Image.FromFile("マップ_草原.png");
 
         public スタート画面()
         {
@@ -30,7 +30,7 @@ namespace unilab2023
 
         private void スタート画面_Load(object sender, EventArgs e)
         {
-            button1.Enabled = true;  //デバッグのたびに寒いパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
+            button1.Enabled = true;  //デバッグのたびにパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
             Global.Conversations = LoadConversation("conversation_demo.csv");
         }
 

@@ -23,19 +23,21 @@ namespace unilab2023
         Brush goalBackgroundColor = new SolidBrush(Color.Yellow);
         Brush startBackgroundColor = new SolidBrush(Color.Blue);
 
-        Image img_tanuki = Image.FromFile("たぬき.png");
+        Image img_tanuki = Image.FromFile("キャラ_たぬき.png");
 
-        Image character_me = Image.FromFile("たぬき.png");
-        Image character_enemy = Image.FromFile("ふくろう.png");
+        Image character_me = Image.FromFile("忍者_正面.png");
+        Image character_enemy = Image.FromFile("キャラ_一つ目小僧.png");
 
-        Image img_green = Image.FromFile("草原.jpg");
-        Image img_white = Image.FromFile("岩場.jpg");
-        Image img_ice = Image.FromFile("氷.png");
-        Image img_jump = Image.FromFile("跳.png");
-        Image animatedImage_up = Image.FromFile("動く床_上.gif");
-        Image animatedImage_right = Image.FromFile("動く床_右.gif");
-        Image animatedImage_down = Image.FromFile("動く床_下.gif");
-        Image animatedImage_left = Image.FromFile("動く床_左.gif");
+        Image img_way = Image.FromFile("マップ_草原.png");
+        Image img_noway = Image.FromFile("マップ_岩場.png");
+        Image img_ice = Image.FromFile("マップ_氷.png");
+        Image img_tree = Image.FromFile("マップ_木.png");
+        Image img_jump = Image.FromFile("マップ_ジャンプ1.png");
+        Image animatedImage_up = Image.FromFile("マップ_動く床_上.gif");
+        Image animatedImage_right = Image.FromFile("マップ_動く床_右.gif");
+        Image animatedImage_down = Image.FromFile("マップ_動く床_下.gif");
+        Image animatedImage_left = Image.FromFile("マップ_動く床_左.gif");
+
 
         //MemoryStream stream = new MemoryStream();
         //byte[] bytes = File.ReadAllBytes("右.gif");
@@ -388,13 +390,15 @@ namespace unilab2023
             {
                 for (int x = 0; x < 10; x++)
                 {
+                    g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
+
                     switch (map[y, x])
                     {
                         case 0:
-                            g1.DrawImage(img_white, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g1.DrawImage(img_noway, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
                         case 1:
-                            g1.DrawImage(img_green, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
                         case 2:
                             g1.DrawImage(img_ice, x * cell_length, y * cell_length, cell_length, cell_length);
@@ -418,9 +422,9 @@ namespace unilab2023
                             ImageAnimator.UpdateFrames(animatedImage_left);
                             g1.DrawImage(animatedImage_left, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
-                        //case 8:
-                        //    g1.DrawImage(img_tree, x * cell_length, y * cell_length, cell_length, cell_length);
-                        //    break;
+                        case 8:
+                            g1.DrawImage(img_tree, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
                         case 100:
                             g1.FillRectangle(startBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_start = x;
