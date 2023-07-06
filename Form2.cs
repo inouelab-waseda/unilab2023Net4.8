@@ -36,13 +36,6 @@ namespace unilab2023
 
         }
 
-        private void createForm1 (string selectedStageName)
-        {
-            Form1 form1 = new Form1();
-            form1.stageName = selectedStageName;
-            form1.Show();
-        }
-
         private void groupBox1_Enter(object sender, EventArgs e)//1面たぬきの里
         {
 
