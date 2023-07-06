@@ -94,7 +94,7 @@ namespace unilab2023
 
             public static List<int[]> move;  //プレイヤーの移動指示を入れるリスト
 
-            //Listboxに入れられる行数の制限
+            //listBoxに入れられる行数の制限
             public static int limit_LB1;
             public static int limit_LB3;
             public static int limit_LB4;
@@ -384,17 +384,17 @@ namespace unilab2023
             {
                 ListBox target = (ListBox)sender;
 
-                //ListBoxの名前によって制限数を設定
+                //listBoxの名前によって制限数を設定
                 int limit = 0;
                 switch (target.Name)
                 {
-                    case "ListBox1":
+                    case "listBox1":
                         limit = Global.limit_LB1;
                         break;
-                    case "ListBox3":
+                    case "listBox3":
                         limit = Global.limit_LB3;
                         break;
-                    case "ListBox4":
+                    case "listBox4":
                         limit = Global.limit_LB4;
                         break;
                     //default:
