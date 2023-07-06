@@ -31,12 +31,37 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(374, 233);
+            this.label1.Location = new System.Drawing.Point(47, 52);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 18);
@@ -63,8 +88,8 @@
             "stage5-1",
             "stage5-2",
             "stage5-3"});
-            this.comboBox1.Location = new System.Drawing.Point(594, 280);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Location = new System.Drawing.Point(50, 69);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(122, 26);
             this.comboBox1.TabIndex = 1;
@@ -73,28 +98,251 @@
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.button1.Font = new System.Drawing.Font("BIZ UDPゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(2000, 1080);
+            this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(500, 120);
+            this.button1.Size = new System.Drawing.Size(1850, 50);
             this.button1.TabIndex = 2;
             this.button1.Text = "スタート！";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button2.Location = new System.Drawing.Point(5, 150);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(140, 65);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "1 - 1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Location = new System.Drawing.Point(340, 680);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(440, 220);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "たぬきの里";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button3.Location = new System.Drawing.Point(150, 150);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(140, 65);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "1 - 2";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button4.Location = new System.Drawing.Point(295, 150);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(140, 65);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "1 - 3";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Location = new System.Drawing.Point(1080, 660);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(440, 220);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "きつねの村";
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button5.Location = new System.Drawing.Point(295, 150);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(140, 65);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "2 - 3";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button6.Location = new System.Drawing.Point(150, 150);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(140, 65);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "2 - 2";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button7.Location = new System.Drawing.Point(5, 150);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(140, 65);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "2 - 1";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button8);
+            this.groupBox4.Controls.Add(this.button9);
+            this.groupBox4.Controls.Add(this.button10);
+            this.groupBox4.Location = new System.Drawing.Point(150, 350);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(440, 220);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "ふくろうの林";
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button8.Location = new System.Drawing.Point(295, 150);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(140, 65);
+            this.button8.TabIndex = 5;
+            this.button8.Text = "4－３";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button9.Location = new System.Drawing.Point(150, 150);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(140, 65);
+            this.button9.TabIndex = 4;
+            this.button9.Text = "4 - 2\r\n";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button10.Location = new System.Drawing.Point(5, 150);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(140, 65);
+            this.button10.TabIndex = 3;
+            this.button10.Text = "4 - 1";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button11);
+            this.groupBox5.Controls.Add(this.button12);
+            this.groupBox5.Controls.Add(this.button13);
+            this.groupBox5.Location = new System.Drawing.Point(710, 50);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(440, 220);
+            this.groupBox5.TabIndex = 6;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "あやし山";
+            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+            // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button11.Location = new System.Drawing.Point(295, 150);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(140, 65);
+            this.button11.TabIndex = 5;
+            this.button11.Text = "5 - 3";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button12.Location = new System.Drawing.Point(150, 150);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(140, 65);
+            this.button12.TabIndex = 4;
+            this.button12.Text = "5 - 2";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button13.Location = new System.Drawing.Point(5, 150);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(140, 65);
+            this.button13.TabIndex = 3;
+            this.button13.Text = "5 - 1";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button14);
+            this.groupBox3.Controls.Add(this.button15);
+            this.groupBox3.Controls.Add(this.button16);
+            this.groupBox3.Location = new System.Drawing.Point(1270, 380);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(440, 220);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "あざらしの湖";
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button14.Location = new System.Drawing.Point(295, 150);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(140, 65);
+            this.button14.TabIndex = 5;
+            this.button14.Text = "3 - 3";
+            this.button14.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button15.Location = new System.Drawing.Point(150, 150);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(140, 65);
+            this.button15.TabIndex = 4;
+            this.button15.Text = "3 - 2";
+            this.button15.UseVisualStyleBackColor = true;
+            // 
+            // button16
+            // 
+            this.button16.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button16.Location = new System.Drawing.Point(5, 150);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(140, 65);
+            this.button16.TabIndex = 3;
+            this.button16.Text = "3 - 1";
+            this.button16.UseVisualStyleBackColor = true;
+            // 
             // ステージ選択画面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 1050);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1842, 961);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ステージ選択画面";
             this.Text = "ステージ選択画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ステージ選択画面_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,5 +353,25 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
     }
 }

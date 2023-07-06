@@ -23,19 +23,21 @@ namespace unilab2023
         Brush goalBackgroundColor = new SolidBrush(Color.Yellow);
         Brush startBackgroundColor = new SolidBrush(Color.Blue);
 
-        Image img_tanuki = Image.FromFile("たぬき.png");
+        Image img_tanuki = Image.FromFile("キャラ_たぬき.png");
 
-        Image character_me = Image.FromFile("たぬき.png");
-        Image character_enemy = Image.FromFile("ふくろう.png");
+        Image character_me = Image.FromFile("忍者_正面.png");
+        Image character_enemy = Image.FromFile("キャラ_一つ目小僧.png");
 
-        Image img_green = Image.FromFile("草原.jpg");
-        Image img_white = Image.FromFile("岩場.jpg");
-        Image img_ice = Image.FromFile("氷.png");
-        Image img_jump = Image.FromFile("跳.png");
-        Image animatedImage_up = Image.FromFile("動く床_上.gif");
-        Image animatedImage_right = Image.FromFile("動く床_右.gif");
-        Image animatedImage_down = Image.FromFile("動く床_下.gif");
-        Image animatedImage_left = Image.FromFile("動く床_左.gif");
+        Image img_way = Image.FromFile("マップ_草原.png");
+        Image img_noway = Image.FromFile("マップ_岩場.png");
+        Image img_ice = Image.FromFile("マップ_氷.png");
+        Image img_tree = Image.FromFile("マップ_木.png");
+        Image img_jump = Image.FromFile("マップ_ジャンプ1.png");
+        Image animatedImage_up = Image.FromFile("マップ_動く床_上.gif");
+        Image animatedImage_right = Image.FromFile("マップ_動く床_右.gif");
+        Image animatedImage_down = Image.FromFile("マップ_動く床_下.gif");
+        Image animatedImage_left = Image.FromFile("マップ_動く床_左.gif");
+
 
         //MemoryStream stream = new MemoryStream();
         //byte[] bytes = File.ReadAllBytes("右.gif");
@@ -96,11 +98,21 @@ namespace unilab2023
             public static int limit_LB1;
             public static int limit_LB3;
             public static int limit_LB4;
+
+            public static List<Conversation> Conversations = new List<Conversation>();  //会話文を入れるリスト
+        }
+
+        public class Conversation
+        {
+            public string character = "";
+            public string dialogue = "";
+            public string img = "";
         }
 
         public void Form1_Load(object sender, EventArgs e)
         {
             Global.map = CreateStage(stageName); //ステージ作成
+            Global.Conversations = LoadConversation("conversation_demo.csv"); //会話読み込み
 
             // 1行文の高さ
             int element_height = listBox1.ItemHeight;
@@ -242,41 +254,43 @@ namespace unilab2023
             }
         }
 
-        //A, Bボタン削除
-        //private void button4_Click(object sender, EventArgs e)
-        //{
-        //    label6.Visible = false;
-        //    SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move.Item1); //キャラ動かす
-        //    label3.Text = Global.count.ToString(); //試行回数の表示
+        /*
+        A, Bボタン削除
+        private void button4_Click(object sender, EventArgs e)
+        {
+            label6.Visible = false;
+            SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move.Item1); //キャラ動かす
+            label3.Text = Global.count.ToString(); //試行回数の表示
 
-        //    if(Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
-        //    {
-        //        label6.Text = "成功！！";
-        //        label6.Visible = true;
-        //        button4.Visible = false;
-        //        button4.Enabled = false;
-        //        button5.Visible = false;
-        //        button5.Enabled = false;
-        //    }
-        //}
+            if(Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
+            {
+                label6.Text = "成功！！";
+                label6.Visible = true;
+                button4.Visible = false;
+                button4.Enabled = false;
+                button5.Visible = false;
+                button5.Enabled = false;
+            }
+        }
 
-        //private void button5_Click(object sender, EventArgs e)
-        //{
-        //    label6.Visible = false;
-        //    var move = Global.move.Item2;
-        //    SquareMovement(Global.x_now, Global.y_now, Global.map, move); //キャラ動かす
-        //    label3.Text = Global.count.ToString(); //試行回数の表示
+        private void button5_Click(object sender, EventArgs e)
+        {
+            label6.Visible = false;
+            var move = Global.move.Item2;
+            SquareMovement(Global.x_now, Global.y_now, Global.map, move); //キャラ動かす
+            label3.Text = Global.count.ToString(); //試行回数の表示
 
-        //    if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
-        //    {
-        //        label6.Text = "クリア！！";
-        //        label6.Visible = true;
-        //        button4.Visible = false;
-        //        button4.Enabled = false;
-        //        button5.Visible = false;
-        //        button5.Enabled = false;
-        //    }
-        //}
+            if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
+            {
+                label6.Text = "クリア！！";
+                label6.Visible = true;
+                button4.Visible = false;
+                button4.Enabled = false;
+                button5.Visible = false;
+                button5.Enabled = false;
+            }
+        }
+        */
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -299,6 +313,7 @@ namespace unilab2023
             //初期設定に戻す
             button1.Visible = true;
             button1.Enabled = true;
+            label6.Visible = false;
             Global.count = 0;
         }
 
@@ -457,13 +472,15 @@ namespace unilab2023
             {
                 for (int x = 0; x < 10; x++)
                 {
+                    g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
+
                     switch (map[y, x])
                     {
                         case 0:
-                            g1.DrawImage(img_white, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g1.DrawImage(img_noway, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
                         case 1:
-                            g1.DrawImage(img_green, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
                         case 2:
                             g1.DrawImage(img_ice, x * cell_length, y * cell_length, cell_length, cell_length);
@@ -487,9 +504,9 @@ namespace unilab2023
                             ImageAnimator.UpdateFrames(animatedImage_left);
                             g1.DrawImage(animatedImage_left, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
-                        //case 8:
-                        //    g1.DrawImage(img_tree, x * cell_length, y * cell_length, cell_length, cell_length);
-                        //    break;
+                        case 8:
+                            g1.DrawImage(img_tree, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
                         case 100:
                             g1.FillRectangle(startBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_start = x;
@@ -983,6 +1000,85 @@ namespace unilab2023
             Global.count += 1;
         }
 
+        //会話文読み込み
+        private List<Conversation> LoadConversation(string conv_stagename)
+        {
+            List<Conversation> conversations = new List<Conversation>();
+
+            using (StreamReader sr = new StreamReader($"{conv_stagename}"))
+            {
+                int i = 0;
+
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] values = line.Split(',');
+
+                    if (i == 0)  //escape 1st row
+                    {
+                        i += 1;
+                        continue;
+                    }
+
+                    //改行文字のための処理；文字列の中に\nが出てきたら切ってつなげる
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        string searchWord = "\\n";
+                        int foundIndex = values[j].IndexOf(searchWord);
+                        List<int> newlineIndex = new List<int>();
+                        while (0 <= foundIndex)
+                        {
+                            //indexを格納
+                            newlineIndex.Add(foundIndex);
+                            int nextIndex = foundIndex + searchWord.Length;
+                            if (nextIndex < values[j].Length)
+                            {
+                                foundIndex = values[j].IndexOf(searchWord, nextIndex);
+                            }
+                            else
+                            {
+                                //最後まで検索したら終了
+                                break;
+                            }
+                        }
+                        //改行文字が無かったら無視
+                        if (newlineIndex.Count > 0)
+                        {
+                            string originalValue = values[j];
+                            values[j] = "";
+                            int startIndex = 0;
+                            int endIndex = newlineIndex[0];
+                            for (int k = 0; k < newlineIndex.Count + 1; k++)
+                            {
+                                values[j] = values[j] + originalValue.Substring(startIndex, endIndex - startIndex) + "\n";
+                                startIndex = endIndex + 2;
+                                if (k < newlineIndex.Count - 1)
+                                {
+                                    endIndex = newlineIndex[k + 1];
+                                }
+                                else
+                                {
+                                    endIndex = originalValue.Length;
+                                }
+
+                            }
+                        }
+                    }
+
+                    conversations.Add(new Conversation());
+
+                    i -= 1;
+
+                    conversations[i].character = values[0];
+                    conversations[i].dialogue = values[1];
+                    conversations[i].img = values[2];
+
+                    i += 2;
+                }
+            }
+            return conversations;
+        }
+
         /*******関数 fin******/
 
 
@@ -990,31 +1086,31 @@ namespace unilab2023
         //作業中？
         bool visible = false;
         private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
-        {   
-               Font fnt = new Font("MS UI Gothic", 15);
-               int sp = 8;
+        {
+            Font fnt = new Font("MS UI Gothic", 15);
+            int sp = 8;
 
-               Bitmap bmp3 = new Bitmap(pictureBox3.Image);
-               Graphics g3 = Graphics.FromImage(bmp3);
+            Bitmap bmp3 = new Bitmap(pictureBox3.Image);
+            Graphics g3 = Graphics.FromImage(bmp3);
 
-               if (!visible)
-               {
-                   g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
-                   if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-                   else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-               }
-               else
-               {
-                   bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-                   g3 = Graphics.FromImage(bmp3);
-                   g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-                   g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-               }
+            if (!visible)
+            {
+                g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
+                if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+                else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+            }
+            else
+            {
+                bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+                g3 = Graphics.FromImage(bmp3);
+                g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+                g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            }
 
-               visible = !visible;
+            visible = !visible;
 
-               pictureBox3.Image = bmp3;
-               g3.Dispose();
+            pictureBox3.Image = bmp3;
+            g3.Dispose();
             
         }
 
