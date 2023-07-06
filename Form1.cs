@@ -88,11 +88,16 @@ namespace unilab2023
             public static int y_goal; //ゴール位置ｙ
             public static int x_now; //現在位置ｘ
             public static int y_now; //現在位置 y
-
+           
             public static int count = 0; //試行回数カウント
             public static int miss_count = 0; //ミスカウント
 
             public static List<int[]> move;  //プレイヤーの移動指示を入れるリスト
+
+            //listBoxに入れられる行数の制限
+            public static int limit_LB1;
+            public static int limit_LB3;
+            public static int limit_LB4;
 
             public static List<Conversation> Conversations = new List<Conversation>();  //会話文を入れるリスト
         }
@@ -127,13 +132,17 @@ namespace unilab2023
 
                     if (values[0] == _stageName)
                     {
-                        height_LB1 = int.Parse(values[1]) + 1;
-                        height_LB3 = int.Parse(values[2]) + 1;
-                        height_LB4 = int.Parse(values[3]) + 1;
+                        Global.limit_LB1 = int.Parse(values[1]);
+                        Global.limit_LB3 = int.Parse(values[2]);
+                        Global.limit_LB4 = int.Parse(values[3]);
                         break;
                     }
                 }
             }
+
+            height_LB1 = Global.limit_LB1 + 1;
+            height_LB3 = Global.limit_LB3 + 1;
+            height_LB4 = Global.limit_LB4 + 1;
 
             if (height_LB1 == 1)
             {
@@ -348,15 +357,60 @@ namespace unilab2023
                 //string型でなければ受け入れない
                 e.Effect = DragDropEffects.None;
         }
+
+        //listbox内の行数を制限しない場合
+        //private void ListBox_DragDrop(object sender, DragEventArgs e)
+        //{
+        //    //ドロップされたデータがstring型か調べる
+        //    if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
+        //    {
+        //        ListBox target = (ListBox)sender;
+        //        //ドロップされたデータ(string型)を取得
+        //        string itemText =
+        //            (string)e.Data.GetData(typeof(string));
+        //        //ドロップされたデータをリストボックスに追加する
+        //        target.Items.Add(itemText);
+
+        //        isEnableDrop = false;
+        //    }
+        //}
+
+
+        //listboxの行数を制限する場合
         private void ListBox_DragDrop(object sender, DragEventArgs e)
         {
             //ドロップされたデータがstring型か調べる
             if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
             {
                 ListBox target = (ListBox)sender;
+
+                //listBoxの名前によって制限数を設定
+                int limit = 0;
+                switch (target.Name)
+                {
+                    case "listBox1":
+                        limit = Global.limit_LB1;
+                        break;
+                    case "listBox3":
+                        limit = Global.limit_LB3;
+                        break;
+                    case "listBox4":
+                        limit = Global.limit_LB4;
+                        break;
+                    //default:
+                    //    throw new Exception("Unsupported ListBox name.");
+                }
+
+                // ドロップによってアイテム数が制限数を超える場合はドロップを拒否
+                if (target.Items.Count >= limit)
+                {
+                    MessageBox.Show($"{target.Name} can only contain up to {limit} items.");
+                    return;
+                }
+
                 //ドロップされたデータ(string型)を取得
-                string itemText =
-                    (string)e.Data.GetData(typeof(string));
+                string itemText = (string)e.Data.GetData(typeof(string));
+
                 //ドロップされたデータをリストボックスに追加する
                 target.Items.Add(itemText);
 
