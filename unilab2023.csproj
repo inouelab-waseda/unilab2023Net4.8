@@ -136,6 +136,7 @@
     <Content Include="bin\Debug\たぬき.png" />
     <Content Include="bin\Debug\たぬき2.png" />
     <Content Include="bin\Debug\ふくろう.png" />
+    <Content Include="bin\Debug\キャラ_唐傘一反.png" />
     <Content Include="bin\Debug\動く床_上.gif" />
     <Content Include="bin\Debug\動く床_下.gif" />
     <Content Include="bin\Debug\動く床_右.gif" />
