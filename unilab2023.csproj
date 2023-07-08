@@ -100,7 +100,6 @@
     <EmbeddedResource Include="スタート画面.resx">
       <DependentUpon>スタート画面.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="bin\Debug\stage4-2.csv" />
     <None Include="bin\Debug\stage3-2.csv" />
     <None Include="bin\Debug\stage3-3.csv" />
     <None Include="bin\Debug\stage2-3.csv" />
@@ -108,6 +107,8 @@
     <None Include="bin\Debug\stage1-2.csv" />
     <None Include="bin\Debug\stage1-3.csv" />
     <None Include="bin\Debug\stage1-4.csv" />
+    <None Include="bin\Debug\stage4-1.csv" />
+    <None Include="bin\Debug\stage4-2.csv" />
     <None Include="bin\Debug\stage5-1.csv" />
     <None Include="bin\Debug\stage5-2.csv" />
     <None Include="bin\Debug\stage3-1.csv" />
