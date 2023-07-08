@@ -26,14 +26,14 @@ namespace unilab2023
         Image img_tanuki = Image.FromFile("キャラ_たぬき.png");
         Image img_kitune = Image.FromFile("キャラ_きつね.png");
         Image img_azarasi = Image.FromFile("キャラ_あざらし.png");
-        //Image img_hukurou = Image.FromFile("キャラ_ふくろう.png");
+        Image img_hukurou = Image.FromFile("キャラ_ふくろう.png");
 
         Image character_me = Image.FromFile("忍者_正面.png");
         Image character_enemy1 = Image.FromFile("キャラ_一つ目小僧.png");
         Image character_enemy2 = Image.FromFile("キャラ_唐傘一反.png");
         Image character_enemy3 = Image.FromFile("キャラ_カッパ.png");
-        //Image character_enemy4 = Image.FromFile("キャラ_てんぐ.png");
-        //Image character_enemy5 = Image.FromFile("キャラ_赤鬼.png");
+        Image character_enemy4 = Image.FromFile("キャラ_てんぐ.png");
+        Image character_enemy5 = Image.FromFile("キャラ_赤鬼.png");
         //Image character_enemy6 = Image.FromFile("キャラ_ヤマタノオロチ.png");
 
         Image img_way = Image.FromFile("マップ_草原.png");
@@ -228,7 +228,7 @@ namespace unilab2023
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//リセットボタン、選択したものだけを消す。選択なければすべて消す。
         {
             if (listBox1.SelectedIndex > -1)
             {
@@ -300,7 +300,7 @@ namespace unilab2023
         }
         */
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)//出発ボタン
         {
             //初期位置に戻す
             Global.x_now = Global.x_start; 
@@ -525,6 +525,7 @@ namespace unilab2023
                             break;
                         case 101:
                             g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
+//ステージごとにゴールのキャラを変えたい
                             g2.DrawImage(character_enemy2, x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
@@ -602,7 +603,7 @@ namespace unilab2023
                 }
             }
 
-
+            
             if (get_move_a.Length != 0)
             {
                 //string[] get_move_a = this.listBox1.Items.Cast<string>().ToArray();
@@ -901,11 +902,16 @@ namespace unilab2023
                 //移動先が木の場合、木の方向には進めない
                 if (Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
-                    move_copy.Clear();
-                    break;
+                    if (move_copy[0][0] == -1) character_me = Image.FromFile("忍者_左面.png");
+                    else if (move_copy[0][0] == 1) character_me = Image.FromFile("忍者_右面.png");
+                    if (move_copy[0][1] == -1) character_me = Image.FromFile("忍者_背面.png");
+                    else if (move_copy[0][1] == 1) character_me = Image.FromFile("忍者_正面.png");
+                    g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                    //move_copy[0] = new int[] { 0, 0 };
+                    move_copy.RemoveAt(0);
                     //500ミリ秒=0.5秒待機する
                     Thread.Sleep(waittime);
-                    //continue;
+                    continue;
                 }
 
                 x += move_copy[0][0];
@@ -915,7 +921,13 @@ namespace unilab2023
                 Global.y_now = y;
 
                 g2.Clear(Color.Transparent);
+//ステージごとにゴールのキャラを変えたい
                 g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+                //忍者の動きに合わせて向きが変わる
+                if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
+                else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
+                if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
+                else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
                 g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
 
 
@@ -928,6 +940,7 @@ namespace unilab2023
 
                 if (Map[y, x] == 101)
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
                     break;
                 }
                 //移動先が氷の上なら同じ方向にもう一回進む
@@ -997,8 +1010,10 @@ namespace unilab2023
 
 
                 move_copy.RemoveAt(0);
-                if (move_copy.Count == 0)
+                if (move_copy.Count == 0)//動作がすべて終了した場合
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
+
                     break;
                 }
 
@@ -1236,8 +1251,6 @@ namespace unilab2023
 
         private void button5_Click(object sender, EventArgs e)//マップに戻るボタン
         {
-            //ステージ選択画面 form2 = new ステージ選択画面();
-            //form2.Show();
             this.Close();
         }
 
