@@ -99,15 +99,10 @@
             int height_group = 183;
             int y_button = 125;
             int space_button = 4;
-            int space_button2 = 8;
-            int space_button3 = 12;
-            int space_button4 = 16;
             int width_button = 112;
-            int width_button2 = 224;
-            int width_buton3 = 336;
             int height_button = 54;
 
-            //掛け算するとエラー出るんので、先に手計算しとく（変数定義の説明例：space_2width_1 = space_button2 * width_button）
+            //掛け算するとエラー出るんので、先に手計算しとく（変数定義の説明例：space_2width_1 = space_button * 2 + width_button）
             int space_2width_1 = 120;
             int space_3width_2 = 236;
             int space_4width_3 = 352;

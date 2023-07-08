@@ -900,7 +900,7 @@ namespace unilab2023
                 }
 
                 //移動先が木の場合、木の方向には進めない
-                if (Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
+                if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
                     if (move_copy[0][0] == -1) character_me = Image.FromFile("忍者_左面.png");
                     else if (move_copy[0][0] == 1) character_me = Image.FromFile("忍者_右面.png");
@@ -1005,8 +1005,6 @@ namespace unilab2023
                     Thread.Sleep(waittime);
                     continue;
                 }
-
-
 
 
                 move_copy.RemoveAt(0);

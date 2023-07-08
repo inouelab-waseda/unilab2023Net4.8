@@ -106,10 +106,7 @@ namespace unilab2023
 
         private void groupBox4_Enter(object sender, EventArgs e)//4面ふくろうの林
         {
-            Form1 form1 = new Form1();
-            selectedStageName = comboBox1.SelectedItem.ToString();
-            form1.stageName = selectedStageName;
-            form1.Show();
+
         }
 
         private void button10_Click(object sender, EventArgs e)//stage4-1
