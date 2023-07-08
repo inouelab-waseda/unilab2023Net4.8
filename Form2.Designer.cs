@@ -93,6 +93,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(98, 23);
             this.comboBox1.TabIndex = 1;
+           
             //ボタン関連の値を変数化して一気に変換させる
             int width_group = 468;
             int height_group = 183;
@@ -110,6 +111,7 @@
             int space_2width_1 = 120;
             int space_3width_2 = 236;
             int space_4width_3 = 352;
+            
             // 
             // groupBox1
             // 
