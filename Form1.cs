@@ -899,7 +899,7 @@ namespace unilab2023
                 }
 
                 //移動先が木の場合、木の方向には進めない
-                if (Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
+                if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
                     move_copy.Clear();
                     break;
