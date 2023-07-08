@@ -17,6 +17,7 @@ namespace unilab2023
         public ステージ選択画面()
         {
             InitializeComponent();
+
         }
 
         private void ステージ選択画面_Load(object sender, EventArgs e)

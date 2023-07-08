@@ -93,13 +93,25 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(98, 23);
             this.comboBox1.TabIndex = 1;
+           
             //ボタン関連の値を変数化して一気に変換させる
             int width_group = 468;
             int height_group = 183;
-            int space_button = 4;
             int y_button = 125;
+            int space_button = 4;
+            int space_button2 = 8;
+            int space_button3 = 12;
+            int space_button4 = 16;
             int width_button = 112;
+            int width_button2 = 224;
+            int width_buton3 = 336;
             int height_button = 54;
+
+            //掛け算するとエラー出るんので、先に手計算しとく（変数定義の説明例：space_2width_1 = space_button2 * width_button）
+            int space_2width_1 = 120;
+            int space_3width_2 = 236;
+            int space_4width_3 = 352;
+            
             // 
             // groupBox1
             // 
@@ -132,7 +144,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button3.Location = new System.Drawing.Point(space_button * 2 + width_button, y_button);
+            this.button3.Location = new System.Drawing.Point(space_2width_1, y_button);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(width_button, height_button);
@@ -144,7 +156,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button4.Location = new System.Drawing.Point(space_button * 3 + width_button * 2, y_button);
+            this.button4.Location = new System.Drawing.Point(space_3width_2, y_button);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(width_button, height_button);
@@ -156,7 +168,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button1.Location = new System.Drawing.Point(space_button * 4 + width_button * 3, y_button);
+            this.button1.Location = new System.Drawing.Point(space_4width_3, y_button);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(width_button, height_button);
@@ -195,7 +207,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button6.Location = new System.Drawing.Point(space_button * 2 + width_button, y_button);
+            this.button6.Location = new System.Drawing.Point(space_2width_1, y_button);
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(width_button, height_button);
@@ -207,7 +219,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button5.Location = new System.Drawing.Point(space_button * 3 + width_button * 2, y_button);
+            this.button5.Location = new System.Drawing.Point(space_3width_2, y_button);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(width_button, height_button);
@@ -246,7 +258,7 @@
             // button15
             // 
             this.button15.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button15.Location = new System.Drawing.Point(space_button * 2 + width_button, y_button);
+            this.button15.Location = new System.Drawing.Point(space_2width_1, y_button);
             this.button15.Margin = new System.Windows.Forms.Padding(2);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(width_button, height_button);
@@ -258,7 +270,7 @@
             // button14
             // 
             this.button14.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button14.Location = new System.Drawing.Point(space_button * 3 + width_button * 2, y_button);
+            this.button14.Location = new System.Drawing.Point(space_3width_2, y_button);
             this.button14.Margin = new System.Windows.Forms.Padding(2);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(width_button, height_button);
@@ -272,7 +284,7 @@
             this.groupBox4.Controls.Add(this.button8);
             this.groupBox4.Controls.Add(this.button9);
             this.groupBox4.Controls.Add(this.button10);
-            this.groupBox4.Location = new System.Drawing.Point(space_button * 2 + width_button, 292);
+            this.groupBox4.Location = new System.Drawing.Point(space_2width_1, 292);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
@@ -297,7 +309,7 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button9.Location = new System.Drawing.Point(space_button * 2 + width_button, y_button);
+            this.button9.Location = new System.Drawing.Point(space_2width_1, y_button);
             this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(width_button, height_button);
@@ -309,7 +321,7 @@
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button8.Location = new System.Drawing.Point(space_button * 3 + width_button * 2, y_button);
+            this.button8.Location = new System.Drawing.Point(space_3width_2, y_button);
             this.button8.Margin = new System.Windows.Forms.Padding(2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(width_button, height_button);
@@ -360,7 +372,7 @@
             // button11
             // 
             this.button11.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button11.Location = new System.Drawing.Point(space_button * 3 + width_button * 2, y_button);
+            this.button11.Location = new System.Drawing.Point(space_3width_2, y_button);
             this.button11.Margin = new System.Windows.Forms.Padding(2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(width_button, height_button);
