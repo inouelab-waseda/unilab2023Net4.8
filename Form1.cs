@@ -1104,8 +1104,7 @@ namespace unilab2023
             if (!visible)
             {
                 g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
-                if (_stageName == "stage1") g3.DrawString("ステージ1のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-                else if (_stageName == "stage2") g3.DrawString("ステージ2のヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+                g3.DrawString("ヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
             }
             else
             {
@@ -1239,6 +1238,11 @@ namespace unilab2023
             //ステージ選択画面 form2 = new ステージ選択画面();
             //form2.Show();
             this.Close();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
