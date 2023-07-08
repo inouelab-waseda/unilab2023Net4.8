@@ -36,6 +36,7 @@ namespace unilab2023
 
         }
 
+
         private void groupBox1_Enter(object sender, EventArgs e)//1面たぬきの里
         {
 
@@ -55,6 +56,11 @@ namespace unilab2023
         private void button4_Click(object sender, EventArgs e)//stage1-3
         {
             createForm1("stage1-3");
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)//stage1-4
+        {
+            createForm1("stage1-4");
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)//2面きつねの村
@@ -139,5 +145,6 @@ namespace unilab2023
         {
             createForm1("stage5-3");
         }
+
     }
 }
