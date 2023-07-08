@@ -994,8 +994,6 @@ namespace unilab2023
                 }
 
 
-
-
                 move_copy.RemoveAt(0);
                 if (move_copy.Count == 0)
                 {
