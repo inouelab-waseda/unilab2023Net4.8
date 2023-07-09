@@ -525,7 +525,7 @@ namespace unilab2023
                             break;
                         case 101:
                             g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
-//ステージごとにゴールのキャラを変えたい
+                            //ステージごとにゴールのキャラを変えたい
                             g2.DrawImage(character_enemy2, x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
@@ -587,7 +587,7 @@ namespace unilab2023
                     }
                     else if (get_move_b_list_copy[i] == "A")
                     {
-                        get_move_b_list.AddRange(get_move_b_list_copy);
+                        get_move_b_list.AddRange(get_move_a_list_copy);
 
                     }
                     else
@@ -614,19 +614,54 @@ namespace unilab2023
                     {
                         int start = i + 1;
                         int trial = int.Parse(Regex.Replace(get_move_a_list[i], @"[^0-9]", ""));
+
                         int goal = 0; //後で設定
 
                         for (int j = 0; j < trial; j++)
                         {
+
                             int k = start;
+
                             do
                             {
-                                if (get_move_a_list[k] == "endfor")
+                                if (get_move_a_list[k].StartsWith("for")) //二重ループ
+                                {
+                                    int trial2 = int.Parse(Regex.Replace(get_move_a_list[k], @"[^0-9]", ""));
+                                    for (int l = 0; l < trial2; l++)
+                                    {
+                                        k = start + 1;
+                                        do
+                                        {
+                                            if (get_move_a_list[k] == "endfor")
+                                            {
+                                                break;
+                                            }
+
+                                            else if (get_move_a_list[k] == "up")
+                                            {
+                                                move_a.Add(new int[2] { 0, -1 });
+                                            }
+                                            else if (get_move_a_list[k] == "down")
+                                            {
+                                                move_a.Add(new int[2] { 0, 1 });
+                                            }
+                                            else if (get_move_a_list[k] == "right")
+                                            {
+                                                move_a.Add(new int[2] { 1, 0 });
+                                            }
+                                            else if (get_move_a_list[k] == "left")
+                                            {
+                                                move_a.Add(new int[2] { -1, 0 });
+                                            }
+                                            k++;
+                                        } while (true);
+                                    }
+                                }
+                                else if (get_move_a_list[k] == "endfor")
                                 {
                                     goal = k;
                                     break;
                                 }
-
                                 else if (get_move_a_list[k] == "up")
                                 {
                                     move_a.Add(new int[2] { 0, -1 });
@@ -643,7 +678,6 @@ namespace unilab2023
                                 {
                                     move_a.Add(new int[2] { -1, 0 });
                                 }
-
                                 k++;
                             } while (true);
                         }
@@ -689,12 +723,44 @@ namespace unilab2023
                             int k = start;
                             do
                             {
-                                if (get_move_b_list[k] == "endfor")
+                                if (get_move_b_list[k].StartsWith("for")) //二重ループ
+                                {
+                                    int trial2 = int.Parse(Regex.Replace(get_move_b_list[k], @"[^0-9]", ""));
+                                    for (int l = 0; l < trial2; l++)
+                                    {
+                                        k = start + 1;
+                                        do
+                                        {
+                                            if (get_move_b_list[k] == "endfor")
+                                            {
+                                                break;
+                                            }
+
+                                            else if (get_move_b_list[k] == "up")
+                                            {
+                                                move_b.Add(new int[2] { 0, -1 });
+                                            }
+                                            else if (get_move_b_list[k] == "down")
+                                            {
+                                                move_b.Add(new int[2] { 0, 1 });
+                                            }
+                                            else if (get_move_b_list[k] == "right")
+                                            {
+                                                move_b.Add(new int[2] { 1, 0 });
+                                            }
+                                            else if (get_move_b_list[k] == "left")
+                                            {
+                                                move_b.Add(new int[2] { -1, 0 });
+                                            }
+                                            k++;
+                                        } while (true);
+                                    }
+                                }
+                                else if (get_move_b_list[k] == "endfor")
                                 {
                                     goal = k;
                                     break;
                                 }
-
                                 else if (get_move_b_list[k] == "up")
                                 {
                                     move_b.Add(new int[2] { 0, -1 });
@@ -711,7 +777,6 @@ namespace unilab2023
                                 {
                                     move_b.Add(new int[2] { -1, 0 });
                                 }
-
                                 k++;
                             } while (true);
                         }
@@ -748,6 +813,7 @@ namespace unilab2023
             {
                 for (int i = 0; i < get_move_main.Length; i++)
                 {
+
                     if (get_move_main[i].StartsWith("for"))
                     {
                         int start = i + 1;
@@ -760,12 +826,52 @@ namespace unilab2023
                             int k = start;
                             do
                             {
-                                if (get_move_main[k] == "endfor")
+                                if (get_move_main[k].StartsWith("for")) //二重ループ
+                                {
+                                    int trial2 = int.Parse(Regex.Replace(get_move_main[k], @"[^0-9]", ""));
+                                    for (int l = 0; l < trial2; l++)
+                                    {
+                                        k = start + 1;
+                                        do
+                                        {
+                                            if (get_move_main[k] == "endfor")
+                                            {
+                                                break;
+                                            }
+
+                                            else if (get_move_main[k] == "up")
+                                            {
+                                                move.Add(new int[2] { 0, -1 });
+                                            }
+                                            else if (get_move_main[k] == "down")
+                                            {
+                                                move.Add(new int[2] { 0, 1 });
+                                            }
+                                            else if (get_move_main[k] == "right")
+                                            {
+                                                move.Add(new int[2] { 1, 0 });
+                                            }
+                                            else if (get_move_main[k] == "left")
+                                            {
+                                                move.Add(new int[2] { -1, 0 });
+                                            }
+                                            else if (get_move_main[k] == "A")
+                                            {
+                                                move.AddRange(move_a);
+                                            }
+                                            else if (get_move_main[k] == "B")
+                                            {
+                                                move.AddRange(move_b);
+                                            }
+                                            k++;
+                                        } while (true);
+                                    }
+                                }
+                                else if (get_move_main[k] == "endfor")
                                 {
                                     goal = k;
                                     break;
                                 }
-
                                 else if (get_move_main[k] == "up")
                                 {
                                     move.Add(new int[2] { 0, -1 });
@@ -782,7 +888,14 @@ namespace unilab2023
                                 {
                                     move.Add(new int[2] { -1, 0 });
                                 }
-
+                                else if (get_move_main[k] == "A")
+                                {
+                                    move.AddRange(move_a);
+                                }
+                                else if (get_move_main[k] == "B")
+                                {
+                                    move.AddRange(move_b);
+                                }
                                 k++;
                             } while (true);
                         }
@@ -921,7 +1034,7 @@ namespace unilab2023
                 Global.y_now = y;
 
                 g2.Clear(Color.Transparent);
-//ステージごとにゴールのキャラを変えたい
+                //ステージごとにゴールのキャラを変えたい
                 g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
                 //忍者の動きに合わせて向きが変わる
                 if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
