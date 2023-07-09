@@ -587,7 +587,7 @@ namespace unilab2023
                     }
                     else if (get_move_b_list_copy[i] == "A")
                     {
-                        get_move_b_list.AddRange(get_move_b_list_copy);
+                        get_move_b_list.AddRange(get_move_a_list_copy);
 
                     }
                     else
