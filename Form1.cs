@@ -899,10 +899,11 @@ namespace unilab2023
                 }
 
                 //移動先が木の場合、木の方向には進めない
-                if (Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
+                if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
-                    move_copy.Clear();
-                    break;
+                    //move_copy[0] = new int[] { 0, 0 };
+                    move_copy.RemoveAt(0);
+                    continue;
                     //500ミリ秒=0.5秒待機する
                     Thread.Sleep(waittime);
                     //continue;
@@ -992,8 +993,6 @@ namespace unilab2023
                     Thread.Sleep(waittime);
                     continue;
                 }
-
-
 
 
                 move_copy.RemoveAt(0);
