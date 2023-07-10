@@ -17,6 +17,7 @@ namespace unilab2023
         public ステージ選択画面()
         {
             InitializeComponent();
+
         }
 
         private void ステージ選択画面_Load(object sender, EventArgs e)
@@ -35,6 +36,7 @@ namespace unilab2023
         {
 
         }
+
 
         private void groupBox1_Enter(object sender, EventArgs e)//1面たぬきの里
         {
@@ -55,6 +57,11 @@ namespace unilab2023
         private void button4_Click(object sender, EventArgs e)//stage1-3
         {
             createForm1("stage1-3");
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)//stage1-4
+        {
+            createForm1("stage1-4");
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)//2面きつねの村
@@ -99,10 +106,7 @@ namespace unilab2023
 
         private void groupBox4_Enter(object sender, EventArgs e)//4面ふくろうの林
         {
-            Form1 form1 = new Form1();
-            selectedStageName = comboBox1.SelectedItem.ToString();
-            form1.stageName = selectedStageName;
-            form1.Show();
+
         }
 
         private void button10_Click(object sender, EventArgs e)//stage4-1
@@ -139,5 +143,6 @@ namespace unilab2023
         {
             createForm1("stage5-3");
         }
+
     }
 }

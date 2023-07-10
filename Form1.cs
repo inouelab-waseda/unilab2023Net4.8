@@ -24,9 +24,17 @@ namespace unilab2023
         Brush startBackgroundColor = new SolidBrush(Color.Blue);
 
         Image img_tanuki = Image.FromFile("キャラ_たぬき.png");
+        Image img_kitune = Image.FromFile("キャラ_きつね.png");
+        Image img_azarasi = Image.FromFile("キャラ_あざらし.png");
+        Image img_hukurou = Image.FromFile("キャラ_ふくろう.png");
 
         Image character_me = Image.FromFile("忍者_正面.png");
-        Image character_enemy = Image.FromFile("キャラ_一つ目小僧.png");
+        Image character_enemy1 = Image.FromFile("キャラ_一つ目小僧.png");
+        Image character_enemy2 = Image.FromFile("キャラ_唐傘一反.png");
+        Image character_enemy3 = Image.FromFile("キャラ_カッパ.png");
+        Image character_enemy4 = Image.FromFile("キャラ_てんぐ.png");
+        Image character_enemy5 = Image.FromFile("キャラ_赤鬼.png");
+        //Image character_enemy6 = Image.FromFile("キャラ_ヤマタノオロチ.png");
 
         Image img_way = Image.FromFile("マップ_草原.png");
         Image img_noway = Image.FromFile("マップ_岩場.png");
@@ -220,7 +228,7 @@ namespace unilab2023
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//リセットボタン、選択したものだけを消す。選択なければすべて消す。
         {
             if (listBox1.SelectedIndex > -1)
             {
@@ -292,7 +300,7 @@ namespace unilab2023
         }
         */
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)//出発ボタン
         {
             //初期位置に戻す
             Global.x_now = Global.x_start; 
@@ -303,7 +311,7 @@ namespace unilab2023
             g2.Clear(Color.Transparent);
             int cell_length = pictureBox1.Width / 10;
             g2.DrawImage(character_me, Global.x_now * cell_length, Global.y_now * cell_length, cell_length, cell_length);
-            g2.DrawImage(character_enemy, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+            g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
             this.Invoke((MethodInvoker)delegate
             {
                 // pictureBox2を同期的にRefreshする
@@ -517,7 +525,8 @@ namespace unilab2023
                             break;
                         case 101:
                             g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
-                            g2.DrawImage(character_enemy, x * cell_length, y * cell_length, cell_length, cell_length);
+                            //ステージごとにゴールのキャラを変えたい
+                            g2.DrawImage(character_enemy2, x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
                             break;
@@ -578,7 +587,7 @@ namespace unilab2023
                     }
                     else if (get_move_b_list_copy[i] == "A")
                     {
-                        get_move_b_list.AddRange(get_move_b_list_copy);
+                        get_move_b_list.AddRange(get_move_a_list_copy);
 
                     }
                     else
@@ -594,7 +603,7 @@ namespace unilab2023
                 }
             }
 
-
+            
             if (get_move_a.Length != 0)
             {
                 //string[] get_move_a = this.listBox1.Items.Cast<string>().ToArray();
@@ -605,19 +614,54 @@ namespace unilab2023
                     {
                         int start = i + 1;
                         int trial = int.Parse(Regex.Replace(get_move_a_list[i], @"[^0-9]", ""));
+
                         int goal = 0; //後で設定
 
                         for (int j = 0; j < trial; j++)
                         {
+
                             int k = start;
+
                             do
                             {
-                                if (get_move_a_list[k] == "endfor")
+                                if (get_move_a_list[k].StartsWith("for")) //二重ループ
+                                {
+                                    int trial2 = int.Parse(Regex.Replace(get_move_a_list[k], @"[^0-9]", ""));
+                                    for (int l = 0; l < trial2; l++)
+                                    {
+                                        k = start + 1;
+                                        do
+                                        {
+                                            if (get_move_a_list[k] == "endfor")
+                                            {
+                                                break;
+                                            }
+
+                                            else if (get_move_a_list[k] == "up")
+                                            {
+                                                move_a.Add(new int[2] { 0, -1 });
+                                            }
+                                            else if (get_move_a_list[k] == "down")
+                                            {
+                                                move_a.Add(new int[2] { 0, 1 });
+                                            }
+                                            else if (get_move_a_list[k] == "right")
+                                            {
+                                                move_a.Add(new int[2] { 1, 0 });
+                                            }
+                                            else if (get_move_a_list[k] == "left")
+                                            {
+                                                move_a.Add(new int[2] { -1, 0 });
+                                            }
+                                            k++;
+                                        } while (true);
+                                    }
+                                }
+                                else if (get_move_a_list[k] == "endfor")
                                 {
                                     goal = k;
                                     break;
                                 }
-
                                 else if (get_move_a_list[k] == "up")
                                 {
                                     move_a.Add(new int[2] { 0, -1 });
@@ -634,7 +678,6 @@ namespace unilab2023
                                 {
                                     move_a.Add(new int[2] { -1, 0 });
                                 }
-
                                 k++;
                             } while (true);
                         }
@@ -680,12 +723,44 @@ namespace unilab2023
                             int k = start;
                             do
                             {
-                                if (get_move_b_list[k] == "endfor")
+                                if (get_move_b_list[k].StartsWith("for")) //二重ループ
+                                {
+                                    int trial2 = int.Parse(Regex.Replace(get_move_b_list[k], @"[^0-9]", ""));
+                                    for (int l = 0; l < trial2; l++)
+                                    {
+                                        k = start + 1;
+                                        do
+                                        {
+                                            if (get_move_b_list[k] == "endfor")
+                                            {
+                                                break;
+                                            }
+
+                                            else if (get_move_b_list[k] == "up")
+                                            {
+                                                move_b.Add(new int[2] { 0, -1 });
+                                            }
+                                            else if (get_move_b_list[k] == "down")
+                                            {
+                                                move_b.Add(new int[2] { 0, 1 });
+                                            }
+                                            else if (get_move_b_list[k] == "right")
+                                            {
+                                                move_b.Add(new int[2] { 1, 0 });
+                                            }
+                                            else if (get_move_b_list[k] == "left")
+                                            {
+                                                move_b.Add(new int[2] { -1, 0 });
+                                            }
+                                            k++;
+                                        } while (true);
+                                    }
+                                }
+                                else if (get_move_b_list[k] == "endfor")
                                 {
                                     goal = k;
                                     break;
                                 }
-
                                 else if (get_move_b_list[k] == "up")
                                 {
                                     move_b.Add(new int[2] { 0, -1 });
@@ -702,7 +777,6 @@ namespace unilab2023
                                 {
                                     move_b.Add(new int[2] { -1, 0 });
                                 }
-
                                 k++;
                             } while (true);
                         }
@@ -739,6 +813,7 @@ namespace unilab2023
             {
                 for (int i = 0; i < get_move_main.Length; i++)
                 {
+
                     if (get_move_main[i].StartsWith("for"))
                     {
                         int start = i + 1;
@@ -751,12 +826,52 @@ namespace unilab2023
                             int k = start;
                             do
                             {
-                                if (get_move_main[k] == "endfor")
+                                if (get_move_main[k].StartsWith("for")) //二重ループ
+                                {
+                                    int trial2 = int.Parse(Regex.Replace(get_move_main[k], @"[^0-9]", ""));
+                                    for (int l = 0; l < trial2; l++)
+                                    {
+                                        k = start + 1;
+                                        do
+                                        {
+                                            if (get_move_main[k] == "endfor")
+                                            {
+                                                break;
+                                            }
+
+                                            else if (get_move_main[k] == "up")
+                                            {
+                                                move.Add(new int[2] { 0, -1 });
+                                            }
+                                            else if (get_move_main[k] == "down")
+                                            {
+                                                move.Add(new int[2] { 0, 1 });
+                                            }
+                                            else if (get_move_main[k] == "right")
+                                            {
+                                                move.Add(new int[2] { 1, 0 });
+                                            }
+                                            else if (get_move_main[k] == "left")
+                                            {
+                                                move.Add(new int[2] { -1, 0 });
+                                            }
+                                            else if (get_move_main[k] == "A")
+                                            {
+                                                move.AddRange(move_a);
+                                            }
+                                            else if (get_move_main[k] == "B")
+                                            {
+                                                move.AddRange(move_b);
+                                            }
+                                            k++;
+                                        } while (true);
+                                    }
+                                }
+                                else if (get_move_main[k] == "endfor")
                                 {
                                     goal = k;
                                     break;
                                 }
-
                                 else if (get_move_main[k] == "up")
                                 {
                                     move.Add(new int[2] { 0, -1 });
@@ -773,7 +888,14 @@ namespace unilab2023
                                 {
                                     move.Add(new int[2] { -1, 0 });
                                 }
-
+                                else if (get_move_main[k] == "A")
+                                {
+                                    move.AddRange(move_a);
+                                }
+                                else if (get_move_main[k] == "B")
+                                {
+                                    move.AddRange(move_b);
+                                }
                                 k++;
                             } while (true);
                         }
@@ -891,13 +1013,18 @@ namespace unilab2023
                 }
 
                 //移動先が木の場合、木の方向には進めない
-                if (Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
+                if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
-                    move_copy.Clear();
-                    break;
+                    if (move_copy[0][0] == -1) character_me = Image.FromFile("忍者_左面.png");
+                    else if (move_copy[0][0] == 1) character_me = Image.FromFile("忍者_右面.png");
+                    if (move_copy[0][1] == -1) character_me = Image.FromFile("忍者_背面.png");
+                    else if (move_copy[0][1] == 1) character_me = Image.FromFile("忍者_正面.png");
+                    g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                    //move_copy[0] = new int[] { 0, 0 };
+                    move_copy.RemoveAt(0);
                     //500ミリ秒=0.5秒待機する
                     Thread.Sleep(waittime);
-                    //continue;
+                    continue;
                 }
 
                 x += move_copy[0][0];
@@ -907,8 +1034,14 @@ namespace unilab2023
                 Global.y_now = y;
 
                 g2.Clear(Color.Transparent);
+                //ステージごとにゴールのキャラを変えたい
+                g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+                //忍者の動きに合わせて向きが変わる
+                if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
+                else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
+                if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
+                else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
                 g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
-                g2.DrawImage(character_enemy, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
 
 
                 //pictureBoxの中身を塗り替える
@@ -920,6 +1053,7 @@ namespace unilab2023
 
                 if (Map[y, x] == 101)
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
                     break;
                 }
                 //移動先が氷の上なら同じ方向にもう一回進む
@@ -986,11 +1120,11 @@ namespace unilab2023
                 }
 
 
-
-
                 move_copy.RemoveAt(0);
-                if (move_copy.Count == 0)
+                if (move_copy.Count == 0)//動作がすべて終了した場合
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
+
                     break;
                 }
 
@@ -1225,6 +1359,12 @@ namespace unilab2023
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)//マップに戻るボタン
+        {
+            this.Close();
+        }
+
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
 
