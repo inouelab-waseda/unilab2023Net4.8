@@ -307,6 +307,9 @@ namespace unilab2023
         }
         */
 
+        // 枠からはみ出す大きさ
+        int extra_length = 7;
+
         private void button6_Click(object sender, EventArgs e)//出発ボタン
         {
             //初期位置に戻す
@@ -317,8 +320,8 @@ namespace unilab2023
             Graphics g2 = Graphics.FromImage(bmp2);
             g2.Clear(Color.Transparent);
             int cell_length = pictureBox1.Width / 10;
-            g2.DrawImage(character_me, Global.x_now * cell_length, Global.y_now * cell_length, cell_length, cell_length);
-            g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+            g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
+            g2.DrawImage(character_enemy2, Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
             this.Invoke((MethodInvoker)delegate
             {
                 // pictureBox2を同期的にRefreshする
@@ -528,12 +531,12 @@ namespace unilab2023
                             Global.y_start = y;
                             Global.x_now = x;
                             Global.y_now = y;
-                            g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                             break;
                         case 101:
                             g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             //ステージごとにゴールのキャラを変えたい
-                            g2.DrawImage(character_enemy2, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g2.DrawImage(character_enemy2, x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
                             break;
@@ -1026,7 +1029,7 @@ namespace unilab2023
                     else if (move_copy[0][0] == 1) character_me = Image.FromFile("忍者_右面.png");
                     if (move_copy[0][1] == -1) character_me = Image.FromFile("忍者_背面.png");
                     else if (move_copy[0][1] == 1) character_me = Image.FromFile("忍者_正面.png");
-                    g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                    g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                     //move_copy[0] = new int[] { 0, 0 };
                     move_copy.RemoveAt(0);
                     //500ミリ秒=0.5秒待機する
@@ -1042,13 +1045,13 @@ namespace unilab2023
 
                 g2.Clear(Color.Transparent);
                 //ステージごとにゴールのキャラを変えたい
-                g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+                g2.DrawImage(character_enemy2, Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                 //忍者の動きに合わせて向きが変わる
                 if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
                 else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
                 if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
                 else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
-                g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
 
 
                 //pictureBoxの中身を塗り替える
