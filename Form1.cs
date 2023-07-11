@@ -306,6 +306,8 @@ namespace unilab2023
             Global.x_now = Global.x_start; 
             Global.y_now = Global.y_start;
 
+            character_me=Image.FromFile("忍者_正面.png");
+
             //初期位置に書き換え
             Graphics g2 = Graphics.FromImage(bmp2);
             g2.Clear(Color.Transparent);
@@ -1004,6 +1006,26 @@ namespace unilab2023
             {
                 if (!Colision_detection(x, y, Map, move_copy) && !jump)
                 {
+                    //忍者を動かしてからミスの表示を出す
+                    x += move_copy[0][0];
+                    y += move_copy[0][1];
+                    g2.Clear(Color.Transparent);
+                    if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
+                    else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
+                    if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
+                    else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
+                    g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                    //ステージごとにゴールのキャラを変えたい
+                    g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+                
+                    //pictureBoxの中身を塗り替える
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        // pictureBox2を同期的にRefreshする
+                        pictureBox2.Refresh();
+                    });
+
+                    //ミスラベル
                     label6.Visible = true;
                     Thread.Sleep(300);
                     //label6.Visible = false;
@@ -1067,12 +1089,7 @@ namespace unilab2023
                 //移動先がジャンプ台なら同じ方向に二回進む（１個先の障害物は無視）
                 if (Map[y, x] == 3 || jump)
                 {
-                    if (move_floor)
-                    {
-                        move_floor = false;
-                        move_copy.RemoveAt(0);
-                    }
-
+                    
                     if (jump) //次の移動で着地
                     {
                         jump = false;
