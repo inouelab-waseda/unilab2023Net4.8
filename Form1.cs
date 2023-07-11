@@ -200,6 +200,13 @@ namespace unilab2023
             g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.Dispose();
+
+            //for文をステージ1-1,1-2で消す
+            if(stageName == "stage1-1" || stageName == "stage1-2")
+            {
+                listBox2.Items.Remove("for (1)");
+                listBox2.Items.Remove("endfor");
+            }
         }
 
         /****button****/
