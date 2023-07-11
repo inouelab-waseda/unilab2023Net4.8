@@ -93,19 +93,22 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(98, 23);
             this.comboBox1.TabIndex = 1;
-           
-            //ボタン関連の値を変数化して一気に変換させる
-            int width_group = 468;
-            int height_group = 183;
-            int y_button = 125;
-            int space_button = 4;
-            int width_button = 112;
-            int height_button = 54;
 
-            //掛け算するとエラー出るんので、先に手計算しとく（変数定義の説明例：space_2width_1 = space_button * 2 + width_button）
-            int space_2width_1 = 120;
-            int space_3width_2 = 236;
-            int space_4width_3 = 352;
+            //ボタン関連の値を変数化して一気に変換させる
+            int[] width_group = new int[] { 440, 585 };//Groupの幅、group1以外は440、group1は585
+            int height_group = 220;
+            int[] x_group = new int[] { 43, 452, 788, 1124, 1600 };//横幅最大2040くらい？
+            int[] y_group = new int[] { 750, 297, 550, 297, 42 };
+            int space_button = 5;
+            int width_button = 140;
+            int height_button = 60;
+            //int[] x_button = new int[] { 5, 150, 295, 440 };
+            int y_button = 155;
+
+            //掛け算するとエラー出るので、先に手計算しとく（変数定義の説明例：space_2width_1 = space_button * 2 + width_button）
+            int space_2width_1 = 150;
+            int space_3width_2 = 295;
+            int space_4width_3 = 440;
             
             // 
             // groupBox1
@@ -114,11 +117,11 @@
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(272, 567);
+            this.groupBox1.Location = new System.Drawing.Point(x_group[0], y_group[0]);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(width_group, height_group);
+            this.groupBox1.Size = new System.Drawing.Size(width_group[1], height_group);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "たぬきの里";
@@ -177,11 +180,11 @@
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Location = new System.Drawing.Point(864, 550);
+            this.groupBox2.Location = new System.Drawing.Point(x_group[1], y_group[1]);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(352, 183);
+            this.groupBox2.Size = new System.Drawing.Size(width_group[0], height_group);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "きつねの村";
@@ -228,11 +231,11 @@
             this.groupBox3.Controls.Add(this.button14);
             this.groupBox3.Controls.Add(this.button15);
             this.groupBox3.Controls.Add(this.button16);
-            this.groupBox3.Location = new System.Drawing.Point(1016, 317);
+            this.groupBox3.Location = new System.Drawing.Point(x_group[2], y_group[2]);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(352, 183);
+            this.groupBox3.Size = new System.Drawing.Size(width_group[0], height_group);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "あざらしの湖";
@@ -279,11 +282,11 @@
             this.groupBox4.Controls.Add(this.button8);
             this.groupBox4.Controls.Add(this.button9);
             this.groupBox4.Controls.Add(this.button10);
-            this.groupBox4.Location = new System.Drawing.Point(space_2width_1, 292);
+            this.groupBox4.Location = new System.Drawing.Point(x_group[3], y_group[3]);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(352, 183);
+            this.groupBox4.Size = new System.Drawing.Size(width_group[0], height_group);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "ふくろうの林";
@@ -330,11 +333,11 @@
             this.groupBox5.Controls.Add(this.button11);
             this.groupBox5.Controls.Add(this.button12);
             this.groupBox5.Controls.Add(this.button13);
-            this.groupBox5.Location = new System.Drawing.Point(568, 42);
+            this.groupBox5.Location = new System.Drawing.Point(x_group[4], y_group[4]);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(352, 183);
+            this.groupBox5.Size = new System.Drawing.Size(width_group[0], height_group);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "あやかしの山";
@@ -355,7 +358,7 @@
             // button12
             // 
             this.button12.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button12.Location = new System.Drawing.Point(120, y_button);
+            this.button12.Location = new System.Drawing.Point(space_2width_1, y_button);
             this.button12.Margin = new System.Windows.Forms.Padding(2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(width_button, height_button);
