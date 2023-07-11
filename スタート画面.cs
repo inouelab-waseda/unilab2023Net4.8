@@ -30,6 +30,21 @@ namespace unilab2023
 
         private void スタート画面_Load(object sender, EventArgs e)
         {
+            Graphics g1 = Graphics.FromImage(bmp1);
+            g1.DrawImage(Image.FromFile("マップ_草原.png"), 0, 0, 190, 960);
+            g1.DrawImage(Image.FromFile("マップ_草原.png"), 1350, 0, 190, 960);
+            g1.DrawImage(Image.FromFile("わせ忍_アイコン2.png"), 185, 0, 1200, 960);
+            g1.DrawImage(Image.FromFile("キャラ_あざらし.png"), 1390, 40, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_カッパ.png"), 20, 40, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_きつね.png"), 40, 220, 120, 120);
+            g1.DrawImage(Image.FromFile("忍者_正面.png"), 30, 400, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_一つ目小僧.png"), 10, 740, 140, 140);
+            g1.DrawImage(Image.FromFile("キャラ_唐傘一反.png"), 1370,580, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_たぬき.png"), 40, 580, 120, 120);
+            g1.DrawImage(Image.FromFile("忍者_正面.png"), 1390, 400, 120, 120);
+            g1.DrawImage(Image.FromFile("ハリネズミ.png"), 1370, 220, 120, 120);
+            g1.DrawImage(Image.FromFile("もぐら.png"), 1390, 750, 120, 120);
+
             button1.Enabled = true;  //デバッグのたびにパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
             Global.Conversations = LoadConversation("conversation_demo.csv");
         }
@@ -188,6 +203,8 @@ namespace unilab2023
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            Graphics g1 = Graphics.FromImage(bmp1);
+            g1.Clear(BackColor);
             drawConversation();
         }
 
