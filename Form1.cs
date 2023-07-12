@@ -972,6 +972,7 @@ namespace unilab2023
         }
 
 
+
         //当たり判定
         public bool Colision_detection(int x, int y, int[,] Map, List<int[]> move)
         {
@@ -1012,15 +1013,23 @@ namespace unilab2023
 
             while (true)
             {
-                if (!Colision_detection(x, y, Map, move_copy) && !jump)
+                if(move_copy.Count > 0)
                 {
-                    label6.Visible = true;
-                    Thread.Sleep(300);
-                    //label6.Visible = false;
-                    Global.miss_count += 1;
-                    label5.Text = Global.miss_count.ToString();
+                    if (!Colision_detection(x, y, Map, move_copy) && !jump)
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
+                }
+                else
+                {
                     break;
                 }
+
 
                 //移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
