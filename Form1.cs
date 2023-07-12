@@ -333,6 +333,7 @@ namespace unilab2023
             button1.Enabled = true;
             label6.Visible = false;
             Global.count = 0;
+            label6.Text = "ミス！";
         }
 
         /******button fin******/
