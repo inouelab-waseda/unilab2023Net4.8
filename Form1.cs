@@ -1066,8 +1066,9 @@ namespace unilab2023
                     character_me = Image.FromFile("忍者_正面.png");
                     break;
                 }
+
                 //移動先が氷の上なら同じ方向にもう一回進む
-                if (Map[y, x] == 2)
+                if (!jump &&  Map[y, x] == 2)
                 {
                     //500ミリ秒=0.5秒待機する
                     Thread.Sleep(waittime);
