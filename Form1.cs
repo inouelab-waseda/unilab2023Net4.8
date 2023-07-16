@@ -23,21 +23,35 @@ namespace unilab2023
         Brush goalBackgroundColor = new SolidBrush(Color.Yellow);
         Brush startBackgroundColor = new SolidBrush(Color.Blue);
 
-        Image img_tanuki = Image.FromFile("キャラ_たぬき.png");
-        Image img_kitune = Image.FromFile("キャラ_きつね.png");
-        Image img_azarasi = Image.FromFile("キャラ_あざらし.png");
-        Image img_hukurou = Image.FromFile("キャラ_ふくろう.png");
+        Image[] img_otomo = new Image[4] {
+            Image.FromFile("キャラ_たぬき.png"),
+            Image.FromFile("キャラ_きつね.png"),
+            Image.FromFile("キャラ_あざらし.png"),
+            Image.FromFile("キャラ_ふくろう.png")
+        };
+        //img_otomo[0] = Image.FromFile("キャラ_たぬき.png");
+        //img_otomo[1] = Image.FromFile("キャラ_きつね.png");
+        //img_otomo[2] = Image.FromFile("キャラ_あざらし.png");
+        //img_otomo[3] = Image.FromFile("キャラ_ふくろう.png");
 
         Image character_me = Image.FromFile("忍者_正面.png");
-        Image character_enemy1 = Image.FromFile("キャラ_一つ目小僧.png");
-        Image character_enemy2 = Image.FromFile("キャラ_唐傘一反.png");
-        Image character_enemy3 = Image.FromFile("キャラ_カッパ.png");
-        Image character_enemy4 = Image.FromFile("キャラ_てんぐ.png");
-        Image character_enemy5 = Image.FromFile("キャラ_赤鬼.png");
-        //Image character_enemy6 = Image.FromFile("キャラ_ヤマタノオロチ.png");
+        Image[] character_enemy = new Image[6] {
+            Image.FromFile("キャラ_一つ目小僧.png"),
+            Image.FromFile("キャラ_唐傘一反.png"),
+            Image.FromFile("キャラ_カッパ.png"),
+            Image.FromFile("キャラ_てんぐ.png"),
+            Image.FromFile("キャラ_赤鬼.png"),
+            Image.FromFile("キャラ_ヤマタノオロチ.png")
+        };
+        //character_enemy[0] = Image.FromFile("キャラ_一つ目小僧.png");
+        //character_enemy[1] = Image.FromFile("キャラ_唐傘一反.png");
+        //character_enemy[2] = Image.FromFile("キャラ_カッパ.png");
+        //character_enemy[3] = Image.FromFile("キャラ_てんぐ.png");
+        //character_enemy[4] = Image.FromFile("キャラ_赤鬼.png");
+        //character_enemy[5] = Image.FromFile("キャラ_ヤマタノオロチ.png");
 
         Image img_way = Image.FromFile("マップ_草原.png");
-        Image img_noway = Image.FromFile("マップ_岩場.png");
+        Image img_noway = Image.FromFile("マップ_岩.png");
         Image img_ice = Image.FromFile("マップ_氷.png");
         Image img_tree = Image.FromFile("マップ_木.png");
         Image img_jump = Image.FromFile("マップ_ジャンプ1.png");
@@ -197,7 +211,7 @@ namespace unilab2023
 
             //ヒントを教えるキャラのアイコンを表示
             Graphics g3 = Graphics.FromImage(bmp3);
-            g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            g3.DrawImage(img_otomo[0], 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.Dispose();
         }
@@ -300,8 +314,9 @@ namespace unilab2023
         }
         */
 
-        private void button6_Click(object sender, EventArgs e)//出発ボタン
+        private void button6_Click(object sender, EventArgs e)//リトライボタン
         {
+            character_me = Image.FromFile("忍者_正面.png");
             //初期位置に戻す
             Global.x_now = Global.x_start; 
             Global.y_now = Global.y_start;
@@ -311,7 +326,7 @@ namespace unilab2023
             g2.Clear(Color.Transparent);
             int cell_length = pictureBox1.Width / 10;
             g2.DrawImage(character_me, Global.x_now * cell_length, Global.y_now * cell_length, cell_length, cell_length);
-            g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+            g2.DrawImage(character_enemy[5], Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
             this.Invoke((MethodInvoker)delegate
             {
                 // pictureBox2を同期的にRefreshする
@@ -526,7 +541,7 @@ namespace unilab2023
                         case 101:
                             g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             //ステージごとにゴールのキャラを変えたい
-                            g2.DrawImage(character_enemy2, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g2.DrawImage(character_enemy[5], x * cell_length, y * cell_length, cell_length, cell_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
                             break;
@@ -979,6 +994,44 @@ namespace unilab2023
                 return true;
             }
         }
+        //動きにあわせて忍者の画像を返す
+        Image Ninja_Image(int x, int y, int steps, bool jump, Image Ninja)
+        {
+            int a = steps % 4;//歩き差分を識別
+            if (a == 1)
+            {
+                if (x == -1) Ninja = Image.FromFile("忍者_左面_右足.png");
+                if (x == 1) Ninja = Image.FromFile("忍者_右面_右足.png");
+                if (y == -1) Ninja = Image.FromFile("忍者_背面_右足.png");
+                if (y == 1) Ninja = Image.FromFile("忍者_正面_右足.png");
+            }else if (a == 3)
+            {
+                if (x == -1) Ninja = Image.FromFile("忍者_左面_左足.png");
+                if (x == 1) Ninja = Image.FromFile("忍者_右面_左足.png");
+                if (y == -1) Ninja = Image.FromFile("忍者_背面_左足.png");
+                if (y == 1) Ninja = Image.FromFile("忍者_正面_左足.png");
+
+            }
+            else
+            {
+                if (x == -1) Ninja = Image.FromFile("忍者_左面.png");
+                if (x == 1) Ninja = Image.FromFile("忍者_右面.png");
+                if (y == -1) Ninja = Image.FromFile("忍者_背面.png");
+                if (y == 1) Ninja = Image.FromFile("忍者_正面.png");
+            }
+            
+
+            if (jump)
+            {
+                if (x == -1) Ninja = Image.FromFile("忍者_左面_ジャンプ.png");
+                if (x == 1) Ninja = Image.FromFile("忍者_右面_ジャンプ.png");
+                if (y == -1) Ninja = Image.FromFile("忍者_背面_ジャンプ.png");
+                if (y == 1) Ninja = Image.FromFile("忍者_正面_ジャンプ.png");
+            }
+
+
+            return Ninja;
+        }
 
         //キャラの座標更新
         public void SquareMovement(int x, int y, int[,] Map, List<int[]> move)
@@ -999,6 +1052,7 @@ namespace unilab2023
             bool jump = false;
             bool move_floor = false;
             int waittime = 250; //ミリ秒
+            Global.count = 1;//何マス歩いたか、歩き差分用
 
             while (true)
             {
@@ -1015,10 +1069,7 @@ namespace unilab2023
                 //移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
-                    if (move_copy[0][0] == -1) character_me = Image.FromFile("忍者_左面.png");
-                    else if (move_copy[0][0] == 1) character_me = Image.FromFile("忍者_右面.png");
-                    if (move_copy[0][1] == -1) character_me = Image.FromFile("忍者_背面.png");
-                    else if (move_copy[0][1] == 1) character_me = Image.FromFile("忍者_正面.png");
+                    character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                     g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
                     //move_copy[0] = new int[] { 0, 0 };
                     move_copy.RemoveAt(0);
@@ -1035,13 +1086,15 @@ namespace unilab2023
 
                 g2.Clear(Color.Transparent);
                 //ステージごとにゴールのキャラを変えたい
-                g2.DrawImage(character_enemy2, Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+                g2.DrawImage(character_enemy[5], Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
                 //忍者の動きに合わせて向きが変わる
-                if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
-                else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
-                if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
-                else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
+
+                character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                 g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                //Thread.Sleep(waittime);//マスの間に歩く差分を出そうとしたけど。。。
+                //g2.Clear(Color.Transparent);
+                //character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                //g2.DrawImage(character_me, x * cell_length + move_copy[0][0] * cell_length / 2, y * cell_length + move_copy[0][1] * cell_length / 2, cell_length, cell_length);
 
 
                 //pictureBoxの中身を塗り替える
@@ -1053,7 +1106,6 @@ namespace unilab2023
 
                 if (Map[y, x] == 101)
                 {
-                    character_me = Image.FromFile("忍者_正面.png");
                     break;
                 }
                 //移動先が氷の上なら同じ方向にもう一回進む
@@ -1119,19 +1171,16 @@ namespace unilab2023
                     continue;
                 }
 
-
                 move_copy.RemoveAt(0);
                 if (move_copy.Count == 0)//動作がすべて終了した場合
                 {
-                    character_me = Image.FromFile("忍者_正面.png");
-
                     break;
                 }
 
                 //500ミリ秒=0.5秒待機する
                 Thread.Sleep(waittime);
             }
-            Global.count += 1;
+            Global.count ++;//歩数を数える、氷、動く床等では増えない
         }
 
         //会話文読み込み
@@ -1236,7 +1285,7 @@ namespace unilab2023
             {
                 bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
                 g3 = Graphics.FromImage(bmp3);
-                g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+                g3.DrawImage(img_otomo[0], 0, 0, bmp3.Height - 1, bmp3.Height - 1);
                 g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             }
 
