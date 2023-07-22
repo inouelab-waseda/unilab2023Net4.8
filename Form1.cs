@@ -51,7 +51,7 @@ namespace unilab2023
         //character_enemy[5] = Image.FromFile("キャラ_ヤマタノオロチ.png");
 
         Image img_way = Image.FromFile("マップ_草原.png");
-        Image img_noway = Image.FromFile("マップ_岩.png");
+        Image img_noway = Image.FromFile("マップ_岩場.png");
         Image img_ice = Image.FromFile("マップ_氷.png");
         Image img_tree = Image.FromFile("マップ_木.png");
         Image img_jump = Image.FromFile("マップ_ジャンプ1.png");
@@ -214,6 +214,13 @@ namespace unilab2023
             g3.DrawImage(img_otomo[0], 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.Dispose();
+
+            //for文をステージ1-1,1-2で消す
+            if(stageName == "stage1-1" || stageName == "stage1-2")
+            {
+                listBox2.Items.Remove("for (1)");
+                listBox2.Items.Remove("endfor");
+            }
         }
 
         /****button****/
@@ -314,7 +321,10 @@ namespace unilab2023
         }
         */
 
-        private void button6_Click(object sender, EventArgs e)//リトライボタン
+        // 枠からはみ出す大きさ
+        int extra_length = 7;
+
+        private void button6_Click(object sender, EventArgs e)//出発ボタン
         {
             character_me = Image.FromFile("忍者_正面.png");
             //初期位置に戻す
@@ -325,8 +335,9 @@ namespace unilab2023
             Graphics g2 = Graphics.FromImage(bmp2);
             g2.Clear(Color.Transparent);
             int cell_length = pictureBox1.Width / 10;
-            g2.DrawImage(character_me, Global.x_now * cell_length, Global.y_now * cell_length, cell_length, cell_length);
-            g2.DrawImage(character_enemy[5], Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+            character_me = Image.FromFile("忍者_正面.png");
+            g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
+            g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
             this.Invoke((MethodInvoker)delegate
             {
                 // pictureBox2を同期的にRefreshする
@@ -338,6 +349,7 @@ namespace unilab2023
             button1.Enabled = true;
             label6.Visible = false;
             Global.count = 0;
+            label6.Text = "ミス！";
         }
 
         /******button fin******/
@@ -536,12 +548,12 @@ namespace unilab2023
                             Global.y_start = y;
                             Global.x_now = x;
                             Global.y_now = y;
-                            g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                            g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                             break;
                         case 101:
                             g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             //ステージごとにゴールのキャラを変えたい
-                            g2.DrawImage(character_enemy[5], x * cell_length, y * cell_length, cell_length, cell_length);
+                            g2.DrawImage(character_enemy[5], x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
                             break;
@@ -977,6 +989,7 @@ namespace unilab2023
         }
 
 
+
         //当たり判定
         public bool Colision_detection(int x, int y, int[,] Map, List<int[]> move)
         {
@@ -1056,15 +1069,23 @@ namespace unilab2023
 
             while (true)
             {
-                if (!Colision_detection(x, y, Map, move_copy) && !jump)
+                if(move_copy.Count > 0)
                 {
-                    label6.Visible = true;
-                    Thread.Sleep(300);
-                    //label6.Visible = false;
-                    Global.miss_count += 1;
-                    label5.Text = Global.miss_count.ToString();
+                    if (!Colision_detection(x, y, Map, move_copy) && !jump)
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
+                }
+                else
+                {
                     break;
                 }
+
 
                 //移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
@@ -1086,7 +1107,7 @@ namespace unilab2023
 
                 g2.Clear(Color.Transparent);
                 //ステージごとにゴールのキャラを変えたい
-                g2.DrawImage(character_enemy[5], Global.x_goal * cell_length, Global.y_goal * cell_length, cell_length, cell_length);
+                g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                 //忍者の動きに合わせて向きが変わる
 
                 character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
@@ -1108,8 +1129,9 @@ namespace unilab2023
                 {
                     break;
                 }
+
                 //移動先が氷の上なら同じ方向にもう一回進む
-                if (Map[y, x] == 2)
+                if (!jump &&  Map[y, x] == 2)
                 {
                     //500ミリ秒=0.5秒待機する
                     Thread.Sleep(waittime);
