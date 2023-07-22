@@ -1091,7 +1091,7 @@ namespace unilab2023
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
                     character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
-                    g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                    g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     //move_copy[0] = new int[] { 0, 0 };
                     move_copy.RemoveAt(0);
                     //500ミリ秒=0.5秒待機する
@@ -1111,7 +1111,7 @@ namespace unilab2023
                 //忍者の動きに合わせて向きが変わる
 
                 character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
-                g2.DrawImage(character_me, x * cell_length, y * cell_length, cell_length, cell_length);
+                g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 //Thread.Sleep(waittime);//マスの間に歩く差分を出そうとしたけど。。。
                 //g2.Clear(Color.Transparent);
                 //character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
