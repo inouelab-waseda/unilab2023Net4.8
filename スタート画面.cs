@@ -187,6 +187,7 @@ namespace unilab2023
             else
             {
                 button1.Enabled = true;
+                button2.Text = "次へ";
                 return;
             }
         }
@@ -197,15 +198,28 @@ namespace unilab2023
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ステージ選択画面 form2 = new ステージ選択画面();
-            form2.Show();
+            //ステージ選択画面 form2 = new ステージ選択画面();
+            //form2.Show();
+
+            pictureBox1_Click(sender,e);
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            button1.Visible = false;
+            button2.Visible = true;
             Graphics g1 = Graphics.FromImage(bmp1);
             g1.Clear(BackColor);
+
             drawConversation();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            ステージ選択画面 form2 = new ステージ選択画面();
+            form2.Show();
         }
 
         /* button fin */

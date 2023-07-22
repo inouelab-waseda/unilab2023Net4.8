@@ -151,6 +151,7 @@
     <Content Include="bin\Debug\草原.jpg" />
     <Content Include="bin\Debug\跳.png" />
     <Content Include="Resources\ボタン枠140_65.png" />
+    <None Include="Resources\ボタン枠140_651.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

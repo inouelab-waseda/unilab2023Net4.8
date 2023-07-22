@@ -69,5 +69,15 @@ namespace unilab2023.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap ボタン枠140_651 {
+            get {
+                object obj = ResourceManager.GetObject("ボタン枠140_651", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
