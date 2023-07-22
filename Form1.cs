@@ -1080,6 +1080,15 @@ namespace unilab2023
                         label5.Text = Global.miss_count.ToString();
                         break;
                     }
+                    if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
                 }
                 else
                 {
@@ -1087,8 +1096,8 @@ namespace unilab2023
                 }
 
 
-                //移動先が木の場合、木の方向には進めない
-                if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
+                //jumpでない時移動先が木の場合、木の方向には進めない||jumpの時着地先が木の場合、木の方向には進めない
+                if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8 || jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8)
                 {
                     character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                     g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
