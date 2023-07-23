@@ -83,6 +83,11 @@ namespace unilab2023
         {
             InitializeComponent();
 
+            //Form全体にdrop可能に
+            this.AllowDrop = true;
+            this.DragDrop += new DragEventHandler(ListBox_DragDrop);
+            this.DragEnter += new DragEventHandler(ListBox_DragEnter);
+
             //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
             pictureBox1.Location = new Point(600, 50);
@@ -358,6 +363,7 @@ namespace unilab2023
         /*******関数******/
         //ListBox要素操作
         bool isEnableDrop = true;
+        private ListBox nearestListBox;
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
         {
             //マウスの左ボタンだけが押されている時のみドラッグできるようにする
@@ -381,6 +387,41 @@ namespace unilab2023
 
                 isEnableDrop = true;
             }
+        }
+
+
+        private ListBox GetNearestListBox(Point point)
+        {
+            // 3つのListBoxをリストに格納する
+            List<ListBox> listBoxes = listBoxes = new List<ListBox> { listBox1, listBox3, listBox4 };
+
+            // Bボタンがあるかないかの場合分け
+            if (Global.limit_LB3 == 0)
+            {
+                listBoxes = new List<ListBox> { listBox1, listBox4 };
+            }
+
+            double minDistance = double.MaxValue;
+            ListBox nearestListBox = null;
+
+            foreach (var listBox in listBoxes)
+            {
+                // ListBoxの中心座標を計算する
+                Point listBoxCenter = new Point(listBox.Location.X + listBox.Width / 2, listBox.Location.Y + listBox.Height / 2);
+
+                // ドラッグされたポイントとListBoxの中心との間の距離を計算する
+                double distance = Math.Sqrt(Math.Pow(listBoxCenter.X - point.X, 2) + Math.Pow(listBoxCenter.Y - point.Y, 2));
+
+                // これまでの最小距離よりも小さい場合は、更新する
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestListBox = listBox;
+                }
+            }
+
+            // 最も近いListBoxを返す
+            return nearestListBox;
         }
         private void ListBox_DragEnter(object sender, DragEventArgs e)
         {
@@ -417,7 +458,11 @@ namespace unilab2023
             //ドロップされたデータがstring型か調べる
             if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
             {
-                ListBox target = (ListBox)sender;
+                Point point = this.PointToClient(new Point(e.X, e.Y));
+                ListBox target = GetNearestListBox(point); // ここでマウス位置に最も近いリストボックスを取得
+
+                if (target == null) // 最も近いリストボックスがない場合は何もしない
+                    return;
 
                 //listBoxの名前によって制限数を設定
                 int limit = 0;
@@ -1080,6 +1125,24 @@ namespace unilab2023
                         label5.Text = Global.miss_count.ToString();
                         break;
                     }
+                    if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
+                    if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
                 }
                 else
                 {
@@ -1087,7 +1150,7 @@ namespace unilab2023
                 }
 
 
-                //移動先が木の場合、木の方向には進めない
+                //jumpでない時移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
                     character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
