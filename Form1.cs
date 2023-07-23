@@ -83,6 +83,12 @@ namespace unilab2023
         {
             InitializeComponent();
 
+            //Form全体にdrop可能に
+            this.AllowDrop = true;
+            this.DragDrop += new DragEventHandler(ListBox_DragDrop);
+            this.DragEnter += new DragEventHandler(ListBox_DragEnter);
+            //this.DragOver += new DragEventHandler(Form_DragOver);
+
             //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
             pictureBox1.Location = new Point(600, 50);
@@ -200,13 +206,16 @@ namespace unilab2023
             listBox1.SelectionMode = SelectionMode.One;
             listBox1.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox1.DragDrop += new DragEventHandler(ListBox_DragDrop);
+            //listBox1.DragOver += new DragEventHandler(Form_DragOver);
             listBox2.MouseDown += new MouseEventHandler(ListBox_MouseDown);
             listBox3.SelectionMode = SelectionMode.One;
             listBox3.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox3.DragDrop += new DragEventHandler(ListBox_DragDrop);
+            //listBox3.DragOver += new DragEventHandler(Form_DragOver);
             listBox4.SelectionMode = SelectionMode.One;
             listBox4.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox4.DragDrop += new DragEventHandler(ListBox_DragDrop);
+            //listBox4.DragOver += new DragEventHandler(Form_DragOver);
             listBox5.MouseDown += new MouseEventHandler(ListBox_MouseDown);
 
             //ヒントを教えるキャラのアイコンを表示
@@ -358,6 +367,7 @@ namespace unilab2023
         /*******関数******/
         //ListBox要素操作
         bool isEnableDrop = true;
+        private ListBox nearestListBox;
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
         {
             //マウスの左ボタンだけが押されている時のみドラッグできるようにする
@@ -381,6 +391,48 @@ namespace unilab2023
 
                 isEnableDrop = true;
             }
+        }
+
+        //private void Form_DragOver(object sender, DragEventArgs e)
+        //{
+        //    Point point = this.PointToClient(new Point(e.X, e.Y));
+        //    nearestListBox = GetNearestListBox(point);
+        //    if (nearestListBox != null)
+        //    {
+        //        e.Effect = DragDropEffects.Move;
+        //    }
+        //    else
+        //    {
+        //        e.Effect = DragDropEffects.None;
+        //    }
+        //}
+
+        private ListBox GetNearestListBox(Point point)
+        {
+            // 3つのListBoxをリストに格納する
+            List<ListBox> listBoxes = new List<ListBox> { listBox1, listBox3, listBox4 };
+
+            double minDistance = double.MaxValue;
+            ListBox nearestListBox = null;
+
+            foreach (var listBox in listBoxes)
+            {
+                // ListBoxの中心座標を計算する
+                Point listBoxCenter = new Point(listBox.Location.X + listBox.Width / 2, listBox.Location.Y + listBox.Height / 2);
+
+                // ドラッグされたポイントとListBoxの中心との間の距離を計算する
+                double distance = Math.Sqrt(Math.Pow(listBoxCenter.X - point.X, 2) + Math.Pow(listBoxCenter.Y - point.Y, 2));
+
+                // これまでの最小距離よりも小さい場合は、更新する
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestListBox = listBox;
+                }
+            }
+
+            // 最も近いListBoxを返す
+            return nearestListBox;
         }
         private void ListBox_DragEnter(object sender, DragEventArgs e)
         {
@@ -417,7 +469,11 @@ namespace unilab2023
             //ドロップされたデータがstring型か調べる
             if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
             {
-                ListBox target = (ListBox)sender;
+                Point point = this.PointToClient(new Point(e.X, e.Y));
+                ListBox target = GetNearestListBox(point); // ここでマウス位置に最も近いリストボックスを取得
+
+                if (target == null) // 最も近いリストボックスがない場合は何もしない
+                    return;
 
                 //listBoxの名前によって制限数を設定
                 int limit = 0;
