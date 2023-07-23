@@ -393,7 +393,13 @@ namespace unilab2023
         private ListBox GetNearestListBox(Point point)
         {
             // 3つのListBoxをリストに格納する
-            List<ListBox> listBoxes = new List<ListBox> { listBox1, listBox3, listBox4 };
+            List<ListBox> listBoxes = listBoxes = new List<ListBox> { listBox1, listBox3, listBox4 };
+
+            // Bボタンがあるかないかの場合分け
+            if (Global.limit_LB3 == 0)
+            {
+                listBoxes = new List<ListBox> { listBox1, listBox4 };
+            }
 
             double minDistance = double.MaxValue;
             ListBox nearestListBox = null;
