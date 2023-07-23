@@ -46,7 +46,7 @@ namespace unilab2023
             g1.DrawImage(Image.FromFile("キャラ_赤鬼.png"), 1380, 380, 120, 120);
 
             button1.Enabled = true;  //デバッグのたびにパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
-            Global.Conversations = LoadConversation("conversation_demo.csv");
+            Global.Conversations = LoadConversation("わせ忍0章.csv");
         }
 
         public class Global

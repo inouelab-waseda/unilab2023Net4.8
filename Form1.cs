@@ -46,24 +46,57 @@ namespace unilab2023
         Image animatedImage_down = Image.FromFile("マップ_動く床_下.gif");
         Image animatedImage_left = Image.FromFile("マップ_動く床_左.gif");
 
+        public Image Draw_Icon(string name)
+        {
+            switch (name)
+            {
+                case "家田":
+                    return character_me;
+                case "たぬき":
+                case "チマキ":
+                    return img_tanuki;
+
+                case "きつね":
+                case "イナリ":
+                    return img_kitune;
+
+                case "あざらし":
+                case "スリミ":
+                    return img_azarasi;
+
+                case "ふくろう":
+                case "ツクネ":
+                    return img_hukurou;
+
+                    /*
+                case "ヤマタノオロチ":
+                    return character_enemy6;
+                    */
+            }
+            Bitmap bmp = new Bitmap(1, 1);
+            bmp.SetPixel(0, 0, Color.White);
+
+            return bmp;
+        }
 
         //MemoryStream stream = new MemoryStream();
         //byte[] bytes = File.ReadAllBytes("右.gif");
         //stream.Write(bytes, 0, bytes.Length);
         //Bitmap animatedImage_right = new Bitmap(stream);
 
-        //アニメ開始
-        //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
-        //DoubleBuffered = true;
+            //アニメ開始
+            //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
+            //DoubleBuffered = true;
 
 
-        //ステージ名の受け渡し
+            //ステージ名の受け渡し
         private string _stageName;
         public string stageName
         {
             get { return _stageName; }
             set { _stageName = value; }
         }
+
 
         public Form1()
         {
@@ -120,7 +153,13 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             Global.map = CreateStage(stageName); //ステージ作成
-            Global.Conversations = LoadConversation("conversation_demo.csv"); //会話読み込み
+
+            string str_num = Regex.Replace(stageName, @"[^0-9]", "");
+            int num = int.Parse(str_num) / 10;
+
+            string file_name = "わせ忍" + num.ToString() + "章.csv";
+
+            Global.Conversations = LoadConversation(file_name); //会話読み込み
 
             // 1行文の高さ
             int element_height = listBox1.ItemHeight;
@@ -195,9 +234,12 @@ namespace unilab2023
             listBox4.DragDrop += new DragEventHandler(ListBox_DragDrop);
             listBox5.MouseDown += new MouseEventHandler(ListBox_MouseDown);
 
+            
             //ヒントを教えるキャラのアイコンを表示
             Graphics g3 = Graphics.FromImage(bmp3);
-            g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            Bitmap bmp = new Bitmap(1, 1);
+            bmp.SetPixel(0, 0, Color.White);
+            g3.DrawImage(bmp, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.Dispose();
 
@@ -1161,6 +1203,11 @@ namespace unilab2023
         {
             List<Conversation> conversations = new List<Conversation>();
 
+            string stage = Regex.Replace(stageName, @"[^0-9]", "");
+            int stage_num = int.Parse(stage) % 10;
+
+            bool load = false;
+
             using (StreamReader sr = new StreamReader($"{conv_stagename}"))
             {
                 int i = 0;
@@ -1221,18 +1268,74 @@ namespace unilab2023
                         }
                     }
 
-                    conversations.Add(new Conversation());
+                    if (load) {
+                        conversations.Add(new Conversation());
 
-                    i -= 1;
+                        i -= 1;
 
-                    conversations[i].character = values[0];
-                    conversations[i].dialogue = values[1];
-                    conversations[i].img = values[2];
+                        conversations[i].character = values[0];
+                        conversations[i].dialogue = values[1];
+                        conversations[i].img = values[2];
 
-                    i += 2;
+                        i += 2;
+                    }
+                    int start_num = values[1].IndexOf("start");
+                    if (start_num > 0)
+                    {
+                        string stg = Regex.Replace(values[1], @"[^0-9]", "");
+                        int stg_num = int.Parse(stg) % 10;
+                        if (stg_num == stage_num) load = true;
+                        else if (stg_num == stage_num + 1)
+                        {
+                            int count = conversations.Count();
+                            if (count != 0) conversations.RemoveAt(count - 1);
+                            load = false;
+                        }
+                    }
                 }
             }
             return conversations;
+        }
+
+        int conversationCounter = 0;  // 脚本のカウンタ
+
+        bool visible = true;
+        private void drawConversation()
+        {
+            int play_num = Global.Conversations[conversationCounter].dialogue.IndexOf("play");
+            int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
+            bool Goal = (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now);
+            
+            if ((play_num > 0 && !Goal) || end_num > 0) return;
+            else if(play_num > 0) conversationCounter += 1;
+
+            //描画準備
+            Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            Graphics g3 = Graphics.FromImage(bmp3);
+
+            Font fnt = new Font("MS UI Gothic", 15);
+            int sp = 8;
+
+            g3.DrawImage(Draw_Icon(Global.Conversations[conversationCounter].character), 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            if (visible)
+            {
+                g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
+                g3.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+
+                pictureBox3.Image = bmp3;
+            }
+
+            g3.Dispose();
+
+            if (conversationCounter < Global.Conversations.Count - 1)
+            {
+                conversationCounter += 1;
+            }
+            else
+            {
+                visible = false;
+            }
         }
 
         /*******関数 fin******/
@@ -1240,33 +1343,9 @@ namespace unilab2023
 
         /******つかわない******/
         //作業中？
-        bool visible = false;
         private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
         {
-            Font fnt = new Font("MS UI Gothic", 15);
-            int sp = 8;
-
-            Bitmap bmp3 = new Bitmap(pictureBox3.Image);
-            Graphics g3 = Graphics.FromImage(bmp3);
-
-            if (!visible)
-            {
-                g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
-                g3.DrawString("ヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
-            }
-            else
-            {
-                bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-                g3 = Graphics.FromImage(bmp3);
-                g3.DrawImage(img_tanuki, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-                g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-            }
-
-            visible = !visible;
-
-            pictureBox3.Image = bmp3;
-            g3.Dispose();
-            
+            drawConversation();          
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
