@@ -29,10 +29,6 @@ namespace unilab2023
             Image.FromFile("キャラ_あざらし.png"),
             Image.FromFile("キャラ_ふくろう.png")
         };
-        //img_otomo[0] = Image.FromFile("キャラ_たぬき.png");
-        //img_otomo[1] = Image.FromFile("キャラ_きつね.png");
-        //img_otomo[2] = Image.FromFile("キャラ_あざらし.png");
-        //img_otomo[3] = Image.FromFile("キャラ_ふくろう.png");
 
         Image character_me = Image.FromFile("忍者_正面.png");
         Image[] character_enemy = new Image[6] {
@@ -43,12 +39,6 @@ namespace unilab2023
             Image.FromFile("キャラ_赤鬼.png"),
             Image.FromFile("キャラ_ヤマタノオロチ.png")
         };
-        //character_enemy[0] = Image.FromFile("キャラ_一つ目小僧.png");
-        //character_enemy[1] = Image.FromFile("キャラ_唐傘一反.png");
-        //character_enemy[2] = Image.FromFile("キャラ_カッパ.png");
-        //character_enemy[3] = Image.FromFile("キャラ_てんぐ.png");
-        //character_enemy[4] = Image.FromFile("キャラ_赤鬼.png");
-        //character_enemy[5] = Image.FromFile("キャラ_ヤマタノオロチ.png");
 
         Image img_way = Image.FromFile("マップ_草原.png");
         Image img_noway = Image.FromFile("マップ_岩場.png");
@@ -68,24 +58,22 @@ namespace unilab2023
                     return character_me;
                 case "たぬき":
                 case "チマキ":
-                    return img_tanuki;
+                    return img_otomo[0];
 
                 case "きつね":
                 case "イナリ":
-                    return img_kitune;
+                    return img_otomo[1];
 
                 case "あざらし":
                 case "スリミ":
-                    return img_azarasi;
+                    return img_otomo[2];
 
                 case "ふくろう":
                 case "ツクネ":
-                    return img_hukurou;
+                    return img_otomo[3];
 
-                    /*
                 case "ヤマタノオロチ":
-                    return character_enemy6;
-                    */
+                    return character_enemy[5];
             }
             Bitmap bmp = new Bitmap(1, 1);
             bmp.SetPixel(0, 0, Color.White);
@@ -284,15 +272,6 @@ namespace unilab2023
             {
                 label6.Text = "クリア！！";
                 label6.Visible = true;
-
-                //button1.Visible = false;
-                //button1.Enabled = false;
-                //button4.Enabled = true;
-                //button5.Enabled = true;
-                //button4.Visible = true;
-                //button5.Visible = true;
-
-
             }
         }
 
@@ -476,6 +455,7 @@ namespace unilab2023
                 e.Effect = DragDropEffects.None;
         }
 
+        /*
         //listbox内の行数を制限しない場合
         //private void ListBox_DragDrop(object sender, DragEventArgs e)
         //{
@@ -492,6 +472,7 @@ namespace unilab2023
         //        isEnableDrop = false;
         //    }
         //}
+        */
 
 
         //listboxの行数を制限する場合
@@ -1450,11 +1431,6 @@ namespace unilab2023
             }
         }
 
-        /*******関数 fin******/
-
-
-        /******つかわない******/
-        //作業中？
         private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
         {
             drawConversation();          
@@ -1478,6 +1454,7 @@ namespace unilab2023
                 }
             }
         }
+
         private void listBox3_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (listBox3.SelectedItem != null)
@@ -1515,6 +1492,11 @@ namespace unilab2023
                 }
             }
         }
+
+        /*******関数 fin******/
+
+
+        /******つかわない******/
 
         //以下空の関数（消さない）
         private void pictureBox2_Click(object sender, EventArgs e)
