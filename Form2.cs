@@ -46,6 +46,7 @@ namespace unilab2023
         private void button2_Click(object sender, EventArgs e)//stage1-1
         {
             createForm1("stage1-1");
+
         }
 
         private void button3_Click(object sender, EventArgs e)//stage1-2
