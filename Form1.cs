@@ -87,7 +87,6 @@ namespace unilab2023
             this.AllowDrop = true;
             this.DragDrop += new DragEventHandler(ListBox_DragDrop);
             this.DragEnter += new DragEventHandler(ListBox_DragEnter);
-            //this.DragOver += new DragEventHandler(Form_DragOver);
 
             //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
@@ -206,16 +205,13 @@ namespace unilab2023
             listBox1.SelectionMode = SelectionMode.One;
             listBox1.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox1.DragDrop += new DragEventHandler(ListBox_DragDrop);
-            //listBox1.DragOver += new DragEventHandler(Form_DragOver);
             listBox2.MouseDown += new MouseEventHandler(ListBox_MouseDown);
             listBox3.SelectionMode = SelectionMode.One;
             listBox3.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox3.DragDrop += new DragEventHandler(ListBox_DragDrop);
-            //listBox3.DragOver += new DragEventHandler(Form_DragOver);
             listBox4.SelectionMode = SelectionMode.One;
             listBox4.DragEnter += new DragEventHandler(ListBox_DragEnter);
             listBox4.DragDrop += new DragEventHandler(ListBox_DragDrop);
-            //listBox4.DragOver += new DragEventHandler(Form_DragOver);
             listBox5.MouseDown += new MouseEventHandler(ListBox_MouseDown);
 
             //ヒントを教えるキャラのアイコンを表示
@@ -393,19 +389,6 @@ namespace unilab2023
             }
         }
 
-        //private void Form_DragOver(object sender, DragEventArgs e)
-        //{
-        //    Point point = this.PointToClient(new Point(e.X, e.Y));
-        //    nearestListBox = GetNearestListBox(point);
-        //    if (nearestListBox != null)
-        //    {
-        //        e.Effect = DragDropEffects.Move;
-        //    }
-        //    else
-        //    {
-        //        e.Effect = DragDropEffects.None;
-        //    }
-        //}
 
         private ListBox GetNearestListBox(Point point)
         {
