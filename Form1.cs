@@ -259,24 +259,7 @@ namespace unilab2023
         }
 
         /****button****/
-        private void button1_Click(object sender, EventArgs e)//出発ボタン
-        {
-            button1.Visible = false;
-            button1.Enabled = false;
-            Global.move = Movement(); //ユーザーの入力を読み取る
-            label6.Visible = false;
-            SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
-            Global.count += 1;
-            label3.Text = Global.count.ToString(); //試行回数の表示
-
-            if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
-            {
-                label6.Text = "クリア！！";
-                label6.Visible = true;
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)//リセットボタン、選択したものだけを消す。選択なければすべて消す。
+       private void button2_Click(object sender, EventArgs e)//ListBoxのリセットボタン、選択したものだけを消す。選択なければすべて消す。
         {
             if (listBox1.SelectedIndex > -1)
             {
@@ -310,7 +293,7 @@ namespace unilab2023
             }
         }
 
-        /*
+         /*
         A, Bボタン削除
         private void button4_Click(object sender, EventArgs e)
         {
@@ -348,44 +331,88 @@ miss_count
         }
         */
 
+        private void button1_Click(object sender, EventArgs e)//出発ボタン
+        {
+            button1.Visible = false;
+            button1.Enabled = false;
+            label6.Visible = false;
+            Global.move = Movement(); //ユーザーの入力を読み取る
+            SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
+            Global.count += 1;
+            label3.Text = Global.count.ToString(); //試行回数の表示
+
+            if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
+            {
+                label6.Text = "クリア！！";
+                label6.Visible = true;
+            }
+        }
+
         // 枠からはみ出す大きさ
         int extra_length = 7;
 
-        private void button6_Click(object sender, EventArgs e)//リトライボタン。ListBoxの中身は消さない
+        public void resetStage(string type) // リセット関連まとめ
         {
-            character_me = Image.FromFile("忍者_正面.png");
-            //初期位置に戻す
-            Global.x_now = Global.x_start; 
-            Global.y_now = Global.y_start;
-
-            //初期位置に書き換え
-            Graphics g2 = Graphics.FromImage(bmp2);
-            g2.Clear(Color.Transparent);
-            int cell_length = pictureBox1.Width / 10;
-            character_me = Image.FromFile("忍者_正面.png");
-            g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
-            g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
-            this.Invoke((MethodInvoker)delegate
+            if (type == "quit")
             {
-                // pictureBox2を同期的にRefreshする
-                pictureBox2.Refresh();
-            });
+                this.Close();
+                return;
+            }
 
-            //初期設定に戻す
-            button1.Visible = true;
-            button1.Enabled = true;
-            label6.Visible = false;
-            Global.count = 0;
+            // ミス
+            else if (type == "miss")
+            {
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            // リトライボタン
+            else if (type == "retry")
+            {
+                //初期位置に戻す
+                Global.x_now = Global.x_start;
+                Global.y_now = Global.y_start;
+
+                //初期位置に書き換え
+                Graphics g2 = Graphics.FromImage(bmp2);
+                g2.Clear(Color.Transparent);
+                int cell_length = pictureBox1.Width / 10;
+                g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    // pictureBox2を同期的にRefreshする
+                    pictureBox2.Refresh();
+                });
+
+                //初期設定に戻す
+                button1.Visible = true;
+                button1.Enabled = true;
+                label6.Visible = false;
+                Global.count = 0;
+                Global.miss_count = 0;
+                label6.Text = "ミス！";
+            }
+
             label3.Text = Global.count.ToString();
-            Global.miss_count = 0;
             label5.Text = Global.miss_count.ToString();
-            label6.Text = "ミス！";
+        }
+
+        private void button6_Click(object sender, EventArgs e) //リトライボタン
+        {
+            resetStage("retry");
+        }
+
+        private void button5_Click(object sender, EventArgs e) //マップに戻るボタン
+        {
+            resetStage("quit");
         }
 
         /******button fin******/
 
+        /******ListBox******/
 
-        /*******関数******/
         //ListBox要素操作
         bool isEnableDrop = true;
         private ListBox nearestListBox;
@@ -478,7 +505,6 @@ miss_count
         //}
         */
 
-
         //listboxの行数を制限する場合
         private void ListBox_DragDrop(object sender, DragEventArgs e)
         {
@@ -525,7 +551,68 @@ miss_count
             }
         }
 
-        //これなに
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                string command = listBox1.SelectedItem.ToString();
+
+                if (command.StartsWith("for"))
+                {
+                    string str_num = Regex.Replace(command, @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+
+                    int id = listBox1.SelectedIndex;
+                    listBox1.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+
+                    listBox1.Refresh();
+                }
+            }
+        }
+
+        private void listBox3_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox3.SelectedItem != null)
+            {
+                string command = listBox3.SelectedItem.ToString();
+
+                if (command.StartsWith("for"))
+                {
+                    string str_num = Regex.Replace(command, @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+
+                    int id = listBox3.SelectedIndex;
+                    listBox3.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+
+                    listBox3.Refresh();
+                }
+            }
+        }
+
+        private void listBox4_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox4.SelectedItem != null)
+            {
+                string command = listBox4.SelectedItem.ToString();
+
+                if (command.StartsWith("for"))
+                {
+                    string str_num = Regex.Replace(command, @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+
+                    int id = listBox4.SelectedIndex;
+                    listBox4.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+
+                    listBox4.Refresh();
+                }
+            }
+        }
+
+        /******ListBox fin******/
+
+        /*******関数******/
+
+        //これなに？
         void Image_FrameChanged(object sender, EventArgs e)
         {
             this.Invalidate();
@@ -1060,7 +1147,6 @@ miss_count
             return newget_move.ToArray();
         }
 
-
         //当たり判定
         public bool Colision_detection(int x, int y, int[,] Map, List<int[]> move)
         {
@@ -1142,32 +1228,12 @@ miss_count
             while (true)
             {
                 if(move_copy.Count > 0)
-                {
-                    if (!Colision_detection(x, y, Map, move_copy) && !jump)
+                {                    
+                    if ((!Colision_detection(x, y, Map, move_copy) && !jump) ||
+                        (!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) ||//jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
+                        (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8)) //jumpの時着地先が木の場合、ゲームオーバー
                     {
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
-                        break;
-                    }
-                    else if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
-                    {
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
-                        break;
-                    }
-                    else if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
-                    {
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
+                        resetStage("miss");
                         break;
                     }
                 }
@@ -1440,63 +1506,6 @@ miss_count
             drawConversation();          
         }
 
-        private void listBox1_DoubleClick(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedItem != null)
-            {
-                string command = listBox1.SelectedItem.ToString();
-
-                if (command.StartsWith("for"))
-                {
-                    string str_num = Regex.Replace(command, @"[^0-9]", "");
-                    int num = int.Parse(str_num);
-
-                    int id = listBox1.SelectedIndex;
-                    listBox1.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
-
-                    listBox1.Refresh();
-                }
-            }
-        }
-
-        private void listBox3_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listBox3.SelectedItem != null)
-            {
-                string command = listBox3.SelectedItem.ToString();
-
-                if (command.StartsWith("for"))
-                {
-                    string str_num = Regex.Replace(command, @"[^0-9]", "");
-                    int num = int.Parse(str_num);
-
-                    int id = listBox3.SelectedIndex;
-                    listBox3.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
-
-                    listBox3.Refresh();
-                }
-            }
-        }
-
-        private void listBox4_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listBox4.SelectedItem != null)
-            {
-                string command = listBox4.SelectedItem.ToString();
-
-                if (command.StartsWith("for"))
-                {
-                    string str_num = Regex.Replace(command, @"[^0-9]", "");
-                    int num = int.Parse(str_num);
-
-                    int id = listBox4.SelectedIndex;
-                    listBox4.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
-
-                    listBox4.Refresh();
-                }
-            }
-        }
-
         /*******関数 fin******/
 
 
@@ -1556,11 +1565,6 @@ miss_count
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void button5_Click(object sender, EventArgs e)//マップに戻るボタン
-        {
-            this.Close();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
