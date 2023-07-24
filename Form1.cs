@@ -259,13 +259,14 @@ namespace unilab2023
         }
 
         /****button****/
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//出発ボタン
         {
             button1.Visible = false;
             button1.Enabled = false;
             Global.move = Movement(); //ユーザーの入力を読み取る
             label6.Visible = false;
             SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
+            Global.count += 1;
             label3.Text = Global.count.ToString(); //試行回数の表示
 
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
@@ -334,7 +335,7 @@ namespace unilab2023
             var move = Global.move.Item2;
             SquareMovement(Global.x_now, Global.y_now, Global.map, move); //キャラ動かす
             label3.Text = Global.count.ToString(); //試行回数の表示
-
+miss_count
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
             {
                 label6.Text = "クリア！！";
@@ -350,7 +351,7 @@ namespace unilab2023
         // 枠からはみ出す大きさ
         int extra_length = 7;
 
-        private void button6_Click(object sender, EventArgs e)//出発ボタン
+        private void button6_Click(object sender, EventArgs e)//リトライボタン。ListBoxの中身は消さない
         {
             character_me = Image.FromFile("忍者_正面.png");
             //初期位置に戻す
@@ -375,6 +376,9 @@ namespace unilab2023
             button1.Enabled = true;
             label6.Visible = false;
             Global.count = 0;
+            label3.Text = Global.count.ToString();
+            Global.miss_count = 0;
+            label5.Text = Global.miss_count.ToString();
             label6.Text = "ミス！";
         }
 
@@ -1057,7 +1061,6 @@ namespace unilab2023
         }
 
 
-
         //当たり判定
         public bool Colision_detection(int x, int y, int[,] Map, List<int[]> move)
         {
@@ -1075,6 +1078,7 @@ namespace unilab2023
                 return true;
             }
         }
+
         //動きにあわせて忍者の画像を返す
         Image Ninja_Image(int x, int y, int steps, bool jump, Image Ninja)
         {
@@ -1114,6 +1118,7 @@ namespace unilab2023
             return Ninja;
         }
 
+        int stepCount = 1;//何マス歩いたか、歩き差分用
         //キャラの座標更新
         public void SquareMovement(int x, int y, int[,] Map, List<int[]> move)
         {
@@ -1133,7 +1138,6 @@ namespace unilab2023
             bool jump = false;
             bool move_floor = false;
             int waittime = 250; //ミリ秒
-            Global.count = 1;//何マス歩いたか、歩き差分用
 
             while (true)
             {
@@ -1148,7 +1152,7 @@ namespace unilab2023
                         label5.Text = Global.miss_count.ToString();
                         break;
                     }
-                    if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
+                    else if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
                     {
                         label6.Visible = true;
                         Thread.Sleep(300);
@@ -1157,7 +1161,7 @@ namespace unilab2023
                         label5.Text = Global.miss_count.ToString();
                         break;
                     }
-                    if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
+                    else if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
                     {
                         label6.Visible = true;
                         Thread.Sleep(300);
@@ -1176,7 +1180,7 @@ namespace unilab2023
                 //jumpでない時移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
-                    character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                    character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], stepCount, jump, character_me);
                     g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     //move_copy[0] = new int[] { 0, 0 };
                     move_copy.RemoveAt(0);
@@ -1196,11 +1200,11 @@ namespace unilab2023
                 g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                 //忍者の動きに合わせて向きが変わる
 
-                character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], stepCount, jump, character_me);
                 g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 //Thread.Sleep(waittime);//マスの間に歩く差分を出そうとしたけど。。。
                 //g2.Clear(Color.Transparent);
-                //character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                //character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], stepCount, jump, character_me);
                 //g2.DrawImage(character_me, x * cell_length + move_copy[0][0] * cell_length / 2, y * cell_length + move_copy[0][1] * cell_length / 2, cell_length, cell_length);
 
 
@@ -1288,7 +1292,7 @@ namespace unilab2023
                 //500ミリ秒=0.5秒待機する
                 Thread.Sleep(waittime);
             }
-            Global.count ++;//歩数を数える、氷、動く床等では増えない
+            stepCount ++;//歩数を数える、氷、動く床等では増えない
         }
 
         //会話文読み込み
