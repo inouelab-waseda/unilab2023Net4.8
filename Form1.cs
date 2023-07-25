@@ -346,6 +346,10 @@ miss_count
                 label6.Text = "クリア！！";
                 label6.Visible = true;
             }
+            else
+            {
+                resetStage("miss");
+            }
         }
 
         // 枠からはみ出す大きさ
