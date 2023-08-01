@@ -256,6 +256,11 @@ namespace unilab2023
                 listBox2.Items.Remove("for (1)");
                 listBox2.Items.Remove("endfor");
             }
+
+            //ストーリー強制視聴
+            listBox2.Enabled = false;
+            listBox5.Enabled = false;
+            drawConversation();
         }
 
         /****button****/
@@ -272,6 +277,8 @@ namespace unilab2023
             {
                 label6.Text = "クリア！！";
                 label6.Visible = true;
+                button5.Enabled = false;
+                conversation();
             }
         }
 
@@ -1398,9 +1405,16 @@ namespace unilab2023
             int play_num = Global.Conversations[conversationCounter].dialogue.IndexOf("play");
             int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
             bool Goal = (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now);
-            
-            if ((play_num > 0 && !Goal) || end_num > 0) return;
-            else if(play_num > 0) conversationCounter += 1;
+
+            if ((play_num > 0 && !Goal) || end_num > 0)
+            {
+                //ストーリー強制視聴解除
+                listBox2.Enabled = true;
+                listBox5.Enabled = true;
+
+                return;
+            }
+            else if (play_num > 0) conversationCounter += 1;
 
             //描画準備
             Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
@@ -1413,6 +1427,7 @@ namespace unilab2023
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             if (visible)
             {
+                textBox3.Text = Global.Conversations[conversationCounter].character;
                 g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
                 g3.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
 
@@ -1424,6 +1439,12 @@ namespace unilab2023
             if (conversationCounter < Global.Conversations.Count - 1)
             {
                 conversationCounter += 1;
+                //ストーリー強制視聴解除
+                if (Global.Conversations[conversationCounter].dialogue.IndexOf("play") > 0)
+                {
+                    listBox2.Enabled = true;
+                    listBox5.Enabled = true;
+                }
             }
             else
             {
@@ -1431,9 +1452,19 @@ namespace unilab2023
             }
         }
 
+        private void conversation()
+        {
+            drawConversation();
+            int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
+            if (end_num > 0)
+            {
+                button5.Enabled = true;
+            }
+        }
+
         private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
         {
-            drawConversation();          
+            conversation();
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
