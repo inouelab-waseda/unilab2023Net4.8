@@ -111,7 +111,7 @@ namespace unilab2023
 
             //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
-            pictureBox1.Location = new Point(600, 50);
+            //pictureBox1.Location = new Point(600, 50);
             pictureBox2.Location = new Point(0, 0);
             pictureBox1.ClientSize = new Size(600, 600);
             pictureBox2.ClientSize = new Size(600, 600);
@@ -123,7 +123,6 @@ namespace unilab2023
             pictureBox1.Image = bmp1;
             pictureBox2.Image = bmp2;
             pictureBox3.Image = bmp3;
-
             this.Load += Form1_Load;
         }
 
@@ -220,7 +219,6 @@ namespace unilab2023
             if(height_LB1 == 1 && height_LB3 == 1)
             {
                 listBox5.Visible = false;
-                listBox2.Location = new Point(listBox4.Location.X, listBox4.Location.Y + 300);
             }
 
 
