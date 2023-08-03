@@ -1240,6 +1240,24 @@ miss_count
                 {
                     if (!Colision_detection(x, y, Map, move_copy) && !jump)
                     {
+                        //忍者を動かしてからミスの表示を出す
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        g2.Clear(Color.Transparent);
+                        if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
+                        else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
+                        if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
+                        else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                
+                        //pictureBoxの中身を塗り替える
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            // pictureBox2を同期的にRefreshする
+                            pictureBox2.Refresh();
+                        });
                         resetStage("miss");
                         break;
                     }
@@ -1262,33 +1280,12 @@ miss_count
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         pictureBox2.Refresh();
-                        Thread.Sleep(300);
-                        x += move_copy[0][0];
-                        y += move_copy[0][1];
-                        Global.x_now = x;
-                        Global.y_now = y;
-                        g2.Clear(Color.Transparent);
-                        //ステージごとにゴールのキャラを変えたい
-                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
-                        //忍者の動きに合わせて向きが変わる
-                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, J, character_me);
-                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
-                        pictureBox2.Refresh();
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
+                        resetStage("miss");
                         break;
                     }
                     if(Global.count_walk > 50) //無限ループ対策
                     {
-                        move_copy.Clear();
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
+                        resetStage("miss");
                         break;
                     }
                 }
@@ -1296,7 +1293,6 @@ miss_count
                 {
                     break;
                 }
-
 
                 //jumpでない時移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
@@ -1408,6 +1404,11 @@ miss_count
                 move_copy.RemoveAt(0);
                 if (move_copy.Count == 0)//動作がすべて終了した場合
                 {
+                    if(Global.x_now != Global.x_goal || Global.y_now != Global.y_goal)
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                    }
                     break;
                 }
 
