@@ -158,10 +158,11 @@
     <Content Include="bin\Debug\草原 %282%29.jpg" />
     <Content Include="bin\Debug\草原.jpg" />
     <Content Include="bin\Debug\跳.png" />
+    <None Include="Resources\たぬきの里1.png" />
     <None Include="Resources\たぬきの里.png" />
-    <None Include="Resources\きつねの村.png" />
-    <None Include="Resources\あざらしの湖.png" />
     <None Include="Resources\ふくろうの林.png" />
+    <None Include="Resources\あざらしの湖.png" />
+    <None Include="Resources\きつねの村.png" />
     <Content Include="Resources\ボタン枠140_65.png" />
     <None Include="Resources\ボタン枠140_651.png" />
   </ItemGroup>
