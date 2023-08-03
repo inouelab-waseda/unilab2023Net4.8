@@ -36,6 +36,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -90,6 +90,7 @@
             // 
             this.button1.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("游明朝", 18F);
             this.button1.Location = new System.Drawing.Point(440, 155);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
@@ -104,6 +105,7 @@
             // 
             this.button4.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button4.Enabled = false;
             this.button4.Font = new System.Drawing.Font("游明朝", 18F);
             this.button4.Location = new System.Drawing.Point(295, 155);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
@@ -118,6 +120,7 @@
             // 
             this.button3.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.Enabled = false;
             this.button3.Font = new System.Drawing.Font("游明朝", 18F);
             this.button3.Location = new System.Drawing.Point(150, 155);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
@@ -147,6 +150,7 @@
             // 
             this.button5.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.Enabled = false;
             this.button5.Font = new System.Drawing.Font("游明朝", 18F);
             this.button5.Location = new System.Drawing.Point(295, 155);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
@@ -161,6 +165,7 @@
             // 
             this.button6.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button6.Enabled = false;
             this.button6.Font = new System.Drawing.Font("游明朝", 18F);
             this.button6.Location = new System.Drawing.Point(150, 155);
             this.button6.Margin = new System.Windows.Forms.Padding(2);
@@ -170,6 +175,21 @@
             this.button6.Text = "2 - 2";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button7.Enabled = false;
+            this.button7.Font = new System.Drawing.Font("游明朝", 18F);
+            this.button7.Location = new System.Drawing.Point(5, 155);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(140, 60);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "2 - 1";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // groupBox4
             // 
@@ -190,6 +210,7 @@
             // 
             this.button8.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button8.Enabled = false;
             this.button8.Font = new System.Drawing.Font("游明朝", 18F);
             this.button8.Location = new System.Drawing.Point(295, 155);
             this.button8.Margin = new System.Windows.Forms.Padding(2);
@@ -204,6 +225,7 @@
             // 
             this.button9.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button9.Enabled = false;
             this.button9.Font = new System.Drawing.Font("游明朝", 18F);
             this.button9.Location = new System.Drawing.Point(150, 155);
             this.button9.Margin = new System.Windows.Forms.Padding(2);
@@ -218,6 +240,7 @@
             // 
             this.button10.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button10.Enabled = false;
             this.button10.Font = new System.Drawing.Font("游明朝", 18F);
             this.button10.Location = new System.Drawing.Point(5, 155);
             this.button10.Margin = new System.Windows.Forms.Padding(2);
@@ -247,6 +270,7 @@
             // 
             this.button11.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button11.Enabled = false;
             this.button11.Font = new System.Drawing.Font("游明朝", 18F);
             this.button11.Location = new System.Drawing.Point(295, 155);
             this.button11.Margin = new System.Windows.Forms.Padding(2);
@@ -261,6 +285,7 @@
             // 
             this.button12.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button12.Enabled = false;
             this.button12.Font = new System.Drawing.Font("游明朝", 18F);
             this.button12.Location = new System.Drawing.Point(150, 155);
             this.button12.Margin = new System.Windows.Forms.Padding(2);
@@ -275,6 +300,7 @@
             // 
             this.button13.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button13.Enabled = false;
             this.button13.Font = new System.Drawing.Font("游明朝", 18F);
             this.button13.Location = new System.Drawing.Point(5, 155);
             this.button13.Margin = new System.Windows.Forms.Padding(2);
@@ -304,6 +330,7 @@
             // 
             this.button14.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button14.Enabled = false;
             this.button14.Font = new System.Drawing.Font("游明朝", 18F);
             this.button14.Location = new System.Drawing.Point(295, 155);
             this.button14.Margin = new System.Windows.Forms.Padding(2);
@@ -316,9 +343,9 @@
             // 
             // button15
             // 
-
             this.button15.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button15.Enabled = false;
             this.button15.Font = new System.Drawing.Font("游明朝", 18F);
             this.button15.Location = new System.Drawing.Point(150, 155);
             this.button15.Margin = new System.Windows.Forms.Padding(2);
@@ -333,6 +360,7 @@
             // 
             this.button16.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button16.Enabled = false;
             this.button16.Font = new System.Drawing.Font("游明朝", 18F);
             this.button16.Location = new System.Drawing.Point(5, 155);
             this.button16.Margin = new System.Windows.Forms.Padding(2);
@@ -342,20 +370,6 @@
             this.button16.Text = "3 - 1";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // button7
-            // 
-            this.button7.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button7.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button7.Location = new System.Drawing.Point(5, 155);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(140, 60);
-            this.button7.TabIndex = 3;
-            this.button7.Text = "2 - 1";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // ステージ選択画面
             // 
@@ -367,11 +381,14 @@
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ステージ選択画面";
             this.Text = "ステージ選択画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ステージ選択画面_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ステージ選択画面_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ステージ選択画面_KeyPress);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);

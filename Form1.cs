@@ -159,6 +159,8 @@ namespace unilab2023
 
         public void Form1_Load(object sender, EventArgs e)
         {
+            button7.Visible = false;
+
             Global.map = CreateStage(stageName); //ステージ作成
 
             string str_num = Regex.Replace(stageName, @"[^0-9]", "");
@@ -272,6 +274,7 @@ namespace unilab2023
             {
                 label6.Text = "クリア！！";
                 label6.Visible = true;
+                button7.Visible = true;
             }
         }
 
@@ -1556,12 +1559,22 @@ namespace unilab2023
 
         private void button5_Click(object sender, EventArgs e)//マップに戻るボタン
         {
+            // ここ変えるかも
             this.Close();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ステージ選択画面 form2 = new ステージ選択画面();
+            form2.stageName = stageName;
+            form2.Show();
+            this.Close();
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
