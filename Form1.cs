@@ -1652,17 +1652,10 @@ namespace unilab2023
 
         }
 
-        private void button5_Click(object sender, EventArgs e)//マップに戻るボタン
-        {
-            // ここ変えるかも
-            this.Close();
-        }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }
-
 
         private void button7_Click(object sender, EventArgs e)
         {
