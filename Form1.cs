@@ -1324,6 +1324,11 @@ namespace unilab2023
                 move_copy.RemoveAt(0);
                 if (move_copy.Count == 0)//動作がすべて終了した場合
                 {
+                    if(Global.x_now != Global.x_goal || Global.y_now != Global.y_goal)
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                    }
                     break;
                 }
 
