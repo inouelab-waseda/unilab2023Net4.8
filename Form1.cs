@@ -111,7 +111,7 @@ namespace unilab2023
 
             //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
-            pictureBox1.Location = new Point(600, 50);
+            //pictureBox1.Location = new Point(600, 50);
             pictureBox2.Location = new Point(0, 0);
             pictureBox1.ClientSize = new Size(600, 600);
             pictureBox2.ClientSize = new Size(600, 600);
@@ -123,7 +123,6 @@ namespace unilab2023
             pictureBox1.Image = bmp1;
             pictureBox2.Image = bmp2;
             pictureBox3.Image = bmp3;
-
             this.Load += Form1_Load;
         }
 
@@ -222,7 +221,6 @@ namespace unilab2023
             if(height_LB1 == 1 && height_LB3 == 1)
             {
                 listBox5.Visible = false;
-                listBox2.Location = new Point(listBox4.Location.X, listBox4.Location.Y + 300);
             }
 
 
@@ -1168,6 +1166,30 @@ namespace unilab2023
                     }
                     if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
                     {
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        Global.x_now = x;
+                        Global.y_now = y;
+                        g2.Clear(Color.Transparent);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //忍者の動きに合わせて向きが変わる
+                        bool J = false;
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        pictureBox2.Refresh();
+                        Thread.Sleep(300);
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        Global.x_now = x;
+                        Global.y_now = y;
+                        g2.Clear(Color.Transparent);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //忍者の動きに合わせて向きが変わる
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, J, character_me);
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        pictureBox2.Refresh();
                         label6.Visible = true;
                         Thread.Sleep(300);
                         //label6.Visible = false;
