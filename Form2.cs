@@ -329,7 +329,12 @@ namespace unilab2023
             createForm1("stage5-3");
         }
 
-        private void ステージ選択画面_KeyDown(object sender, KeyEventArgs e)
+        private void ステージ選択画面_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void ステージ選択画面_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.M)
             {
@@ -338,11 +343,6 @@ namespace unilab2023
                 form2.stageName = "stage5-2";
                 form2.Show();
             }
-        }
-
-        private void ステージ選択画面_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
         }
     }
 }
