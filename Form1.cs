@@ -170,6 +170,13 @@ namespace unilab2023
             Global.Conversations = LoadConversation(file_name); //会話読み込み
 
             // 1行文の高さ
+            int ItemHeight = 20;
+            listBox1.ItemHeight = ItemHeight;
+            listBox2.ItemHeight = ItemHeight;
+            listBox3.ItemHeight = ItemHeight;
+            listBox4.ItemHeight = ItemHeight;
+            listBox5.ItemHeight = ItemHeight;
+            
             int element_height = listBox1.ItemHeight;
 
             // それぞれの枠の高さ
@@ -344,7 +351,6 @@ miss_count
             Global.move = Movement(); //ユーザーの入力を読み取る
             SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
             Global.count += 1;
-            label3.Text = Global.count.ToString(); //試行回数の表示
 
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
             {
@@ -404,8 +410,6 @@ miss_count
                 label6.Text = "ミス！";
             }
 
-            label3.Text = Global.count.ToString();
-            label5.Text = Global.miss_count.ToString();
         }
 
         private void button6_Click(object sender, EventArgs e) //リトライボタン
@@ -1278,7 +1282,6 @@ miss_count
                         Thread.Sleep(300);
                         //label6.Visible = false;
                         Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
                         break;
                     }
                     if(Global.count_walk > 50) //無限ループ対策
@@ -1288,7 +1291,6 @@ miss_count
                         Thread.Sleep(300);
                         //label6.Visible = false;
                         Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
                         break;
                     }
                 }
