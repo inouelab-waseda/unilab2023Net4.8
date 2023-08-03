@@ -31,7 +31,24 @@ namespace unilab2023
 
         private void ステージ選択画面_Load(object sender, EventArgs e)
         {
-           
+            // initialize
+            button3.Enabled = false;
+            button4.Enabled = false;
+            button1.Enabled = false;
+            button7.Enabled = false;
+            button6.Enabled = false;
+            button5.Enabled = false;
+            button16.Enabled = false;
+            button15.Enabled = false;
+            button14.Enabled = false;
+            button10.Enabled = false;
+            button9.Enabled = false;
+            button8.Enabled = false;
+            button13.Enabled = false;
+            button12.Enabled = false;
+            button11.Enabled = false;
+
+            // stage locked
             switch (stageName)
             {
                 case "stage1-1":
