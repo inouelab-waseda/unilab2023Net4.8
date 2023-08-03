@@ -34,16 +34,16 @@ namespace unilab2023
             g1.DrawImage(Image.FromFile("マップ_草原.png"), 0, 0, 190, 960);
             g1.DrawImage(Image.FromFile("マップ_草原.png"), 1350, 0, 190, 960);
             g1.DrawImage(Image.FromFile("わせ忍_アイコン2.png"), 185, 0, 1200, 960);
-            g1.DrawImage(Image.FromFile("キャラ_カッパ.png"), 1380, 560, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_あざらし.png"), 30, 20, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_きつね.png"), 30, 200, 120, 120);
-            g1.DrawImage(Image.FromFile("忍者_正面.png"), 30, 380, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_ふくろう.png"), 30, 730, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_唐傘一反.png"), 1380, 40, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_たぬき.png"), 30, 560, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_てんぐ.png"), 1380, 730, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_一つ目小僧.png"), 1380, 200, 120, 120);
-            g1.DrawImage(Image.FromFile("キャラ_赤鬼.png"), 1380, 380, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_あざらし.png"), 30, 8, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_きつね.png"), 30, 176, 120, 120);
+            g1.DrawImage(Image.FromFile("忍者_正面.png"), 30, 344, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_たぬき.png"), 30, 512, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_ふくろう.png"), 30, 670, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_唐傘一反.png"), 1380, 28, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_一つ目小僧.png"), 1380, 176, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_赤鬼.png"), 1380, 344, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_カッパ.png"), 1380, 512, 120, 120);
+            g1.DrawImage(Image.FromFile("キャラ_てんぐ.png"), 1380, 670, 120, 120);
 
             button1.Enabled = true;  //デバッグのたびにパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
             Global.Conversations = LoadConversation("conversation_demo.csv");
@@ -159,23 +159,25 @@ namespace unilab2023
             int dia_x = 1500;
             int dia_y = 200;
 
-            g1.FillRectangle(Brushes.Black, 15, 500 + face, name_x, name_y);
-            g1.DrawRectangle(pen, 15, 500 + face, name_x, name_y);
+            int chousei_x = 420;
 
-            g1.FillRectangle(Brushes.Black, 15, 500+face + name_y, dia_x, dia_y);
-            g1.DrawRectangle(pen, 15, 500 + face + name_y, dia_x, dia_y);
+            g1.FillRectangle(Brushes.Black, 15, chousei_x + face, name_x, name_y);
+            g1.DrawRectangle(pen, 15, chousei_x + face, name_x, name_y);
+
+            g1.FillRectangle(Brushes.Black, 15, chousei_x + face + name_y, dia_x, dia_y);
+            g1.DrawRectangle(pen, 15, chousei_x + face + name_y, dia_x, dia_y);
 
             if (Global.Conversations[conversationCounter].img == "img_shizu")
             {
                 //switch文の方がいいかもしれない、あるいはdictionaryなど
-                g1.DrawImage(img_shizu, 15, 500, face, face);
+                g1.DrawImage(img_shizu, 15, chousei_x, face, face);
             }
             else if (Global.Conversations[conversationCounter].img == "img_ikaP")
             {
-                g1.DrawImage(img_ikaP, 15, 500, face, face);
+                g1.DrawImage(img_ikaP, 15, chousei_x, face, face);
             }
-            g1.DrawString(Global.Conversations[conversationCounter].character, fnt, Brushes.White, 15 + sp, 500 + face + sp);
-            g1.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.White, 15 + sp, 500 + face + name_y + sp);
+            g1.DrawString(Global.Conversations[conversationCounter].character, fnt, Brushes.White, 15 + sp, chousei_x + face + sp);
+            g1.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.White, 15 + sp, chousei_x + face + name_y + sp);
 
             pictureBox1.Image = bmp1;
             g1.Dispose();

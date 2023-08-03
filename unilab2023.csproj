@@ -139,6 +139,14 @@
     <Content Include="bin\Debug\たぬき2.png" />
     <Content Include="bin\Debug\ふくろう.png" />
     <Content Include="bin\Debug\キャラ_唐傘一反.png" />
+    <Content Include="bin\Debug\マップ_雲_上.png" />
+    <Content Include="bin\Debug\マップ_雲_下.png" />
+    <Content Include="bin\Debug\マップ_雲_右.png" />
+    <Content Include="bin\Debug\マップ_雲_右上.png" />
+    <Content Include="bin\Debug\マップ_雲_右下.png" />
+    <Content Include="bin\Debug\マップ_雲_左.png" />
+    <Content Include="bin\Debug\マップ_雲_左上.png" />
+    <Content Include="bin\Debug\マップ_雲_左下.png" />
     <Content Include="bin\Debug\動く床_上.gif" />
     <Content Include="bin\Debug\動く床_下.gif" />
     <Content Include="bin\Debug\動く床_右.gif" />
@@ -150,6 +158,10 @@
     <Content Include="bin\Debug\草原 %282%29.jpg" />
     <Content Include="bin\Debug\草原.jpg" />
     <Content Include="bin\Debug\跳.png" />
+    <None Include="Resources\たぬきの里.png" />
+    <None Include="Resources\きつねの村.png" />
+    <None Include="Resources\あざらしの湖.png" />
+    <None Include="Resources\ふくろうの林.png" />
     <Content Include="Resources\ボタン枠140_65.png" />
     <None Include="Resources\ボタン枠140_651.png" />
   </ItemGroup>
