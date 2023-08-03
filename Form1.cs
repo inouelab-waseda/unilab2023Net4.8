@@ -421,7 +421,6 @@ namespace unilab2023
 
         //ListBox要素操作
         bool isEnableDrop = true;
-        private ListBox nearestListBox;
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
         {
             //マウスの左ボタンだけが押されている時のみドラッグできるようにする
