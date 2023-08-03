@@ -121,4 +121,16 @@
   <data name="ボタン枠140_65" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ボタン枠140_65.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="あざらしの湖" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\あざらしの湖.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="きつねの村" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\きつねの村.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="たぬきの里" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\たぬきの里.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ふくろうの林" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ふくろうの林.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

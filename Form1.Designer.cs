@@ -65,7 +65,7 @@
             this.listBox1.AllowDrop = true;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(73, 112);
+            this.listBox1.Location = new System.Drawing.Point(1370, 217);
             this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(119, 259);
@@ -80,7 +80,7 @@
             this.listBox3.AllowDrop = true;
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 15;
-            this.listBox3.Location = new System.Drawing.Point(256, 112);
+            this.listBox3.Location = new System.Drawing.Point(1577, 217);
             this.listBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(119, 259);
@@ -95,7 +95,7 @@
             this.listBox4.AllowDrop = true;
             this.listBox4.FormattingEnabled = true;
             this.listBox4.ItemHeight = 15;
-            this.listBox4.Location = new System.Drawing.Point(483, 112);
+            this.listBox4.Location = new System.Drawing.Point(1139, 217);
             this.listBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox4.Name = "listBox4";
             this.listBox4.Size = new System.Drawing.Size(119, 259);
@@ -107,20 +107,20 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(604, 90);
+            this.pictureBox2.Location = new System.Drawing.Point(129, 86);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(323, 288);
+            this.pictureBox2.Size = new System.Drawing.Size(600, 600);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click_1);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(97, 391);
+            this.button2.Location = new System.Drawing.Point(1398, 491);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(69, 30);
+            this.button2.Size = new System.Drawing.Size(72, 30);
             this.button2.TabIndex = 4;
             this.button2.Text = "リセット";
             this.button2.UseVisualStyleBackColor = true;
@@ -128,7 +128,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(275, 391);
+            this.button3.Location = new System.Drawing.Point(1603, 491);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(69, 30);
@@ -139,7 +139,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(505, 391);
+            this.button4.Location = new System.Drawing.Point(1169, 491);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(69, 30);
@@ -166,10 +166,10 @@
             "←",
             "for (1)",
             "endfor"});
-            this.listBox2.Location = new System.Drawing.Point(135, 506);
+            this.listBox2.Location = new System.Drawing.Point(1139, 584);
             this.listBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(119, 118);
+            this.listBox2.Size = new System.Drawing.Size(119, 175);
             this.listBox2.TabIndex = 7;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
@@ -182,20 +182,20 @@
             this.listBox5.Items.AddRange(new object[] {
             "A",
             "B"});
-            this.listBox5.Location = new System.Drawing.Point(348, 506);
+            this.listBox5.Location = new System.Drawing.Point(1577, 598);
             this.listBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(119, 64);
+            this.listBox5.Size = new System.Drawing.Size(119, 154);
             this.listBox5.TabIndex = 8;
             this.listBox5.SelectedIndexChanged += new System.EventHandler(this.listBox5_SelectedIndexChanged);
             // 
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox3.Location = new System.Drawing.Point(483, 978);
+            this.pictureBox3.Location = new System.Drawing.Point(129, 898);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(1032, 61);
+            this.pictureBox3.Size = new System.Drawing.Size(818, 61);
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
@@ -203,14 +203,15 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.SystemColors.Info;
             this.button1.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(984, 832);
+            this.button1.Location = new System.Drawing.Point(1156, 898);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(172, 69);
+            this.button1.Size = new System.Drawing.Size(172, 61);
             this.button1.TabIndex = 10;
             this.button1.Text = "出発！";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
@@ -220,11 +221,11 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(275, 722);
+            this.groupBox1.Location = new System.Drawing.Point(1342, 598);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(189, 146);
+            this.groupBox1.Size = new System.Drawing.Size(189, 156);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
@@ -272,7 +273,7 @@
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label6.Font = new System.Drawing.Font("游明朝 Demibold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label6.ForeColor = System.Drawing.Color.Tomato;
-            this.label6.Location = new System.Drawing.Point(1091, 356);
+            this.label6.Location = new System.Drawing.Point(293, 392);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(284, 103);
             this.label6.TabIndex = 12;
@@ -283,7 +284,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1241, 861);
+            this.button6.Location = new System.Drawing.Point(1369, 919);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(120, 40);
@@ -294,10 +295,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(604, 90);
+            this.pictureBox1.Location = new System.Drawing.Point(129, 86);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(323, 288);
+            this.pictureBox1.Size = new System.Drawing.Size(600, 600);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -306,10 +307,10 @@
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(83, 85);
+            this.textBox1.Location = new System.Drawing.Point(1369, 183);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 15);
+            this.textBox1.Size = new System.Drawing.Size(119, 15);
             this.textBox1.TabIndex = 17;
             this.textBox1.Text = "A";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -319,7 +320,7 @@
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(256, 85);
+            this.textBox2.Location = new System.Drawing.Point(1577, 183);
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(117, 15);
@@ -331,7 +332,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("游明朝", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button5.Location = new System.Drawing.Point(57, 832);
+            this.button5.Location = new System.Drawing.Point(28, 4);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(167, 58);
@@ -345,7 +346,7 @@
             this.textBox3.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Font = new System.Drawing.Font("ＭＳ 明朝", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox3.Location = new System.Drawing.Point(485, 958);
+            this.textBox3.Location = new System.Drawing.Point(54, 875);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 15);
@@ -367,8 +368,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1803, 1055);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.listBox1);
