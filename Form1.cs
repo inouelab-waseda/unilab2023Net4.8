@@ -168,7 +168,7 @@ namespace unilab2023
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            // button7.Visible = false;
+            button5.Visible = false;
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -358,7 +358,7 @@ namespace unilab2023
             {
                 label6.Text = "クリア！！";
                 label6.Visible = true;
-                button7.Visible = true;
+                button5.Visible = true;
             }
             else
             {
