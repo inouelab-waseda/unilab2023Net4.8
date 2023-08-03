@@ -1148,6 +1148,24 @@ namespace unilab2023
                 {
                     if (!Colision_detection(x, y, Map, move_copy) && !jump)
                     {
+                        //忍者を動かしてからミスの表示を出す
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        g2.Clear(Color.Transparent);
+                        if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
+                        else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
+                        if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
+                        else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                
+                        //pictureBoxの中身を塗り替える
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            // pictureBox2を同期的にRefreshする
+                            pictureBox2.Refresh();
+                        });
                         label6.Visible = true;
                         Thread.Sleep(300);
                         //label6.Visible = false;
