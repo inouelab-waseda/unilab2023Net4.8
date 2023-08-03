@@ -1301,7 +1301,7 @@ miss_count
                 //jumpでない時移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
-                    character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], stepCount, jump, character_me);
+                    character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count_walk, jump, character_me);
                     g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     //move_copy[0] = new int[] { 0, 0 };
                     move_copy.RemoveAt(0);
