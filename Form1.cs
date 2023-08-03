@@ -346,8 +346,6 @@ namespace unilab2023
             Global.move = Movement(); //ユーザーの入力を読み取る
             SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
             Global.count += 1;
-            label3.Text = Global.count.ToString(); //試行回数の表示
-
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
             {
                 label6.Text = "クリア！！";
@@ -405,9 +403,6 @@ namespace unilab2023
                 Global.miss_count = 0;
                 label6.Text = "ミス！";
             }
-
-            label3.Text = Global.count.ToString();
-            label5.Text = Global.miss_count.ToString();
         }
 
         private void button6_Click(object sender, EventArgs e) //リトライボタン
