@@ -49,6 +49,14 @@ namespace unilab2023
         Image animatedImage_right = Image.FromFile("マップ_動く床_右.gif");
         Image animatedImage_down = Image.FromFile("マップ_動く床_下.gif");
         Image animatedImage_left = Image.FromFile("マップ_動く床_左.gif");
+        Image cloud_ul = Image.FromFile("マップ_雲_左上.png");
+        Image cloud_left = Image.FromFile("マップ_雲_左.png");
+        Image cloud_bl = Image.FromFile("マップ_雲_左下.png");
+        Image cloud_bottom = Image.FromFile("マップ_雲_下.png");
+        Image cloud_br = Image.FromFile("マップ_雲_右下.png");
+        Image cloud_right = Image.FromFile("マップ_雲_右.png");
+        Image cloud_ur = Image.FromFile("マップ_雲_右上.png");
+        Image cloud_upside = Image.FromFile("マップ_雲_上.png");
 
         public Image Draw_Icon(string name)
         {
@@ -113,8 +121,8 @@ namespace unilab2023
             pictureBox2.Parent = pictureBox1;
             //pictureBox1.Location = new Point(600, 50);
             pictureBox2.Location = new Point(0, 0);
-            pictureBox1.ClientSize = new Size(600, 600);
-            pictureBox2.ClientSize = new Size(600, 600);
+            pictureBox1.ClientSize = new Size(684, 684);
+            pictureBox2.ClientSize = new Size(684, 684);
             pictureBox2.BackColor = Color.Transparent;
 
             bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -128,7 +136,7 @@ namespace unilab2023
 
         public class Global //グローバル変数格納
         {
-            public static int[,] map = new int[10, 10]; //map情報
+            public static int[,] map = new int[12, 12]; //map情報
             public static int x_start; //スタート位置ｘ
             public static int y_start; //スタート位置ｙ
             public static int x_goal; //ゴール位置ｘ
@@ -160,7 +168,7 @@ namespace unilab2023
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            button7.Visible = false;
+            // button7.Visible = false;
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -354,11 +362,11 @@ namespace unilab2023
             Global.move = Movement(); //ユーザーの入力を読み取る
             SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
             Global.count += 1;
-
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
             {
                 label6.Text = "クリア！！";
                 label6.Visible = true;
+                button7.Visible = true;
             }
             else
             {
@@ -373,6 +381,9 @@ namespace unilab2023
         {
             if (type == "quit")
             {
+                ステージ選択画面 form2 = new ステージ選択画面();
+                form2.stageName = stageName;
+                form2.Show();
                 this.Close();
                 return;
             }
@@ -395,7 +406,7 @@ namespace unilab2023
                 //初期位置に書き換え
                 Graphics g2 = Graphics.FromImage(bmp2);
                 g2.Clear(Color.Transparent);
-                int cell_length = pictureBox1.Width / 10;
+                int cell_length = pictureBox1.Width / 12;
                 g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 this.Invoke((MethodInvoker)delegate
@@ -412,7 +423,6 @@ namespace unilab2023
                 Global.miss_count = 0;
                 label6.Text = "ミス！";
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e) //リトライボタン
@@ -423,6 +433,14 @@ namespace unilab2023
         private void button5_Click(object sender, EventArgs e) //マップに戻るボタン
         {
             resetStage("quit");
+        }
+
+        private void button7_Click(object sender, EventArgs e) // 使ってない？
+        {
+            ステージ選択画面 form2 = new ステージ選択画面();
+            form2.stageName = stageName;
+            form2.Show();
+            this.Close();
         }
 
         /******button fin******/
@@ -649,7 +667,7 @@ namespace unilab2023
         //ステージ描写
         private int[,] CreateStage(string stage_name)
         {
-            int[,] map = new int[10, 10];
+            int[,] map = new int[12, 12];
 
             using (StreamReader sr = new StreamReader($"{stage_name}.csv"))
             {
@@ -676,11 +694,11 @@ namespace unilab2023
             Graphics g1 = Graphics.FromImage(bmp1);
             Graphics g2 = Graphics.FromImage(bmp2);
 
-            int cell_length = pictureBox1.Width / 10;
+            int cell_length = pictureBox1.Width / 12;
 
-            for (int y = 0; y < 10; y++)
+            for (int y = 0; y < 12; y++)
             {
-                for (int x = 0; x < 10; x++)
+                for (int x = 0; x < 12; x++)
                 {
                     g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
 
@@ -716,6 +734,30 @@ namespace unilab2023
                             break;
                         case 8:
                             g1.DrawImage(img_tree, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 20:
+                            g1.DrawImage(cloud_ul, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 21:
+                            g1.DrawImage(cloud_left, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 22:
+                            g1.DrawImage(cloud_bl, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 23:
+                            g1.DrawImage(cloud_bottom, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 24:
+                            g1.DrawImage(cloud_br, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 25:
+                            g1.DrawImage(cloud_right, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 26:
+                            g1.DrawImage(cloud_ur, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 27:
+                            g1.DrawImage(cloud_upside, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
                         case 100:
                             g1.FillRectangle(startBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
@@ -1242,7 +1284,7 @@ namespace unilab2023
         public void SquareMovement(int x, int y, int[,] Map, List<int[]> move)
         {
             Graphics g2 = Graphics.FromImage(bmp2);
-            int cell_length = pictureBox1.Width / 10;
+            int cell_length = pictureBox1.Width / 12;
             if (move.Count == 0)
             {
                 return;
@@ -1678,14 +1720,6 @@ namespace unilab2023
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            ステージ選択画面 form2 = new ステージ選択画面();
-            form2.stageName = stageName;
-            form2.Show();
-            this.Close();
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
