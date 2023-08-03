@@ -20,15 +20,182 @@ namespace unilab2023
 
         }
 
+        private string _stageName;
+        public string stageName
+        {
+            get { return _stageName; }
+            set { _stageName = value; }
+        }
+
+
+
         private void ステージ選択画面_Load(object sender, EventArgs e)
         {
+           
+            switch (stageName)
+            {
+                case "stage1-1":
+                    button3.Enabled = true;
+                    break;
+                case "stage1-2":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    break;
+                case "stage1-3":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    break;
+                case "stage1-4":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    break;
 
+                case "stage2-1":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    break;
+                case "stage2-2":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    break;
+                case "stage2-3":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    break;
+
+                case "stage3-1":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    break;
+                case "stage3-2":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    break;
+                case "stage3-3":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    break;
+
+                case "stage4-1":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    break;
+                case "stage4-2":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    button8.Enabled = true;
+                    break;
+                case "stage4-3":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    button8.Enabled = true;
+                    button13.Enabled = true;
+                    break;
+
+                case "stage5-1":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    button8.Enabled = true;
+                    button13.Enabled = true;
+                    button12.Enabled = true;
+                    break;
+                case "stage5-2":
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    button8.Enabled = true;
+                    button13.Enabled = true;
+                    button12.Enabled = true;
+                    button11.Enabled = true;
+                    break;
+            }
         }
         
         private void createForm1(string selectedStageName)
         {
             Form1 form1 = new Form1();
             form1.stageName = selectedStageName;
+            this.Close();
             form1.Show();
         }
 
@@ -40,7 +207,7 @@ namespace unilab2023
 
         private void groupBox1_Enter(object sender, EventArgs e)//1面たぬきの里
         {
-
+           
         }
 
         private void button2_Click(object sender, EventArgs e)//stage1-1
@@ -145,5 +312,20 @@ namespace unilab2023
             createForm1("stage5-3");
         }
 
+        private void ステージ選択画面_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.M)
+            {
+                this.Close();
+                ステージ選択画面 form2 = new ステージ選択画面();
+                form2.stageName = "stage5-2";
+                form2.Show();
+            }
+        }
+
+        private void ステージ選択画面_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
     }
 }

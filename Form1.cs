@@ -160,6 +160,8 @@ namespace unilab2023
 
         public void Form1_Load(object sender, EventArgs e)
         {
+            button7.Visible = false;
+
             Global.map = CreateStage(stageName); //ステージ作成
 
             string str_num = Regex.Replace(stageName, @"[^0-9]", "");
@@ -323,7 +325,7 @@ namespace unilab2023
             var move = Global.move.Item2;
             SquareMovement(Global.x_now, Global.y_now, Global.map, move); //キャラ動かす
             label3.Text = Global.count.ToString(); //試行回数の表示
-miss_count
+
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
             {
                 label6.Text = "クリア！！";
@@ -1648,6 +1650,14 @@ miss_count
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ステージ選択画面 form2 = new ステージ選択画面();
+            form2.stageName = stageName;
+            form2.Show();
+            this.Close();
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
