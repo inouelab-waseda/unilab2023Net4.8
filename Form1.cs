@@ -29,10 +29,6 @@ namespace unilab2023
             Image.FromFile("キャラ_あざらし.png"),
             Image.FromFile("キャラ_ふくろう.png")
         };
-        //img_otomo[0] = Image.FromFile("キャラ_たぬき.png");
-        //img_otomo[1] = Image.FromFile("キャラ_きつね.png");
-        //img_otomo[2] = Image.FromFile("キャラ_あざらし.png");
-        //img_otomo[3] = Image.FromFile("キャラ_ふくろう.png");
 
         Image character_me = Image.FromFile("忍者_正面.png");
         Image[] character_enemy = new Image[6] {
@@ -43,12 +39,6 @@ namespace unilab2023
             Image.FromFile("キャラ_赤鬼.png"),
             Image.FromFile("キャラ_ヤマタノオロチ.png")
         };
-        //character_enemy[0] = Image.FromFile("キャラ_一つ目小僧.png");
-        //character_enemy[1] = Image.FromFile("キャラ_唐傘一反.png");
-        //character_enemy[2] = Image.FromFile("キャラ_カッパ.png");
-        //character_enemy[3] = Image.FromFile("キャラ_てんぐ.png");
-        //character_enemy[4] = Image.FromFile("キャラ_赤鬼.png");
-        //character_enemy[5] = Image.FromFile("キャラ_ヤマタノオロチ.png");
 
         Image img_way = Image.FromFile("マップ_草原.png");
         Image img_noway = Image.FromFile("マップ_岩場.png");
@@ -60,18 +50,48 @@ namespace unilab2023
         Image animatedImage_down = Image.FromFile("マップ_動く床_下.gif");
         Image animatedImage_left = Image.FromFile("マップ_動く床_左.gif");
 
+        public Image Draw_Icon(string name)
+        {
+            switch (name)
+            {
+                case "家田":
+                    return character_me;
+                case "たぬき":
+                case "チマキ":
+                    return img_otomo[0];
+
+                case "きつね":
+                case "イナリ":
+                    return img_otomo[1];
+
+                case "あざらし":
+                case "スリミ":
+                    return img_otomo[2];
+
+                case "ふくろう":
+                case "ツクネ":
+                    return img_otomo[3];
+
+                case "ヤマタノオロチ":
+                    return character_enemy[5];
+            }
+            Bitmap bmp = new Bitmap(1, 1);
+            bmp.SetPixel(0, 0, Color.White);
+
+            return bmp;
+        }
 
         //MemoryStream stream = new MemoryStream();
         //byte[] bytes = File.ReadAllBytes("右.gif");
         //stream.Write(bytes, 0, bytes.Length);
         //Bitmap animatedImage_right = new Bitmap(stream);
 
-        //アニメ開始
-        //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
-        //DoubleBuffered = true;
+            //アニメ開始
+            //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
+            //DoubleBuffered = true;
 
 
-        //ステージ名の受け渡し
+            //ステージ名の受け渡し
         private string _stageName;
         public string stageName
         {
@@ -79,13 +99,19 @@ namespace unilab2023
             set { _stageName = value; }
         }
 
+
         public Form1()
         {
             InitializeComponent();
 
+            //Form全体にdrop可能に
+            this.AllowDrop = true;
+            this.DragDrop += new DragEventHandler(ListBox_DragDrop);
+            this.DragEnter += new DragEventHandler(ListBox_DragEnter);
+
             //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
-            pictureBox1.Location = new Point(600, 50);
+            //pictureBox1.Location = new Point(600, 50);
             pictureBox2.Location = new Point(0, 0);
             pictureBox1.ClientSize = new Size(600, 600);
             pictureBox2.ClientSize = new Size(600, 600);
@@ -97,7 +123,6 @@ namespace unilab2023
             pictureBox1.Image = bmp1;
             pictureBox2.Image = bmp2;
             pictureBox3.Image = bmp3;
-
             this.Load += Form1_Load;
         }
 
@@ -113,6 +138,8 @@ namespace unilab2023
            
             public static int count = 0; //試行回数カウント
             public static int miss_count = 0; //ミスカウント
+
+            public static int count_walk = 0; //歩数カウント
 
             public static List<int[]> move;  //プレイヤーの移動指示を入れるリスト
 
@@ -134,7 +161,13 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             Global.map = CreateStage(stageName); //ステージ作成
-            Global.Conversations = LoadConversation("conversation_demo.csv"); //会話読み込み
+
+            string str_num = Regex.Replace(stageName, @"[^0-9]", "");
+            int num = int.Parse(str_num) / 10;
+
+            string file_name = "わせ忍" + num.ToString() + "章.csv";
+
+            Global.Conversations = LoadConversation(file_name); //会話読み込み
 
             // 1行文の高さ
             int element_height = listBox1.ItemHeight;
@@ -188,7 +221,6 @@ namespace unilab2023
             if(height_LB1 == 1 && height_LB3 == 1)
             {
                 listBox5.Visible = false;
-                listBox2.Location = new Point(listBox4.Location.X, listBox4.Location.Y + 300);
             }
 
 
@@ -209,9 +241,12 @@ namespace unilab2023
             listBox4.DragDrop += new DragEventHandler(ListBox_DragDrop);
             listBox5.MouseDown += new MouseEventHandler(ListBox_MouseDown);
 
+            
             //ヒントを教えるキャラのアイコンを表示
             Graphics g3 = Graphics.FromImage(bmp3);
-            g3.DrawImage(img_otomo[0], 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            Bitmap bmp = new Bitmap(1, 1);
+            bmp.SetPixel(0, 0, Color.White);
+            g3.DrawImage(bmp, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.Dispose();
 
@@ -221,6 +256,11 @@ namespace unilab2023
                 listBox2.Items.Remove("for (1)");
                 listBox2.Items.Remove("endfor");
             }
+
+            //ストーリー強制視聴
+            listBox2.Enabled = false;
+            listBox5.Enabled = false;
+            drawConversation();
         }
 
         /****button****/
@@ -237,15 +277,8 @@ namespace unilab2023
             {
                 label6.Text = "クリア！！";
                 label6.Visible = true;
-
-                //button1.Visible = false;
-                //button1.Enabled = false;
-                //button4.Enabled = true;
-                //button5.Enabled = true;
-                //button4.Visible = true;
-                //button5.Visible = true;
-
-
+                button5.Enabled = false;
+                conversation();
             }
         }
 
@@ -358,6 +391,7 @@ namespace unilab2023
         /*******関数******/
         //ListBox要素操作
         bool isEnableDrop = true;
+        private ListBox nearestListBox;
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
         {
             //マウスの左ボタンだけが押されている時のみドラッグできるようにする
@@ -382,6 +416,41 @@ namespace unilab2023
                 isEnableDrop = true;
             }
         }
+
+
+        private ListBox GetNearestListBox(Point point)
+        {
+            // 3つのListBoxをリストに格納する
+            List<ListBox> listBoxes = listBoxes = new List<ListBox> { listBox1, listBox3, listBox4 };
+
+            // Bボタンがあるかないかの場合分け
+            if (Global.limit_LB3 == 0)
+            {
+                listBoxes = new List<ListBox> { listBox1, listBox4 };
+            }
+
+            double minDistance = double.MaxValue;
+            ListBox nearestListBox = null;
+
+            foreach (var listBox in listBoxes)
+            {
+                // ListBoxの中心座標を計算する
+                Point listBoxCenter = new Point(listBox.Location.X + listBox.Width / 2, listBox.Location.Y + listBox.Height / 2);
+
+                // ドラッグされたポイントとListBoxの中心との間の距離を計算する
+                double distance = Math.Sqrt(Math.Pow(listBoxCenter.X - point.X, 2) + Math.Pow(listBoxCenter.Y - point.Y, 2));
+
+                // これまでの最小距離よりも小さい場合は、更新する
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestListBox = listBox;
+                }
+            }
+
+            // 最も近いListBoxを返す
+            return nearestListBox;
+        }
         private void ListBox_DragEnter(object sender, DragEventArgs e)
         {
             //ドラッグされているデータがstring型か調べ、
@@ -393,6 +462,7 @@ namespace unilab2023
                 e.Effect = DragDropEffects.None;
         }
 
+        /*
         //listbox内の行数を制限しない場合
         //private void ListBox_DragDrop(object sender, DragEventArgs e)
         //{
@@ -409,6 +479,7 @@ namespace unilab2023
         //        isEnableDrop = false;
         //    }
         //}
+        */
 
 
         //listboxの行数を制限する場合
@@ -417,7 +488,11 @@ namespace unilab2023
             //ドロップされたデータがstring型か調べる
             if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
             {
-                ListBox target = (ListBox)sender;
+                Point point = this.PointToClient(new Point(e.X, e.Y));
+                ListBox target = GetNearestListBox(point); // ここでマウス位置に最も近いリストボックスを取得
+
+                if (target == null) // 最も近いリストボックスがない場合は何もしない
+                    return;
 
                 //listBoxの名前によって制限数を設定
                 int limit = 0;
@@ -1065,7 +1140,7 @@ namespace unilab2023
             bool jump = false;
             bool move_floor = false;
             int waittime = 250; //ミリ秒
-            Global.count = 1;//何マス歩いたか、歩き差分用
+            Global.count_walk = 1;//何マス歩いたか、歩き差分用
 
             while (true)
             {
@@ -1080,6 +1155,58 @@ namespace unilab2023
                         label5.Text = Global.miss_count.ToString();
                         break;
                     }
+                    if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
+                    {
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
+                    if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
+                    {
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        Global.x_now = x;
+                        Global.y_now = y;
+                        g2.Clear(Color.Transparent);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //忍者の動きに合わせて向きが変わる
+                        bool J = false;
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        pictureBox2.Refresh();
+                        Thread.Sleep(300);
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        Global.x_now = x;
+                        Global.y_now = y;
+                        g2.Clear(Color.Transparent);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //忍者の動きに合わせて向きが変わる
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, J, character_me);
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        pictureBox2.Refresh();
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
+                    if(Global.count_walk > 50) //無限ループ対策
+                    {
+                        move_copy.Clear();
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
                 }
                 else
                 {
@@ -1087,7 +1214,7 @@ namespace unilab2023
                 }
 
 
-                //移動先が木の場合、木の方向には進めない
+                //jumpでない時移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
                     character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
@@ -1101,6 +1228,7 @@ namespace unilab2023
 
                 x += move_copy[0][0];
                 y += move_copy[0][1];
+
 
                 Global.x_now = x;
                 Global.y_now = y;
@@ -1201,14 +1329,21 @@ namespace unilab2023
 
                 //500ミリ秒=0.5秒待機する
                 Thread.Sleep(waittime);
+                Global.count_walk++;
             }
-            Global.count ++;//歩数を数える、氷、動く床等では増えない
+
+            
         }
 
         //会話文読み込み
         private List<Conversation> LoadConversation(string conv_stagename)
         {
             List<Conversation> conversations = new List<Conversation>();
+
+            string stage = Regex.Replace(stageName, @"[^0-9]", "");
+            int stage_num = int.Parse(stage) % 10;
+
+            bool load = false;
 
             using (StreamReader sr = new StreamReader($"{conv_stagename}"))
             {
@@ -1270,52 +1405,103 @@ namespace unilab2023
                         }
                     }
 
-                    conversations.Add(new Conversation());
+                    if (load) {
+                        conversations.Add(new Conversation());
 
-                    i -= 1;
+                        i -= 1;
 
-                    conversations[i].character = values[0];
-                    conversations[i].dialogue = values[1];
-                    conversations[i].img = values[2];
+                        conversations[i].character = values[0];
+                        conversations[i].dialogue = values[1];
+                        conversations[i].img = values[2];
 
-                    i += 2;
+                        i += 2;
+                    }
+                    int start_num = values[1].IndexOf("start");
+                    if (start_num > 0)
+                    {
+                        string stg = Regex.Replace(values[1], @"[^0-9]", "");
+                        int stg_num = int.Parse(stg) % 10;
+                        if (stg_num == stage_num) load = true;
+                        else if (stg_num == stage_num + 1)
+                        {
+                            int count = conversations.Count();
+                            if (count != 0) conversations.RemoveAt(count - 1);
+                            load = false;
+                        }
+                    }
                 }
             }
             return conversations;
         }
 
-        /*******関数 fin******/
+        int conversationCounter = 0;  // 脚本のカウンタ
 
-
-        /******つかわない******/
-        //作業中？
-        bool visible = false;
-        private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
+        bool visible = true;
+        private void drawConversation()
         {
+            int play_num = Global.Conversations[conversationCounter].dialogue.IndexOf("play");
+            int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
+            bool Goal = (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now);
+
+            if ((play_num > 0 && !Goal) || end_num > 0)
+            {
+                //ストーリー強制視聴解除
+                listBox2.Enabled = true;
+                listBox5.Enabled = true;
+
+                return;
+            }
+            else if (play_num > 0) conversationCounter += 1;
+
+            //描画準備
+            Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            Graphics g3 = Graphics.FromImage(bmp3);
+
             Font fnt = new Font("MS UI Gothic", 15);
             int sp = 8;
 
-            Bitmap bmp3 = new Bitmap(pictureBox3.Image);
-            Graphics g3 = Graphics.FromImage(bmp3);
-
-            if (!visible)
+            g3.DrawImage(Draw_Icon(Global.Conversations[conversationCounter].character), 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+            if (visible)
             {
+                textBox3.Text = Global.Conversations[conversationCounter].character;
                 g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
-                g3.DrawString("ヒントです", fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+                g3.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
+
+                pictureBox3.Image = bmp3;
+            }
+
+            g3.Dispose();
+
+            if (conversationCounter < Global.Conversations.Count - 1)
+            {
+                conversationCounter += 1;
+                //ストーリー強制視聴解除
+                if (Global.Conversations[conversationCounter].dialogue.IndexOf("play") > 0)
+                {
+                    listBox2.Enabled = true;
+                    listBox5.Enabled = true;
+                }
             }
             else
             {
-                bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-                g3 = Graphics.FromImage(bmp3);
-                g3.DrawImage(img_otomo[0], 0, 0, bmp3.Height - 1, bmp3.Height - 1);
-                g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
+                visible = false;
             }
+        }
 
-            visible = !visible;
+        private void conversation()
+        {
+            drawConversation();
+            int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
+            if (end_num > 0)
+            {
+                button5.Enabled = true;
+            }
+        }
 
-            pictureBox3.Image = bmp3;
-            g3.Dispose();
-            
+        private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
+        {
+            conversation();
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -1336,6 +1522,7 @@ namespace unilab2023
                 }
             }
         }
+
         private void listBox3_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (listBox3.SelectedItem != null)
@@ -1373,6 +1560,11 @@ namespace unilab2023
                 }
             }
         }
+
+        /*******関数 fin******/
+
+
+        /******つかわない******/
 
         //以下空の関数（消さない）
         private void pictureBox2_Click(object sender, EventArgs e)

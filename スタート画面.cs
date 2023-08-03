@@ -46,7 +46,7 @@ namespace unilab2023
             g1.DrawImage(Image.FromFile("キャラ_てんぐ.png"), 1380, 670, 120, 120);
 
             button1.Enabled = true;  //デバッグのたびにパロディを見なきゃいけないのは面倒なので、一時的にfalse→trueに変更
-            Global.Conversations = LoadConversation("conversation_demo.csv");
+            Global.Conversations = LoadConversation("わせ忍0章.csv");
         }
 
         public class Global
@@ -197,24 +197,34 @@ namespace unilab2023
         /* function fin */
 
         /* button */
+        bool flag_button = false;
 
         private void button1_Click(object sender, EventArgs e)
         {
             //ステージ選択画面 form2 = new ステージ選択画面();
             //form2.Show();
 
-            pictureBox1_Click(sender,e);
+            button1.Visible = false;
+            button1.Enabled = false;
+            button2.Visible = true;
+            Graphics g1 = Graphics.FromImage(bmp1);
+            g1.Clear(BackColor);
+            flag_button = true;
+
+            drawConversation();
 
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            button1.Visible = false;
-            button2.Visible = true;
-            Graphics g1 = Graphics.FromImage(bmp1);
-            g1.Clear(BackColor);
+            if(flag_button == true)
+            {
+                Graphics g1 = Graphics.FromImage(bmp1);
+                g1.Clear(BackColor);
 
-            drawConversation();
+                drawConversation();
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
