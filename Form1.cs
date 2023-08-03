@@ -139,6 +139,8 @@ namespace unilab2023
             public static int count = 0; //試行回数カウント
             public static int miss_count = 0; //ミスカウント
 
+            public static int count_walk = 0; //歩数カウント
+
             public static List<int[]> move;  //プレイヤーの移動指示を入れるリスト
 
             //listBoxに入れられる行数の制限
@@ -254,6 +256,11 @@ namespace unilab2023
                 listBox2.Items.Remove("for (1)");
                 listBox2.Items.Remove("endfor");
             }
+
+            //ストーリー強制視聴
+            listBox2.Enabled = false;
+            listBox5.Enabled = false;
+            drawConversation();
         }
 
         /****button****/
@@ -270,6 +277,8 @@ namespace unilab2023
             {
                 label6.Text = "クリア！！";
                 label6.Visible = true;
+                button5.Enabled = false;
+                conversation();
             }
         }
 
@@ -1131,7 +1140,7 @@ namespace unilab2023
             bool jump = false;
             bool move_floor = false;
             int waittime = 250; //ミリ秒
-            Global.count = 1;//何マス歩いたか、歩き差分用
+            Global.count_walk = 1;//何マス歩いたか、歩き差分用
 
             while (true)
             {
@@ -1188,6 +1197,16 @@ namespace unilab2023
                         label5.Text = Global.miss_count.ToString();
                         break;
                     }
+                    if(Global.count_walk > 50) //無限ループ対策
+                    {
+                        move_copy.Clear();
+                        label6.Visible = true;
+                        Thread.Sleep(300);
+                        //label6.Visible = false;
+                        Global.miss_count += 1;
+                        label5.Text = Global.miss_count.ToString();
+                        break;
+                    }
                 }
                 else
                 {
@@ -1209,6 +1228,7 @@ namespace unilab2023
 
                 x += move_copy[0][0];
                 y += move_copy[0][1];
+
 
                 Global.x_now = x;
                 Global.y_now = y;
@@ -1309,8 +1329,10 @@ namespace unilab2023
 
                 //500ミリ秒=0.5秒待機する
                 Thread.Sleep(waittime);
+                Global.count_walk++;
             }
-            Global.count ++;//歩数を数える、氷、動く床等では増えない
+
+            
         }
 
         //会話文読み込み
@@ -1420,9 +1442,16 @@ namespace unilab2023
             int play_num = Global.Conversations[conversationCounter].dialogue.IndexOf("play");
             int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
             bool Goal = (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now);
-            
-            if ((play_num > 0 && !Goal) || end_num > 0) return;
-            else if(play_num > 0) conversationCounter += 1;
+
+            if ((play_num > 0 && !Goal) || end_num > 0)
+            {
+                //ストーリー強制視聴解除
+                listBox2.Enabled = true;
+                listBox5.Enabled = true;
+
+                return;
+            }
+            else if (play_num > 0) conversationCounter += 1;
 
             //描画準備
             Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
@@ -1435,6 +1464,7 @@ namespace unilab2023
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             if (visible)
             {
+                textBox3.Text = Global.Conversations[conversationCounter].character;
                 g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
                 g3.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
 
@@ -1446,6 +1476,12 @@ namespace unilab2023
             if (conversationCounter < Global.Conversations.Count - 1)
             {
                 conversationCounter += 1;
+                //ストーリー強制視聴解除
+                if (Global.Conversations[conversationCounter].dialogue.IndexOf("play") > 0)
+                {
+                    listBox2.Enabled = true;
+                    listBox5.Enabled = true;
+                }
             }
             else
             {
@@ -1453,9 +1489,19 @@ namespace unilab2023
             }
         }
 
+        private void conversation()
+        {
+            drawConversation();
+            int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
+            if (end_num > 0)
+            {
+                button5.Enabled = true;
+            }
+        }
+
         private void pictureBox3_MouseClick(object sender, MouseEventArgs e)    //アイコンをクリックすることでヒントを表示
         {
-            drawConversation();          
+            conversation();
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
