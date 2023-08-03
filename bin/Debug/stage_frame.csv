@@ -1,12 +1,12 @@
-stage1-1,0,0,8
+stage1-1,0,0,5
 stage1-2,0,0,8
 stage1-3,0,0,4
 stage1-4,0,0,4
-stage2-1,0,0,8
-stage2-2,0,0,8
+stage2-1,0,0,1
+stage2-2,0,0,4
 stage2-3,5,0,1
-stage3-1,0,0,8
-stage3-2,5,0,3
+stage3-1,0,0,2
+stage3-2,4,0,1
 stage3-3,4,4,2
 stage4-1,0,0,1
 stage4-2,3,3,5

@@ -271,7 +271,6 @@ namespace unilab2023
             Global.move = Movement(); //ユーザーの入力を読み取る
             label6.Visible = false;
             SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
-            label3.Text = Global.count.ToString(); //試行回数の表示
 
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
             {
@@ -1152,7 +1151,6 @@ namespace unilab2023
                         Thread.Sleep(300);
                         //label6.Visible = false;
                         Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
                         break;
                     }
                     if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
@@ -1161,7 +1159,6 @@ namespace unilab2023
                         Thread.Sleep(300);
                         //label6.Visible = false;
                         Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
                         break;
                     }
                     if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
@@ -1194,7 +1191,6 @@ namespace unilab2023
                         Thread.Sleep(300);
                         //label6.Visible = false;
                         Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
                         break;
                     }
                     if(Global.count_walk > 50) //無限ループ対策
@@ -1204,7 +1200,6 @@ namespace unilab2023
                         Thread.Sleep(300);
                         //label6.Visible = false;
                         Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
                         break;
                     }
                 }
