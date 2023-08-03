@@ -63,9 +63,9 @@ namespace unilab2023.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap ボタン枠140_65 {
+        internal static System.Drawing.Bitmap あざらしの湖 {
             get {
-                object obj = ResourceManager.GetObject("ボタン枠140_65", resourceCulture);
+                object obj = ResourceManager.GetObject("あざらしの湖", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,39 @@ namespace unilab2023.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap ボタン枠140_651 {
+        internal static System.Drawing.Bitmap きつねの村 {
             get {
-                object obj = ResourceManager.GetObject("ボタン枠140_651", resourceCulture);
+                object obj = ResourceManager.GetObject("きつねの村", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap たぬきの里 {
+            get {
+                object obj = ResourceManager.GetObject("たぬきの里", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap ふくろうの林 {
+            get {
+                object obj = ResourceManager.GetObject("ふくろうの林", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap ボタン枠140_65 {
+            get {
+                object obj = ResourceManager.GetObject("ボタン枠140_65", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
