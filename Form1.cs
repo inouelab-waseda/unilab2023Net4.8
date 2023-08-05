@@ -116,8 +116,6 @@ namespace unilab2023
             this.AllowDrop = true;
             this.DragDrop += new DragEventHandler(ListBox_DragDrop);
             this.DragEnter += new DragEventHandler(ListBox_DragEnter);
-            this.textBox3.MouseEnter += new System.EventHandler(this.textBox3_MouseEnter);
-            this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox3_MouseLeave);
 
 
             //pictureBoxの設定
@@ -175,6 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
+            _stageName = "stage4-3";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -239,17 +238,6 @@ namespace unilab2023
                 listBox5.Visible = false;
             }
 
-            ToolTip toolTip1 = new ToolTip();
-
-            // ツールチップが表示されるまでの時間を設定します。
-            toolTip1.InitialDelay = 1000;
-            // ツールチップが表示される時間を設定します。
-            toolTip1.AutoPopDelay = 5000;
-            // ツールチップが表示され続けるべきであるかどうかを設定します。
-            toolTip1.ReshowDelay = 500;
-            // マウスがツールチップウィンドウ内に移動した場合でも、ツールチップが表示され続けるべきであるかどうかを設定します。
-            toolTip1.ShowAlways = true;
-
             // CSVから読み込んだテキストを設定します。
             using (StreamReader sr = new StreamReader($"hint.csv"))
             {
@@ -267,7 +255,15 @@ namespace unilab2023
                     }
                 }
             }
-            toolTip1.SetToolTip(this.textBox3, Global.hint);
+            
+            if (Global.hint == null)
+            {
+                button8.Visible = false;
+            }
+            else
+            {
+                button8.Visible = true;
+            }
 
             listBox1.Height = element_height * height_LB1;
             listBox3.Height = element_height * height_LB3;
@@ -557,69 +553,54 @@ namespace unilab2023
                 e.Effect = DragDropEffects.None;
         }
 
-
         private void DisplayImageAndTextOnPictureBox(PictureBox pictureBox, string image, string text)
         {
-            // 画像ファイルを読み込みます。
+            // 画像ファイルを読み込む。
             Image img = Image.FromFile(image);
 
-            // 新しいBitmapを作成します。画像のサイズに合わせます。
-            Bitmap bmp = new Bitmap(img.Width, img.Height);
+            Bitmap bmp = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            Graphics g = Graphics.FromImage(bmp);
 
-            // Bitmapに対して描画するためのGraphicsを作成します。
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                // 元の画像を描画します。
-                g.DrawImage(img, 0, 0, img.Width, img.Height);
+            Font fnt = new Font("MS UI Gothic", 15);
+            int sp = 8;
 
-                // テキストの色、フォント、位置を設定して描画します。
-                using (Font font = new Font("Arial", 16))
-                {
-                    g.DrawString(text, font, Brushes.Black, new PointF(0, 0));
-                }
-            }
+            g.DrawImage(img, 0, 0, bmp.Height - 1, bmp.Height - 1);
+            g.DrawRectangle(Pens.Black, 0, 0, bmp.Height - 1, bmp.Height - 1);
 
-            // PictureBoxのImageに描画したBitmapをセットします。
+            g.DrawRectangle(Pens.White, 100, 100, 100, 100);
+            g.DrawString(text, fnt, Brushes.Black, bmp.Height + sp, 0 + sp);
+
             pictureBox.Image = bmp;
-        }
 
-        private void textBox3_MouseEnter(object sender, EventArgs e)
-        {
-            // CSVからテキストを読み込むロジック
-            string csvText = Global.hint;
-            string image = Global.hint_character;  // 画像のパスを取得
 
-            // PictureBox3に画像とテキストを表示するロジック
-            DisplayImageAndTextOnPictureBox(pictureBox3, image, csvText);
+            g.Dispose();
+         }
 
-        }
 
-        private void pictureBox3_MouseLeave(object sender, EventArgs e)
-        {
-            // PictureBoxのImageをnullに設定し、表示されている画像を消去します。
-            pictureBox3.Image = null;
-        }
-        /*
-        //listbox内の行数を制限しない場合
-        //private void ListBox_DragDrop(object sender, DragEventArgs e)
-        //{
-        //    //ドロップされたデータがstring型か調べる
-        //    if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
-        //    {
-        //        ListBox target = (ListBox)sender;
-        //        //ドロップされたデータ(string型)を取得
-        //        string itemText =
-        //            (string)e.Data.GetData(typeof(string));
-        //        //ドロップされたデータをリストボックスに追加する
-        //        target.Items.Add(itemText);
 
-        //        isEnableDrop = false;
-        //    }
-        //}
-        */
 
-        //listboxの行数を制限する場合
-        private void ListBox_DragDrop(object sender, DragEventArgs e)
+
+            /*
+            //listbox内の行数を制限しない場合
+            //private void ListBox_DragDrop(object sender, DragEventArgs e)
+            //{
+            //    //ドロップされたデータがstring型か調べる
+            //    if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
+            //    {
+            //        ListBox target = (ListBox)sender;
+            //        //ドロップされたデータ(string型)を取得
+            //        string itemText =
+            //            (string)e.Data.GetData(typeof(string));
+            //        //ドロップされたデータをリストボックスに追加する
+            //        target.Items.Add(itemText);
+
+            //        isEnableDrop = false;
+            //    }
+            //}
+            */
+
+            //listboxの行数を制限する場合
+            private void ListBox_DragDrop(object sender, DragEventArgs e)
         {
             //ドロップされたデータがstring型か調べる
             if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
@@ -1781,6 +1762,14 @@ namespace unilab2023
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (Global.hint != null) 
+            {
+                DisplayImageAndTextOnPictureBox(pictureBox3, Global.hint_character, Global.hint);
+            }
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
