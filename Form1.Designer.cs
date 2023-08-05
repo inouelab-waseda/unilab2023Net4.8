@@ -48,6 +48,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -101,7 +102,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(129, 86);
+            this.pictureBox2.Location = new System.Drawing.Point(128, 11);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(600, 600);
@@ -186,7 +187,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox3.Location = new System.Drawing.Point(129, 991);
+            this.pictureBox3.Location = new System.Drawing.Point(191, 906);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(818, 61);
@@ -215,7 +216,7 @@
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label6.Font = new System.Drawing.Font("游明朝 Demibold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label6.ForeColor = System.Drawing.Color.Tomato;
-            this.label6.Location = new System.Drawing.Point(293, 392);
+            this.label6.Location = new System.Drawing.Point(278, 275);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(284, 103);
             this.label6.TabIndex = 12;
@@ -237,7 +238,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(129, 86);
+            this.pictureBox1.Location = new System.Drawing.Point(128, 11);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(600, 600);
@@ -288,12 +289,12 @@
             this.textBox3.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Font = new System.Drawing.Font("ＭＳ 明朝", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox3.Location = new System.Drawing.Point(128, 972);
+            this.textBox3.Location = new System.Drawing.Point(191, 887);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(67, 15);
             this.textBox3.TabIndex = 20;
-            this.textBox3.Text = "ヒント！";
+            this.textBox3.Text = "Name";
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // button7
@@ -306,6 +307,18 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.SystemColors.Info;
+            this.button8.Font = new System.Drawing.Font("UD デジタル 教科書体 N-B", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button8.Location = new System.Drawing.Point(43, 889);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(126, 80);
+            this.button8.TabIndex = 21;
+            this.button8.Text = "ヒントだよ～";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -313,6 +326,7 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1803, 1055);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.listBox1);
@@ -367,6 +381,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 
