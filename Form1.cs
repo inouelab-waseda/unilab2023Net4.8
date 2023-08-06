@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            _stageName = "stage4-3";
+            _stageName = "stage1-3";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -243,7 +243,6 @@ namespace unilab2023
             if(height_LB1 == 1 && height_LB3 == 1)
             {
                 listBox5.Visible = false;
-                listBox4.Location = new System.Drawing.Point(listBox2.Location.X, listBox4.Location.Y);
             }
 
             // CSVから読み込んだテキストを設定します。
