@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            //_stageName = "stage3-2";
+            _stageName = "stage2-3";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -1292,7 +1292,7 @@ namespace unilab2023
                 {
                     string str_num = Regex.Replace(newget_move[i], @"[^0-9]", "");
                     int num = int.Parse(str_num);
-                    newget_move[i] = "for (" + (num % 9 + 1).ToString() + ")";
+                    newget_move[i] = "for (" + (num % 9).ToString() + ")";
                 }
                 if (newget_move[i].StartsWith("連チャンの術おわり"))
                 {
