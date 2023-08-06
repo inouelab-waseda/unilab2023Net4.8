@@ -687,6 +687,10 @@ namespace unilab2023
             {
                 string command = listBox1.SelectedItem.ToString();
 
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
                 if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
@@ -706,6 +710,10 @@ namespace unilab2023
             {
                 string command = listBox3.SelectedItem.ToString();
 
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
                 if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
@@ -725,6 +733,10 @@ namespace unilab2023
             {
                 string command = listBox4.SelectedItem.ToString();
 
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
                 if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
@@ -737,6 +749,7 @@ namespace unilab2023
                 }
             }
         }
+
 
         /******ListBox fin******/
 
