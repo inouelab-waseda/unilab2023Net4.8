@@ -436,10 +436,19 @@ namespace unilab2023
                 Global.miss_count += 1;
             }
 
-            //無限ループの時のエラー
+            //無限ループの時のミス
             else if (type == "miss_countover")
             {
                 label6.Text = "これ以上は移動できない！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //止まった時ゴール到着してないミス
+            else if (type == "miss_countover")
+            {
+                label6.Text = "ゴールまで届いてないね！やり直そう！";
                 label6.Visible = true;
                 Thread.Sleep(300);
                 Global.miss_count += 1;
@@ -1567,7 +1576,7 @@ namespace unilab2023
                 {
                     if(Global.x_now != Global.x_goal || Global.y_now != Global.y_goal)
                     {
-                        label6.Visible = true;
+                        resetStage("miss_end");
                         Thread.Sleep(300);
                     }
                     break;
