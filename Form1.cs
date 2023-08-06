@@ -456,6 +456,7 @@ namespace unilab2023
                 Graphics g2 = Graphics.FromImage(bmp2);
                 g2.Clear(Color.Transparent);
                 int cell_length = pictureBox1.Width / 12;
+                character_me = Image.FromFile("忍者_正面.png");
                 g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 this.Invoke((MethodInvoker)delegate
