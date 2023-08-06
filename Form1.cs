@@ -185,6 +185,13 @@ namespace unilab2023
             Global.Conversations = LoadConversation(file_name); //会話読み込み
 
             // 1行文の高さ
+            int ItemHeight = 20;
+            listBox1.ItemHeight = ItemHeight;
+            listBox2.ItemHeight = ItemHeight;
+            listBox3.ItemHeight = ItemHeight;
+            listBox4.ItemHeight = ItemHeight;
+            listBox5.ItemHeight = ItemHeight;
+
             int element_height = listBox1.ItemHeight;
 
             // それぞれの枠の高さ
@@ -236,6 +243,7 @@ namespace unilab2023
             if(height_LB1 == 1 && height_LB3 == 1)
             {
                 listBox5.Visible = false;
+                listBox4.Location = new System.Drawing.Point(listBox2.Location.X, listBox4.Location.Y);
             }
 
             // CSVから読み込んだテキストを設定します。
@@ -651,13 +659,13 @@ namespace unilab2023
             {
                 string command = listBox1.SelectedItem.ToString();
 
-                if (command.StartsWith("for"))
+                if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
                     int num = int.Parse(str_num);
 
                     int id = listBox1.SelectedIndex;
-                    listBox1.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+                    listBox1.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
 
                     listBox1.Refresh();
                 }
@@ -670,13 +678,13 @@ namespace unilab2023
             {
                 string command = listBox3.SelectedItem.ToString();
 
-                if (command.StartsWith("for"))
+                if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
                     int num = int.Parse(str_num);
 
                     int id = listBox3.SelectedIndex;
-                    listBox3.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+                    listBox3.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
 
                     listBox3.Refresh();
                 }
@@ -689,13 +697,13 @@ namespace unilab2023
             {
                 string command = listBox4.SelectedItem.ToString();
 
-                if (command.StartsWith("for"))
+                if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
                     int num = int.Parse(str_num);
 
                     int id = listBox4.SelectedIndex;
-                    listBox4.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+                    listBox4.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
 
                     listBox4.Refresh();
                 }
@@ -1260,6 +1268,24 @@ namespace unilab2023
                 if (newget_move[i] == "↓")
                 {
                     newget_move[i] = "down";
+                }
+                if (newget_move[i].StartsWith("連チャンの術 ("))
+                {
+                    string str_num = Regex.Replace(newget_move[i], @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+                    newget_move[i] = "for (" + (num % 9 + 1).ToString() + ")";
+                }
+                if (newget_move[i].StartsWith("連チャンの術おわり"))
+                {
+                    newget_move[i] = "endfor";
+                }
+                if (newget_move[i] == "Aの術")
+                {
+                    newget_move[i] = "A";
+                }
+                if (newget_move[i] == "Bの術")
+                {
+                    newget_move[i] = "B";
                 }
             }
             return newget_move.ToArray();
