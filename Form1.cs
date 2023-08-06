@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            _stageName = "stage3-2";
+            //_stageName = "stage3-2";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
