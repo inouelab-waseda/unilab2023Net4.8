@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            _stageName = "stage1-3";
+            _stageName = "stage2-3";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -418,9 +418,28 @@ namespace unilab2023
                 return;
             }
 
-            // ミス
-            else if (type == "miss")
+            // 曇から落ちたミス
+            else if (type == "miss_out")
             {
+                label6.Text = "曇から落ちた！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //木に刺されたミス
+            else if (type == "miss_tree")
+            {
+                label6.Text = "木に刺された！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //無限ループの時のエラー
+            else if (type == "miss_countover")
+            {
+                label6.Text = "これ以上は移動できない！やり直そう！";
                 label6.Visible = true;
                 Thread.Sleep(300);
                 Global.miss_count += 1;
@@ -1392,12 +1411,12 @@ namespace unilab2023
                             // pictureBox2を同期的にRefreshする
                             pictureBox2.Refresh();
                         });
-                        resetStage("miss");
+                        resetStage("miss_out");
                         break;
                     }
                     if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
                     {
-                        resetStage("miss");
+                        resetStage("miss_out");
                         break;
                     }
                     if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
@@ -1410,16 +1429,28 @@ namespace unilab2023
                         //ステージごとにゴールのキャラを変えたい
                         g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         //忍者の動きに合わせて向きが変わる
-                        bool J = false;
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         pictureBox2.Refresh();
-                        resetStage("miss");
+                        Thread.Sleep(waittime);
+                        bool J = false;
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        Global.x_now = x;
+                        Global.y_now = y;
+                        g2.Clear(Color.Transparent);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //忍者の動きに合わせて向きが変わる
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, J, character_me);
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        pictureBox2.Refresh();
+                        resetStage("miss_tree");
                         break;
                     }
                     if(Global.count_walk > 50) //無限ループ対策
                     {
-                        resetStage("miss");
+                        resetStage("miss_countover");
                         break;
                     }
                 }
