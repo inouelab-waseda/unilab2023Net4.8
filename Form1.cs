@@ -446,7 +446,7 @@ namespace unilab2023
             }
 
             //止まった時ゴール到着してないミス
-            else if (type == "miss_countover")
+            else if (type == "miss_end")
             {
                 label6.Text = "ゴールまで届いてないね！やり直そう！";
                 label6.Visible = true;
