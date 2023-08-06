@@ -220,7 +220,7 @@
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label6.Font = new System.Drawing.Font("游明朝 Demibold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label6.ForeColor = System.Drawing.Color.Tomato;
-            this.label6.Location = new System.Drawing.Point(291, 257);
+            this.label6.Location = new System.Drawing.Point(86, 416);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(284, 103);
             this.label6.TabIndex = 12;

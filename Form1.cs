@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            _stageName = "stage2-3";
+            _stageName = "stage3-2";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -421,7 +421,7 @@ namespace unilab2023
             // 曇から落ちたミス
             else if (type == "miss_out")
             {
-                label6.Text = "曇から落ちた！やり直そう！";
+                label6.Text = "そこは止まれないよ！やり直そう！";
                 label6.Visible = true;
                 Thread.Sleep(300);
                 Global.miss_count += 1;
