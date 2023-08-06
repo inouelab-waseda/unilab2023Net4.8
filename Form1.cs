@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            _stageName = "stage2-3";
+            //_stageName = "stage3-2";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -1319,7 +1319,7 @@ namespace unilab2023
             int new_x = x + move[0][0];
             int new_y = y + move[0][1];
 
-            if ((new_x + 1) <= 0 || (max_x - new_x) <= 0 || (new_y + 1) <= 0 || (max_y - new_y) <= 0) return false;
+            if (new_x <= 0 || (max_x - new_x) <= 1 || new_y <= 0 || (max_y - new_y) <= 1) return false;
             else if (Map[new_y, new_x] == 0) return false;
             else
             {
@@ -1412,11 +1412,6 @@ namespace unilab2023
                             // pictureBox2を同期的にRefreshする
                             pictureBox2.Refresh();
                         });
-                        resetStage("miss_out");
-                        break;
-                    }
-                    if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
-                    {
                         resetStage("miss_out");
                         break;
                     }
