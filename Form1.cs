@@ -1481,7 +1481,7 @@ namespace unilab2023
                         Global.y_now = y;
                         g2.Clear(Color.Transparent);
                         //ステージごとにゴールのキャラを変えたい
-                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        g2.DrawImage(goal_obj(_stageName), Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         //忍者の動きに合わせて向きが変わる
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
@@ -1494,7 +1494,7 @@ namespace unilab2023
                         Global.y_now = y;
                         g2.Clear(Color.Transparent);
                         //ステージごとにゴールのキャラを変えたい
-                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        g2.DrawImage(goal_obj(_stageName), Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         //忍者の動きに合わせて向きが変わる
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, J, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
