@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            //_stageName = "stage4-3";
+            _stageName = "stage2-3";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -185,6 +185,13 @@ namespace unilab2023
             Global.Conversations = LoadConversation(file_name); //会話読み込み
 
             // 1行文の高さ
+            int ItemHeight = 20;
+            listBox1.ItemHeight = ItemHeight;
+            listBox2.ItemHeight = ItemHeight;
+            listBox3.ItemHeight = ItemHeight;
+            listBox4.ItemHeight = ItemHeight;
+            listBox5.ItemHeight = ItemHeight;
+
             int element_height = listBox1.ItemHeight;
 
             // それぞれの枠の高さ
@@ -411,9 +418,37 @@ namespace unilab2023
                 return;
             }
 
-            // ミス
-            else if (type == "miss")
+            // 曇から落ちたミス
+            else if (type == "miss_out")
             {
+                label6.Text = "そこは止まれないよ！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //木に刺されたミス
+            else if (type == "miss_tree")
+            {
+                label6.Text = "木に刺された！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //無限ループの時のミス
+            else if (type == "miss_countover")
+            {
+                label6.Text = "これ以上は移動できない！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //止まった時ゴール到着してないミス
+            else if (type == "miss_end")
+            {
+                label6.Text = "ゴールまで届いてないね！やり直そう！";
                 label6.Visible = true;
                 Thread.Sleep(300);
                 Global.miss_count += 1;
@@ -430,6 +465,7 @@ namespace unilab2023
                 Graphics g2 = Graphics.FromImage(bmp2);
                 g2.Clear(Color.Transparent);
                 int cell_length = pictureBox1.Width / 12;
+                character_me = Image.FromFile("忍者_正面.png");
                 g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 this.Invoke((MethodInvoker)delegate
@@ -651,13 +687,17 @@ namespace unilab2023
             {
                 string command = listBox1.SelectedItem.ToString();
 
-                if (command.StartsWith("for"))
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
+                if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
                     int num = int.Parse(str_num);
 
                     int id = listBox1.SelectedIndex;
-                    listBox1.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+                    listBox1.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
 
                     listBox1.Refresh();
                 }
@@ -670,13 +710,17 @@ namespace unilab2023
             {
                 string command = listBox3.SelectedItem.ToString();
 
-                if (command.StartsWith("for"))
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
+                if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
                     int num = int.Parse(str_num);
 
                     int id = listBox3.SelectedIndex;
-                    listBox3.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+                    listBox3.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
 
                     listBox3.Refresh();
                 }
@@ -689,18 +733,23 @@ namespace unilab2023
             {
                 string command = listBox4.SelectedItem.ToString();
 
-                if (command.StartsWith("for"))
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
+                if (command.StartsWith("連チャンの術"))
                 {
                     string str_num = Regex.Replace(command, @"[^0-9]", "");
                     int num = int.Parse(str_num);
 
                     int id = listBox4.SelectedIndex;
-                    listBox4.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
+                    listBox4.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
 
                     listBox4.Refresh();
                 }
             }
         }
+
 
         /******ListBox fin******/
 
@@ -1261,6 +1310,24 @@ namespace unilab2023
                 {
                     newget_move[i] = "down";
                 }
+                if (newget_move[i].StartsWith("連チャンの術 ("))
+                {
+                    string str_num = Regex.Replace(newget_move[i], @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+                    newget_move[i] = "for (" + (num % 9).ToString() + ")";
+                }
+                if (newget_move[i].StartsWith("連チャンの術おわり"))
+                {
+                    newget_move[i] = "endfor";
+                }
+                if (newget_move[i] == "Aの術")
+                {
+                    newget_move[i] = "A";
+                }
+                if (newget_move[i] == "Bの術")
+                {
+                    newget_move[i] = "B";
+                }
             }
             return newget_move.ToArray();
         }
@@ -1274,7 +1341,7 @@ namespace unilab2023
             int new_x = x + move[0][0];
             int new_y = y + move[0][1];
 
-            if ((new_x + 1) <= 0 || (max_x - new_x) <= 0 || (new_y + 1) <= 0 || (max_y - new_y) <= 0) return false;
+            if (new_x <= 0 || (max_x - new_x) <= 1 || new_y <= 0 || (max_y - new_y) <= 1) return false;
             else if (Map[new_y, new_x] == 0) return false;
             else
             {
@@ -1367,12 +1434,7 @@ namespace unilab2023
                             // pictureBox2を同期的にRefreshする
                             pictureBox2.Refresh();
                         });
-                        resetStage("miss");
-                        break;
-                    }
-                    if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
-                    {
-                        resetStage("miss");
+                        resetStage("miss_out");
                         break;
                     }
                     if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
@@ -1385,16 +1447,28 @@ namespace unilab2023
                         //ステージごとにゴールのキャラを変えたい
                         g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         //忍者の動きに合わせて向きが変わる
-                        bool J = false;
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         pictureBox2.Refresh();
-                        resetStage("miss");
+                        Thread.Sleep(waittime);
+                        bool J = false;
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        Global.x_now = x;
+                        Global.y_now = y;
+                        g2.Clear(Color.Transparent);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //忍者の動きに合わせて向きが変わる
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, J, character_me);
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        pictureBox2.Refresh();
+                        resetStage("miss_tree");
                         break;
                     }
                     if(Global.count_walk > 50) //無限ループ対策
                     {
-                        resetStage("miss");
+                        resetStage("miss_countover");
                         break;
                     }
                 }
@@ -1515,7 +1589,7 @@ namespace unilab2023
                 {
                     if(Global.x_now != Global.x_goal || Global.y_now != Global.y_goal)
                     {
-                        label6.Visible = true;
+                        resetStage("miss_end");
                         Thread.Sleep(300);
                     }
                     break;
