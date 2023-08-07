@@ -210,8 +210,8 @@ namespace unilab2023
             Graphics g1 = Graphics.FromImage(bmp1);
             g1.Clear(TransparencyKey);
             flag_button = true;
-            //Image img = Image.FromFile("わせ忍_背景_薄暗.png");
-            //g1.DrawImage(img, 0, 0, 1550, 650);
+            Image img = Image.FromFile("わせ忍_背景_薄暗.png");
+            g1.DrawImage(img, 0, 0, 1550, 800);
             drawConversation();
 
         }
