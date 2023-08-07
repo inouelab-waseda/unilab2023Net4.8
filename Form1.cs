@@ -62,7 +62,7 @@ namespace unilab2023
         {
             switch (name)
             {
-                case "家田":
+                case "シゲノブ":
                     return character_me;
                 case "たぬき":
                 case "チマキ":
