@@ -164,6 +164,7 @@
     <None Include="Resources\あざらしの湖.png" />
     <None Include="Resources\きつねの村.png" />
     <None Include="Resources\あやかしの山.png" />
+    <None Include="Resources\わせ忍_背景.png" />
     <Content Include="Resources\ボタン枠140_65.png" />
     <None Include="Resources\ボタン枠140_651.png" />
   </ItemGroup>

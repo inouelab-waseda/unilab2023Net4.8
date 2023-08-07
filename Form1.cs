@@ -49,6 +49,14 @@ namespace unilab2023
         Image animatedImage_right = Image.FromFile("マップ_動く床_右.gif");
         Image animatedImage_down = Image.FromFile("マップ_動く床_下.gif");
         Image animatedImage_left = Image.FromFile("マップ_動く床_左.gif");
+        Image cloud_ul = Image.FromFile("マップ_雲_左上.png");
+        Image cloud_left = Image.FromFile("マップ_雲_左.png");
+        Image cloud_bl = Image.FromFile("マップ_雲_左下.png");
+        Image cloud_bottom = Image.FromFile("マップ_雲_下.png");
+        Image cloud_br = Image.FromFile("マップ_雲_右下.png");
+        Image cloud_right = Image.FromFile("マップ_雲_右.png");
+        Image cloud_ur = Image.FromFile("マップ_雲_右上.png");
+        Image cloud_upside = Image.FromFile("マップ_雲_上.png");
 
         public Image Draw_Icon(string name)
         {
@@ -109,12 +117,13 @@ namespace unilab2023
             this.DragDrop += new DragEventHandler(ListBox_DragDrop);
             this.DragEnter += new DragEventHandler(ListBox_DragEnter);
 
+
             //pictureBoxの設定
             pictureBox2.Parent = pictureBox1;
             //pictureBox1.Location = new Point(600, 50);
             pictureBox2.Location = new Point(0, 0);
-            pictureBox1.ClientSize = new Size(600, 600);
-            pictureBox2.ClientSize = new Size(600, 600);
+            pictureBox1.ClientSize = new Size(684, 684);
+            pictureBox2.ClientSize = new Size(684, 684);
             pictureBox2.BackColor = Color.Transparent;
 
             bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -128,7 +137,7 @@ namespace unilab2023
 
         public class Global //グローバル変数格納
         {
-            public static int[,] map = new int[10, 10]; //map情報
+            public static int[,] map = new int[12, 12]; //map情報
             public static int x_start; //スタート位置ｘ
             public static int y_start; //スタート位置ｙ
             public static int x_goal; //ゴール位置ｘ
@@ -148,6 +157,9 @@ namespace unilab2023
             public static int limit_LB3;
             public static int limit_LB4;
 
+            public static string hint;
+            public static string hint_character;
+
             public static List<Conversation> Conversations = new List<Conversation>();  //会話文を入れるリスト
         }
 
@@ -160,6 +172,9 @@ namespace unilab2023
 
         public void Form1_Load(object sender, EventArgs e)
         {
+            button5.Visible = false;
+            //_stageName = "stage2-3";
+
             Global.map = CreateStage(stageName); //ステージ作成
 
             string str_num = Regex.Replace(stageName, @"[^0-9]", "");
@@ -170,6 +185,13 @@ namespace unilab2023
             Global.Conversations = LoadConversation(file_name); //会話読み込み
 
             // 1行文の高さ
+            int ItemHeight = 20;
+            listBox1.ItemHeight = ItemHeight;
+            listBox2.ItemHeight = ItemHeight;
+            listBox3.ItemHeight = ItemHeight;
+            listBox4.ItemHeight = ItemHeight;
+            listBox5.ItemHeight = ItemHeight;
+
             int element_height = listBox1.ItemHeight;
 
             // それぞれの枠の高さ
@@ -223,6 +245,32 @@ namespace unilab2023
                 listBox5.Visible = false;
             }
 
+            // CSVから読み込んだテキストを設定します。
+            using (StreamReader sr = new StreamReader($"hint.csv"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] values = line.Split(',');
+
+
+                    if (values[0] == _stageName)
+                    {
+                        Global.hint_character = values[1];
+                        Global.hint = values[2];
+                        break;
+                    }
+                }
+            }
+            
+            if (Global.hint == null)
+            {
+                button8.Visible = false;
+            }
+            else
+            {
+                button8.Visible = true;
+            }
 
             listBox1.Height = element_height * height_LB1;
             listBox3.Height = element_height * height_LB3;
@@ -264,25 +312,7 @@ namespace unilab2023
         }
 
         /****button****/
-        private void button1_Click(object sender, EventArgs e)
-        {
-            button1.Visible = false;
-            button1.Enabled = false;
-            Global.move = Movement(); //ユーザーの入力を読み取る
-            label6.Visible = false;
-            SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
-            label3.Text = Global.count.ToString(); //試行回数の表示
-
-            if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
-            {
-                label6.Text = "クリア！！";
-                label6.Visible = true;
-                button5.Enabled = false;
-                conversation();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)//リセットボタン、選択したものだけを消す。選択なければすべて消す。
+       private void button2_Click(object sender, EventArgs e)//ListBoxのリセットボタン、選択したものだけを消す。選択なければすべて消す。
         {
             if (listBox1.SelectedIndex > -1)
             {
@@ -316,7 +346,7 @@ namespace unilab2023
             }
         }
 
-        /*
+         /*
         A, Bボタン削除
         private void button4_Click(object sender, EventArgs e)
         {
@@ -354,44 +384,130 @@ namespace unilab2023
         }
         */
 
+        private void button1_Click(object sender, EventArgs e)//出発ボタン
+        {
+            button1.Visible = false;
+            button1.Enabled = false;
+            label6.Visible = false;
+            Global.move = Movement(); //ユーザーの入力を読み取る
+            SquareMovement(Global.x_now, Global.y_now, Global.map, Global.move); //キャラ動かす
+            Global.count += 1;
+            if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
+            {
+                label6.Text = "クリア！！";
+                label6.Visible = true;
+                button5.Visible = true;
+            }
+            else
+            {
+                resetStage("miss");
+            }
+        }
+
         // 枠からはみ出す大きさ
         int extra_length = 7;
 
-        private void button6_Click(object sender, EventArgs e)//出発ボタン
+        public void resetStage(string type) // リセット関連まとめ
         {
-            character_me = Image.FromFile("忍者_正面.png");
-            //初期位置に戻す
-            Global.x_now = Global.x_start; 
-            Global.y_now = Global.y_start;
-
-            //初期位置に書き換え
-            Graphics g2 = Graphics.FromImage(bmp2);
-            g2.Clear(Color.Transparent);
-            int cell_length = pictureBox1.Width / 10;
-            character_me = Image.FromFile("忍者_正面.png");
-            g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
-            g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
-            this.Invoke((MethodInvoker)delegate
+            if (type == "quit")
             {
-                // pictureBox2を同期的にRefreshする
-                pictureBox2.Refresh();
-            });
+                ステージ選択画面 form2 = new ステージ選択画面();
+                form2.stageName = stageName;
+                form2.Show();
+                this.Close();
+                return;
+            }
 
-            //初期設定に戻す
-            button1.Visible = true;
-            button1.Enabled = true;
-            label6.Visible = false;
-            Global.count = 0;
-            label6.Text = "ミス！";
+            // 曇から落ちたミス
+            else if (type == "miss_out")
+            {
+                label6.Text = "そこは止まれないよ！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //木に刺されたミス
+            else if (type == "miss_tree")
+            {
+                label6.Text = "木に刺された！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //無限ループの時のミス
+            else if (type == "miss_countover")
+            {
+                label6.Text = "これ以上は移動できない！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            //止まった時ゴール到着してないミス
+            else if (type == "miss_end")
+            {
+                label6.Text = "ゴールまで届いてないね！やり直そう！";
+                label6.Visible = true;
+                Thread.Sleep(300);
+                Global.miss_count += 1;
+            }
+
+            // リトライボタン
+            else if (type == "retry")
+            {
+                //初期位置に戻す
+                Global.x_now = Global.x_start;
+                Global.y_now = Global.y_start;
+
+                //初期位置に書き換え
+                Graphics g2 = Graphics.FromImage(bmp2);
+                g2.Clear(Color.Transparent);
+                int cell_length = pictureBox1.Width / 12;
+                character_me = Image.FromFile("忍者_正面.png");
+                g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    // pictureBox2を同期的にRefreshする
+                    pictureBox2.Refresh();
+                });
+
+                //初期設定に戻す
+                button1.Visible = true;
+                button1.Enabled = true;
+                label6.Visible = false;
+                Global.count = 0;
+                Global.miss_count = 0;
+                label6.Text = "ミス！";
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e) //リトライボタン
+        {
+            resetStage("retry");
+        }
+
+        private void button5_Click(object sender, EventArgs e) //マップに戻るボタン
+        {
+            resetStage("quit");
+        }
+
+        private void button7_Click(object sender, EventArgs e) // 使ってない？
+        {
+            ステージ選択画面 form2 = new ステージ選択画面();
+            form2.stageName = stageName;
+            form2.Show();
+            this.Close();
         }
 
         /******button fin******/
 
+        /******ListBox******/
 
-        /*******関数******/
         //ListBox要素操作
         bool isEnableDrop = true;
-        private ListBox nearestListBox;
         private void ListBox_MouseDown(object sender, MouseEventArgs e)
         {
             //マウスの左ボタンだけが押されている時のみドラッグできるようにする
@@ -429,6 +545,17 @@ namespace unilab2023
                 listBoxes = new List<ListBox> { listBox1, listBox4 };
             }
 
+            // Aボタンない時
+            if (Global.limit_LB1 == 0)
+            {
+                listBoxes = new List<ListBox> { listBox3, listBox4 };
+            }
+
+            // A.Bボタンない時
+            if (Global.limit_LB1 == 0 && Global.limit_LB3 == 0)
+            {
+                listBoxes = new List<ListBox> { listBox4 };
+            }
             double minDistance = double.MaxValue;
             ListBox nearestListBox = null;
 
@@ -462,28 +589,54 @@ namespace unilab2023
                 e.Effect = DragDropEffects.None;
         }
 
-        /*
-        //listbox内の行数を制限しない場合
-        //private void ListBox_DragDrop(object sender, DragEventArgs e)
-        //{
-        //    //ドロップされたデータがstring型か調べる
-        //    if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
-        //    {
-        //        ListBox target = (ListBox)sender;
-        //        //ドロップされたデータ(string型)を取得
-        //        string itemText =
-        //            (string)e.Data.GetData(typeof(string));
-        //        //ドロップされたデータをリストボックスに追加する
-        //        target.Items.Add(itemText);
+        private void DisplayImageAndTextOnPictureBox(PictureBox pictureBox, string image, string text)
+        {
+            // 画像ファイルを読み込む。
+            Image img = Image.FromFile(image);
 
-        //        isEnableDrop = false;
-        //    }
-        //}
-        */
+            Bitmap bmp = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            Graphics g = Graphics.FromImage(bmp);
+
+            Font fnt = new Font("MS UI Gothic", 15);
+            int sp = 8;
+
+            g.DrawImage(img, 0, 0, bmp.Height - 1, bmp.Height - 1);
+            g.DrawRectangle(Pens.Black, 0, 0, bmp.Height - 1, bmp.Height - 1);
+
+            g.DrawRectangle(Pens.White, 100, 100, 100, 100);
+            g.DrawString(text, fnt, Brushes.Black, bmp.Height + sp, 0 + sp);
+
+            pictureBox.Image = bmp;
 
 
-        //listboxの行数を制限する場合
-        private void ListBox_DragDrop(object sender, DragEventArgs e)
+            g.Dispose();
+         }
+
+
+
+
+
+            /*
+            //listbox内の行数を制限しない場合
+            //private void ListBox_DragDrop(object sender, DragEventArgs e)
+            //{
+            //    //ドロップされたデータがstring型か調べる
+            //    if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
+            //    {
+            //        ListBox target = (ListBox)sender;
+            //        //ドロップされたデータ(string型)を取得
+            //        string itemText =
+            //            (string)e.Data.GetData(typeof(string));
+            //        //ドロップされたデータをリストボックスに追加する
+            //        target.Items.Add(itemText);
+
+            //        isEnableDrop = false;
+            //    }
+            //}
+            */
+
+            //listboxの行数を制限する場合
+            private void ListBox_DragDrop(object sender, DragEventArgs e)
         {
             //ドロップされたデータがstring型か調べる
             if (e.Data.GetDataPresent(typeof(string)) && isEnableDrop)
@@ -528,7 +681,81 @@ namespace unilab2023
             }
         }
 
-        //これなに
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                string command = listBox1.SelectedItem.ToString();
+
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
+                if (command.StartsWith("連チャンの術"))
+                {
+                    string str_num = Regex.Replace(command, @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+
+                    int id = listBox1.SelectedIndex;
+                    listBox1.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
+
+                    listBox1.Refresh();
+                }
+            }
+        }
+
+        private void listBox3_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox3.SelectedItem != null)
+            {
+                string command = listBox3.SelectedItem.ToString();
+
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
+                if (command.StartsWith("連チャンの術"))
+                {
+                    string str_num = Regex.Replace(command, @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+
+                    int id = listBox3.SelectedIndex;
+                    listBox3.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
+
+                    listBox3.Refresh();
+                }
+            }
+        }
+
+        private void listBox4_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox4.SelectedItem != null)
+            {
+                string command = listBox4.SelectedItem.ToString();
+
+                if (command == "連チャンの術おわり")
+                {
+                    return;
+                }
+                if (command.StartsWith("連チャンの術"))
+                {
+                    string str_num = Regex.Replace(command, @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+
+                    int id = listBox4.SelectedIndex;
+                    listBox4.Items[id] = "連チャンの術 (" + (num % 9 + 1).ToString() + ")";
+
+                    listBox4.Refresh();
+                }
+            }
+        }
+
+
+        /******ListBox fin******/
+
+        /*******関数******/
+
+        //これなに？
         void Image_FrameChanged(object sender, EventArgs e)
         {
             this.Invalidate();
@@ -549,7 +776,7 @@ namespace unilab2023
         //ステージ描写
         private int[,] CreateStage(string stage_name)
         {
-            int[,] map = new int[10, 10];
+            int[,] map = new int[12, 12];
 
             using (StreamReader sr = new StreamReader($"{stage_name}.csv"))
             {
@@ -576,14 +803,20 @@ namespace unilab2023
             Graphics g1 = Graphics.FromImage(bmp1);
             Graphics g2 = Graphics.FromImage(bmp2);
 
-            int cell_length = pictureBox1.Width / 10;
+            int cell_length = pictureBox1.Width / 12;
 
-            for (int y = 0; y < 10; y++)
+            for(int y = 1; y < 11; y++)
             {
-                for (int x = 0; x < 10; x++)
+                for(int x = 1; x < 11; x++)
                 {
                     g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
+                }
+            }
 
+            for (int y = 0; y < 12; y++)
+            {
+                for (int x = 0; x < 12; x++)
+                {
                     switch (map[y, x])
                     {
                         case 0:
@@ -616,6 +849,30 @@ namespace unilab2023
                             break;
                         case 8:
                             g1.DrawImage(img_tree, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 20:
+                            g1.DrawImage(cloud_ul, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 21:
+                            g1.DrawImage(cloud_left, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 22:
+                            g1.DrawImage(cloud_bl, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 23:
+                            g1.DrawImage(cloud_bottom, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 24:
+                            g1.DrawImage(cloud_br, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 25:
+                            g1.DrawImage(cloud_right, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 26:
+                            g1.DrawImage(cloud_ur, x * cell_length, y * cell_length, cell_length, cell_length);
+                            break;
+                        case 27:
+                            g1.DrawImage(cloud_upside, x * cell_length, y * cell_length, cell_length, cell_length);
                             break;
                         case 100:
                             g1.FillRectangle(startBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
@@ -1059,11 +1316,27 @@ namespace unilab2023
                 {
                     newget_move[i] = "down";
                 }
+                if (newget_move[i].StartsWith("連チャンの術 ("))
+                {
+                    string str_num = Regex.Replace(newget_move[i], @"[^0-9]", "");
+                    int num = int.Parse(str_num);
+                    newget_move[i] = "for (" + (num % 9).ToString() + ")";
+                }
+                if (newget_move[i].StartsWith("連チャンの術おわり"))
+                {
+                    newget_move[i] = "endfor";
+                }
+                if (newget_move[i] == "Aの術")
+                {
+                    newget_move[i] = "A";
+                }
+                if (newget_move[i] == "Bの術")
+                {
+                    newget_move[i] = "B";
+                }
             }
             return newget_move.ToArray();
         }
-
-
 
         //当たり判定
         public bool Colision_detection(int x, int y, int[,] Map, List<int[]> move)
@@ -1074,7 +1347,7 @@ namespace unilab2023
             int new_x = x + move[0][0];
             int new_y = y + move[0][1];
 
-            if ((new_x + 1) <= 0 || (max_x - new_x) <= 0 || (new_y + 1) <= 0 || (max_y - new_y) <= 0) return false;
+            if (new_x <= 0 || (max_x - new_x) <= 1 || new_y <= 0 || (max_y - new_y) <= 1) return false;
             else if (Map[new_y, new_x] == 0) return false;
             else
             {
@@ -1082,6 +1355,7 @@ namespace unilab2023
                 return true;
             }
         }
+
         //動きにあわせて忍者の画像を返す
         Image Ninja_Image(int x, int y, int steps, bool jump, Image Ninja)
         {
@@ -1125,7 +1399,7 @@ namespace unilab2023
         public void SquareMovement(int x, int y, int[,] Map, List<int[]> move)
         {
             Graphics g2 = Graphics.FromImage(bmp2);
-            int cell_length = pictureBox1.Width / 10;
+            int cell_length = pictureBox1.Width / 12;
             if (move.Count == 0)
             {
                 return;
@@ -1148,20 +1422,24 @@ namespace unilab2023
                 {
                     if (!Colision_detection(x, y, Map, move_copy) && !jump)
                     {
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
-                        break;
-                    }
-                    if(!Colision_detection(x + move_copy[0][0], y + move_copy[0][1], Map, move_copy) && jump) //jumpの着地先がmap外かどうか（これがないとjumpのif文エラーでる）
-                    {
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
+                        //忍者を動かしてからミスの表示を出す
+                        x += move_copy[0][0];
+                        y += move_copy[0][1];
+                        g2.Clear(Color.Transparent);
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        //ステージごとにゴールのキャラを変えたい
+                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                
+                        //pictureBoxの中身を塗り替える
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            // pictureBox2を同期的にRefreshする
+                            pictureBox2.Refresh();
+                        });
+                        resetStage("miss_out");
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         break;
                     }
                     if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
@@ -1174,11 +1452,11 @@ namespace unilab2023
                         //ステージごとにゴールのキャラを変えたい
                         g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         //忍者の動きに合わせて向きが変わる
-                        bool J = false;
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         pictureBox2.Refresh();
-                        Thread.Sleep(300);
+                        Thread.Sleep(waittime);
+                        bool J = false;
                         x += move_copy[0][0];
                         y += move_copy[0][1];
                         Global.x_now = x;
@@ -1190,34 +1468,30 @@ namespace unilab2023
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, J, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         pictureBox2.Refresh();
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
+                        resetStage("miss_tree");
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         break;
                     }
                     if(Global.count_walk > 50) //無限ループ対策
                     {
-                        move_copy.Clear();
-                        label6.Visible = true;
-                        Thread.Sleep(300);
-                        //label6.Visible = false;
-                        Global.miss_count += 1;
-                        label5.Text = Global.miss_count.ToString();
+                        resetStage("miss_countover");
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         break;
                     }
                 }
                 else
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
+                    g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     break;
                 }
-
 
                 //jumpでない時移動先が木の場合、木の方向には進めない
                 if (!jump && Map[y + move_copy[0][1], x + move_copy[0][0]] == 8)
                 {
-                    character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                    character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count_walk, jump, character_me);
                     g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     //move_copy[0] = new int[] { 0, 0 };
                     move_copy.RemoveAt(0);
@@ -1238,11 +1512,11 @@ namespace unilab2023
                 g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                 //忍者の動きに合わせて向きが変わる
 
-                character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count_walk, jump, character_me);
                 g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 //Thread.Sleep(waittime);//マスの間に歩く差分を出そうとしたけど。。。
                 //g2.Clear(Color.Transparent);
-                //character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
+                //character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], stepCount, jump, character_me);
                 //g2.DrawImage(character_me, x * cell_length + move_copy[0][0] * cell_length / 2, y * cell_length + move_copy[0][1] * cell_length / 2, cell_length, cell_length);
 
 
@@ -1255,6 +1529,8 @@ namespace unilab2023
 
                 if (Map[y, x] == 101)
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
+                    g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     break;
                 }
 
@@ -1324,6 +1600,13 @@ namespace unilab2023
                 move_copy.RemoveAt(0);
                 if (move_copy.Count == 0)//動作がすべて終了した場合
                 {
+                    if(Global.x_now != Global.x_goal || Global.y_now != Global.y_goal)
+                    {
+                        resetStage("miss_end");
+                        Thread.Sleep(300);
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                    }
                     break;
                 }
 
@@ -1504,63 +1787,6 @@ namespace unilab2023
             conversation();
         }
 
-        private void listBox1_DoubleClick(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedItem != null)
-            {
-                string command = listBox1.SelectedItem.ToString();
-
-                if (command.StartsWith("for"))
-                {
-                    string str_num = Regex.Replace(command, @"[^0-9]", "");
-                    int num = int.Parse(str_num);
-
-                    int id = listBox1.SelectedIndex;
-                    listBox1.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
-
-                    listBox1.Refresh();
-                }
-            }
-        }
-
-        private void listBox3_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listBox3.SelectedItem != null)
-            {
-                string command = listBox3.SelectedItem.ToString();
-
-                if (command.StartsWith("for"))
-                {
-                    string str_num = Regex.Replace(command, @"[^0-9]", "");
-                    int num = int.Parse(str_num);
-
-                    int id = listBox3.SelectedIndex;
-                    listBox3.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
-
-                    listBox3.Refresh();
-                }
-            }
-        }
-
-        private void listBox4_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listBox4.SelectedItem != null)
-            {
-                string command = listBox4.SelectedItem.ToString();
-
-                if (command.StartsWith("for"))
-                {
-                    string str_num = Regex.Replace(command, @"[^0-9]", "");
-                    int num = int.Parse(str_num);
-
-                    int id = listBox4.SelectedIndex;
-                    listBox4.Items[id] = "for (" + (num % 9 + 1).ToString() + ")";
-
-                    listBox4.Refresh();
-                }
-            }
-        }
-
         /*******関数 fin******/
 
 
@@ -1622,14 +1848,17 @@ namespace unilab2023
 
         }
 
-        private void button5_Click(object sender, EventArgs e)//マップに戻るボタン
-        {
-            this.Close();
-        }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (Global.hint != null) 
+            {
+                DisplayImageAndTextOnPictureBox(pictureBox3, Global.hint_character, Global.hint);
+            }
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)

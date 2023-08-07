@@ -20,15 +20,199 @@ namespace unilab2023
 
         }
 
+        private string _stageName;
+        public string stageName
+        {
+            get { return _stageName; }
+            set { _stageName = value; }
+        }
+
+
+
         private void ステージ選択画面_Load(object sender, EventArgs e)
         {
+            // initialize
+            button3.Visible = false;
+            button4.Visible = false;
+            button1.Visible = false;
+            button7.Visible = false;
+            button6.Visible = false;
+            button5.Visible = false;
+            button16.Visible = false;
+            button15.Visible = false;
+            button14.Visible = false;
+            button10.Visible = false;
+            button9.Visible = false;
+            button8.Visible = false;
+            button13.Visible = false;
+            button12.Visible = false;
+            button11.Visible = false;
 
+            // stage locked
+            switch (stageName)
+            {
+                case "stage1-1":
+                    button3.Visible = true;
+                    break;
+                case "stage1-2":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    break;
+                case "stage1-3":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    break;
+                case "stage1-4":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    break;
+
+                case "stage2-1":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    break;
+                case "stage2-2":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    break;
+                case "stage2-3":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    break;
+
+                case "stage3-1":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    break;
+                case "stage3-2":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    button14.Visible = true;
+                    break;
+                case "stage3-3":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    button14.Visible = true;
+                    button10.Visible = true;
+                    break;
+
+                case "stage4-1":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    button14.Visible = true;
+                    button10.Visible = true;
+                    button9.Visible = true;
+                    break;
+                case "stage4-2":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    button14.Visible = true;
+                    button10.Visible = true;
+                    button9.Visible = true;
+                    button8.Visible = true;
+                    break;
+                case "stage4-3":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    button14.Visible = true;
+                    button10.Visible = true;
+                    button9.Visible = true;
+                    button8.Visible = true;
+                    button13.Visible = true;
+                    break;
+
+                case "stage5-1":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    button14.Visible = true;
+                    button10.Visible = true;
+                    button9.Visible = true;
+                    button8.Visible = true;
+                    button13.Visible = true;
+                    button12.Visible = true;
+                    break;
+                case "stage5-2":
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button1.Visible = true;
+                    button7.Visible = true;
+                    button6.Visible = true;
+                    button5.Visible = true;
+                    button16.Visible = true;
+                    button15.Visible = true;
+                    button14.Visible = true;
+                    button10.Visible = true;
+                    button9.Visible = true;
+                    button8.Visible = true;
+                    button13.Visible = true;
+                    button12.Visible = true;
+                    button11.Visible = true;
+                    break;
+            }
         }
         
         private void createForm1(string selectedStageName)
         {
             Form1 form1 = new Form1();
             form1.stageName = selectedStageName;
+            this.Close();
             form1.Show();
         }
 
@@ -40,7 +224,7 @@ namespace unilab2023
 
         private void groupBox1_Enter(object sender, EventArgs e)//1面たぬきの里
         {
-
+           
         }
 
         private void button2_Click(object sender, EventArgs e)//stage1-1
@@ -145,5 +329,20 @@ namespace unilab2023
             createForm1("stage5-3");
         }
 
+        private void ステージ選択画面_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void ステージ選択画面_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.M)
+            {
+                this.Close();
+                ステージ選択画面 form2 = new ステージ選択画面();
+                form2.stageName = "stage5-2";
+                form2.Show();
+            }
+        }
     }
 }

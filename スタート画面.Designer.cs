@@ -38,10 +38,10 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.button1.Font = new System.Drawing.Font("游明朝", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(880, 900);
+            this.button1.Location = new System.Drawing.Point(880, 870);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(309, 116);
+            this.button1.Size = new System.Drawing.Size(300, 115);
             this.button1.TabIndex = 1;
             this.button1.Text = "はじめる";
             this.button1.UseVisualStyleBackColor = false;
@@ -62,7 +62,7 @@
             // 
             this.button2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.button2.Font = new System.Drawing.Font("游明朝", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button2.Location = new System.Drawing.Point(1514, 616);
+            this.button2.Location = new System.Drawing.Point(1700, 900);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(248, 60);
