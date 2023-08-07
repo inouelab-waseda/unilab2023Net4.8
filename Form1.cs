@@ -173,7 +173,7 @@ namespace unilab2023
         public void Form1_Load(object sender, EventArgs e)
         {
             button5.Visible = false;
-            _stageName = "stage1-1";
+            //_stageName = "stage2-3";
 
             Global.map = CreateStage(stageName); //ステージ作成
 
@@ -805,12 +805,18 @@ namespace unilab2023
 
             int cell_length = pictureBox1.Width / 12;
 
+            for(int y = 1; y < 11; y++)
+            {
+                for(int x = 1; x < 11; x++)
+                {
+                    g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
+                }
+            }
+
             for (int y = 0; y < 12; y++)
             {
                 for (int x = 0; x < 12; x++)
                 {
-                    g1.DrawImage(img_way, x * cell_length, y * cell_length, cell_length, cell_length);
-
                     switch (map[y, x])
                     {
                         case 0:
@@ -1420,10 +1426,7 @@ namespace unilab2023
                         x += move_copy[0][0];
                         y += move_copy[0][1];
                         g2.Clear(Color.Transparent);
-                        if (move_copy[0][0] == -1)      character_me = Image.FromFile("忍者_左面.png");
-                        else if(move_copy[0][0] == 1)   character_me = Image.FromFile("忍者_右面.png");
-                        if (move_copy[0][1] == -1)      character_me = Image.FromFile("忍者_背面.png");
-                        else if (move_copy[0][1] == 1)  character_me = Image.FromFile("忍者_正面.png");
+                        character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         //ステージごとにゴールのキャラを変えたい
                         g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
@@ -1435,6 +1438,8 @@ namespace unilab2023
                             pictureBox2.Refresh();
                         });
                         resetStage("miss_out");
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         break;
                     }
                     if (jump && Map[y + move_copy[0][1] * 2, x + move_copy[0][0] * 2] == 8) //jumpの時着地先が木の場合、ゲームオーバー
@@ -1464,16 +1469,22 @@ namespace unilab2023
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         pictureBox2.Refresh();
                         resetStage("miss_tree");
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         break;
                     }
                     if(Global.count_walk > 50) //無限ループ対策
                     {
                         resetStage("miss_countover");
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         break;
                     }
                 }
                 else
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
+                    g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     break;
                 }
 
@@ -1518,6 +1529,8 @@ namespace unilab2023
 
                 if (Map[y, x] == 101)
                 {
+                    character_me = Image.FromFile("忍者_正面.png");
+                    g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     break;
                 }
 
@@ -1591,6 +1604,8 @@ namespace unilab2023
                     {
                         resetStage("miss_end");
                         Thread.Sleep(300);
+                        character_me = Image.FromFile("忍者_正面.png");
+                        g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                     }
                     break;
                 }
