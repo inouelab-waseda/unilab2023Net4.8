@@ -73,6 +73,16 @@ namespace unilab2023.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap あやかしの山 {
+            get {
+                object obj = ResourceManager.GetObject("あやかしの山", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap きつねの村 {
             get {
                 object obj = ResourceManager.GetObject("きつねの村", resourceCulture);
