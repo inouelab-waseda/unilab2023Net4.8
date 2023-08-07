@@ -80,7 +80,6 @@
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button11.Font = new System.Drawing.Font("游明朝", 18F);
             this.button11.Location = new System.Drawing.Point(312, 166);
-            this.button11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(128, 53);
             this.button11.TabIndex = 5;
@@ -94,7 +93,6 @@
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button12.Font = new System.Drawing.Font("游明朝", 18F);
             this.button12.Location = new System.Drawing.Point(154, 165);
-            this.button12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(136, 52);
             this.button12.TabIndex = 4;
@@ -108,7 +106,6 @@
             this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button13.Font = new System.Drawing.Font("游明朝", 18F);
             this.button13.Location = new System.Drawing.Point(0, 166);
-            this.button13.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(136, 51);
             this.button13.TabIndex = 3;

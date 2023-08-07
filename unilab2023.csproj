@@ -139,6 +139,7 @@
     <Content Include="bin\Debug\たぬき2.png" />
     <Content Include="bin\Debug\ふくろう.png" />
     <Content Include="bin\Debug\キャラ_唐傘一反.png" />
+    <Content Include="bin\Debug\マップ_巻物.png" />
     <Content Include="bin\Debug\マップ_雲_上.png" />
     <Content Include="bin\Debug\マップ_雲_下.png" />
     <Content Include="bin\Debug\マップ_雲_右.png" />
@@ -165,6 +166,7 @@
     <None Include="Resources\きつねの村.png" />
     <None Include="Resources\あやかしの山.png" />
     <None Include="Resources\わせ忍_背景.png" />
+    <None Include="Resources\わせ忍_背景_薄暗.png" />
     <Content Include="Resources\ボタン枠140_65.png" />
     <None Include="Resources\ボタン枠140_651.png" />
   </ItemGroup>

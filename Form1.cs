@@ -88,6 +88,36 @@ namespace unilab2023
 
             return bmp;
         }
+        //ゴールのキャラを返す関数
+        public Image goal_obj(string _stageName)
+        {
+            switch (_stageName)
+            {
+                case "stage1-2":
+                    return img_otomo[0];
+                case "stage1-4":
+                    return character_enemy[0];
+                case "stage2-2":
+                    return img_otomo[1];
+                case "stage2-3":
+                    return character_enemy[1];
+                case "stage3-2":
+                    return img_otomo[2];
+                case "stage3-3":
+                    return character_enemy[2];
+                case "stage4-2":
+                    return img_otomo[3];
+                case "stage4-3":
+                    return character_enemy[3];
+                case "stage5-1":
+                    return character_enemy[4];
+                case "stage5-2":
+                    return character_enemy[4];
+                case "stage5-3":
+                    return character_enemy[5];
+            }
+            return Image.FromFile("マップ_巻物.png");
+        }
 
         //MemoryStream stream = new MemoryStream();
         //byte[] bytes = File.ReadAllBytes("右.gif");
@@ -301,8 +331,8 @@ namespace unilab2023
             //for文をステージ1-1,1-2で消す
             if(stageName == "stage1-1" || stageName == "stage1-2")
             {
-                listBox2.Items.Remove("for (1)");
-                listBox2.Items.Remove("endfor");
+                listBox2.Items.Remove("連チャンの術 (1)");
+                listBox2.Items.Remove("連チャンの術おわり");
             }
 
             //ストーリー強制視聴
@@ -467,7 +497,8 @@ namespace unilab2023
                 int cell_length = pictureBox1.Width / 12;
                 character_me = Image.FromFile("忍者_正面.png");
                 g2.DrawImage(character_me, Global.x_now * cell_length - extra_length, Global.y_now * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
-                g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+
+                g2.DrawImage(goal_obj(_stageName), Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 this.Invoke((MethodInvoker)delegate
                 {
                     // pictureBox2を同期的にRefreshする
@@ -885,7 +916,7 @@ namespace unilab2023
                         case 101:
                             g1.FillRectangle(goalBackgroundColor, x * cell_length, y * cell_length, cell_length, cell_length);
                             //ステージごとにゴールのキャラを変えたい
-                            g2.DrawImage(character_enemy[5], x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
+                            g2.DrawImage(goal_obj(_stageName), x * cell_length - extra_length, y * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                             Global.x_goal = x;
                             Global.y_goal = y;
                             break;
@@ -1429,7 +1460,7 @@ namespace unilab2023
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                         //ステージごとにゴールのキャラを変えたい
-                        g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
+                        g2.DrawImage(goal_obj(_stageName), Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
                 
                         //pictureBoxの中身を塗り替える
                         this.Invoke((MethodInvoker)delegate
@@ -1509,7 +1540,7 @@ namespace unilab2023
 
                 g2.Clear(Color.Transparent);
                 //ステージごとにゴールのキャラを変えたい
-                g2.DrawImage(character_enemy[5], Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
+                g2.DrawImage(goal_obj(_stageName), Global.x_goal * cell_length - extra_length, Global.y_goal * cell_length - 2*extra_length, cell_length + 2*extra_length, cell_length + 2*extra_length);
                 //忍者の動きに合わせて向きが変わる
 
                 character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count_walk, jump, character_me);
