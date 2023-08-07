@@ -394,8 +394,8 @@ namespace unilab2023
             Global.count += 1;
             if (Global.x_goal == Global.x_now && Global.y_goal == Global.y_now)
             {
-                label6.Text = "クリア！！";
-                label6.Visible = true;
+                label1.Text = "クリア！！";
+                label1.Visible = true;
                 button5.Visible = true;
             }
             else
@@ -1859,6 +1859,11 @@ namespace unilab2023
             {
                 DisplayImageAndTextOnPictureBox(pictureBox3, Global.hint_character, Global.hint);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
