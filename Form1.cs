@@ -189,6 +189,7 @@ namespace unilab2023
 
             public static string hint;
             public static string hint_character;
+            public static string hint_name;
 
             public static List<Conversation> Conversations = new List<Conversation>();  //会話文を入れるリスト
         }
@@ -275,6 +276,10 @@ namespace unilab2023
                 listBox5.Visible = false;
             }
 
+            Global.hint = null;
+            Global.hint_character = null;
+            Global.hint_name = null;
+
             // CSVから読み込んだテキストを設定します。
             using (StreamReader sr = new StreamReader($"hint.csv"))
             {
@@ -288,6 +293,7 @@ namespace unilab2023
                     {
                         Global.hint_character = values[1];
                         Global.hint = values[2];
+                        Global.hint_name = values[3];
                         break;
                     }
                 }
@@ -638,6 +644,7 @@ namespace unilab2023
             g.DrawString(text, fnt, Brushes.Black, bmp.Height + sp, 0 + sp);
 
             pictureBox.Image = bmp;
+            textBox3.Text = Global.hint_name;
 
 
             g.Dispose();
