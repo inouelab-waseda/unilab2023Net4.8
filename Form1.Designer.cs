@@ -191,10 +191,10 @@
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox3.Location = new System.Drawing.Point(191, 906);
+            this.pictureBox3.Location = new System.Drawing.Point(92, 906);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(818, 61);
+            this.pictureBox3.Size = new System.Drawing.Size(914, 61);
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
@@ -204,7 +204,7 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.Info;
             this.button1.Font = new System.Drawing.Font("游明朝", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1156, 898);
+            this.button1.Location = new System.Drawing.Point(1347, 894);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(172, 61);
@@ -231,7 +231,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1369, 919);
+            this.button6.Location = new System.Drawing.Point(1559, 908);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(120, 40);
@@ -281,7 +281,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("游明朝", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button5.Location = new System.Drawing.Point(1156, 898);
+            this.button5.Location = new System.Drawing.Point(1347, 894);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(167, 58);
@@ -295,7 +295,7 @@
             this.textBox3.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Font = new System.Drawing.Font("ＭＳ 明朝", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox3.Location = new System.Drawing.Point(191, 887);
+            this.textBox3.Location = new System.Drawing.Point(92, 887);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(67, 15);
@@ -317,7 +317,7 @@
             // 
             this.button8.BackColor = System.Drawing.SystemColors.Info;
             this.button8.Font = new System.Drawing.Font("UD デジタル 教科書体 N-B", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button8.Location = new System.Drawing.Point(43, 889);
+            this.button8.Location = new System.Drawing.Point(1044, 894);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(126, 80);
             this.button8.TabIndex = 21;
