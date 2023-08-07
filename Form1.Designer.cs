@@ -191,10 +191,10 @@
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox3.Location = new System.Drawing.Point(92, 906);
+            this.pictureBox3.Location = new System.Drawing.Point(81, 906);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(914, 61);
+            this.pictureBox3.Size = new System.Drawing.Size(957, 61);
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
@@ -317,7 +317,7 @@
             // 
             this.button8.BackColor = System.Drawing.SystemColors.Info;
             this.button8.Font = new System.Drawing.Font("UD デジタル 教科書体 N-B", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button8.Location = new System.Drawing.Point(1044, 894);
+            this.button8.Location = new System.Drawing.Point(1077, 890);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(126, 80);
             this.button8.TabIndex = 21;
