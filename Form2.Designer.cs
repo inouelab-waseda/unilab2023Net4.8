@@ -93,7 +93,7 @@
             this.button12.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button12.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button12.Location = new System.Drawing.Point(91, 167);
+            this.button12.Location = new System.Drawing.Point(91, 166);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(136, 52);
             this.button12.TabIndex = 4;
@@ -257,7 +257,7 @@
             this.button5.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button5.Location = new System.Drawing.Point(186, 184);
+            this.button5.Location = new System.Drawing.Point(187, 168);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(138, 48);
@@ -271,7 +271,7 @@
             this.button6.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button6.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button6.Location = new System.Drawing.Point(289, 184);
+            this.button6.Location = new System.Drawing.Point(287, 165);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(138, 51);
@@ -285,7 +285,7 @@
             this.button7.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button7.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button7.Location = new System.Drawing.Point(89, 184);
+            this.button7.Location = new System.Drawing.Point(89, 165);
             this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(138, 51);
