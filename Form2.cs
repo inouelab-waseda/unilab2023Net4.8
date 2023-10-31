@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace unilab2023
 {
+
+
+
     public partial class ステージ選択画面 : Form
     {
         string selectedStageName;
@@ -48,26 +51,75 @@ namespace unilab2023
             button12.Visible = false;
             button11.Visible = false;
 
+            button3.Enabled = false;
+            button4.Enabled = false;
+            button1.Enabled = false;
+            button7.Enabled = false;
+            button6.Enabled = false;
+            button5.Enabled = false;
+            button16.Enabled = false;
+            button15.Enabled = false;
+            button14.Enabled = false;
+            button10.Enabled = false;
+            button9.Enabled = false;
+            button8.Enabled = false;
+            button13.Enabled = false;
+            button12.Enabled = false;
+            button11.Enabled = false;
+
             // stage locked
             switch (stageName)
             {
+                case "裏stage":
+                    button2.Visible = false;
+                    button1.Visible = true; //1-4
+                    button5.Visible = true; //2-3
+                    button14.Visible = true; //3-3
+                    button8.Visible = true; //4-3
+                    button12.Visible = true; //5-2
+                    button11.Visible = true; //5-3
+
+                    button2.Enabled = false;
+                    button1.Enabled = true; //1-4
+                    button5.Enabled = true; //2-3
+                    button14.Enabled = true; //3-3
+                    button8.Enabled = true; //4-3
+                    button12.Enabled = true; //5-2
+                    button11.Enabled = true; //5-3
+                    button17.Text = "表ステージへ";
+                    break;
+
                 case "stage1-1":
                     button3.Visible = true;
+
+                    button3.Enabled = true;
                     break;
                 case "stage1-2":
                     button3.Visible = true;
                     button4.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
                     break;
                 case "stage1-3":
                     button3.Visible = true;
                     button4.Visible = true;
                     button1.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
                     break;
                 case "stage1-4":
                     button3.Visible = true;
                     button4.Visible = true;
                     button1.Visible = true;
                     button7.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
                     break;
 
                 case "stage2-1":
@@ -76,6 +128,12 @@ namespace unilab2023
                     button1.Visible = true;
                     button7.Visible = true;
                     button6.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
                     break;
                 case "stage2-2":
                     button3.Visible = true;
@@ -84,6 +142,13 @@ namespace unilab2023
                     button7.Visible = true;
                     button6.Visible = true;
                     button5.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
                     break;
                 case "stage2-3":
                     button3.Visible = true;
@@ -93,6 +158,14 @@ namespace unilab2023
                     button6.Visible = true;
                     button5.Visible = true;
                     button16.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
                     break;
 
                 case "stage3-1":
@@ -104,6 +177,15 @@ namespace unilab2023
                     button5.Visible = true;
                     button16.Visible = true;
                     button15.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
                     break;
                 case "stage3-2":
                     button3.Visible = true;
@@ -115,7 +197,19 @@ namespace unilab2023
                     button16.Visible = true;
                     button15.Visible = true;
                     button14.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
                     break;
+
+
                 case "stage3-3":
                     button3.Visible = true;
                     button4.Visible = true;
@@ -127,6 +221,17 @@ namespace unilab2023
                     button15.Visible = true;
                     button14.Visible = true;
                     button10.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
                     break;
 
                 case "stage4-1":
@@ -141,6 +246,18 @@ namespace unilab2023
                     button14.Visible = true;
                     button10.Visible = true;
                     button9.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
                     break;
                 case "stage4-2":
                     button3.Visible = true;
@@ -155,6 +272,19 @@ namespace unilab2023
                     button10.Visible = true;
                     button9.Visible = true;
                     button8.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    button8.Enabled = true;
                     break;
                 case "stage4-3":
                     button3.Visible = true;
@@ -170,6 +300,20 @@ namespace unilab2023
                     button9.Visible = true;
                     button8.Visible = true;
                     button13.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    button8.Enabled = true;
+                    button13.Enabled = true;
                     break;
 
                 case "stage5-1":
@@ -187,23 +331,54 @@ namespace unilab2023
                     button8.Visible = true;
                     button13.Visible = true;
                     button12.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    button8.Enabled = true;
+                    button13.Enabled = true;
+                    button12.Enabled = true;
                     break;
                 case "stage5-2":
                     button3.Visible = true;
                     button4.Visible = true;
-                    button1.Visible = true;
+                    //button1.Visible = true;
                     button7.Visible = true;
                     button6.Visible = true;
-                    button5.Visible = true;
+                    //button5.Visible = true;
                     button16.Visible = true;
                     button15.Visible = true;
-                    button14.Visible = true;
+                    //button14.Visible = true;
                     button10.Visible = true;
                     button9.Visible = true;
-                    button8.Visible = true;
+                    //button8.Visible = true;
                     button13.Visible = true;
-                    button12.Visible = true;
-                    button11.Visible = true;
+                    //button12.Visible = true;
+                    //button11.Visible = true;
+
+                    button3.Enabled = true;
+                    button4.Enabled = true;
+                    //button1.Enabled = true;
+                    button7.Enabled = true;
+                    button6.Enabled = true;
+                    //button5.Enabled = true;
+                    button16.Enabled = true;
+                    button15.Enabled = true;
+                    //button14.Enabled = true;
+                    button10.Enabled = true;
+                    button9.Enabled = true;
+                    //button8.Enabled = true;
+                    button13.Enabled = true;
+                    //button12.Enabled = true;
+                    //button11.Enabled = true;
                     break;
             }
         }
@@ -337,6 +512,24 @@ namespace unilab2023
         private void ステージ選択画面_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.M)
+            {
+                this.Close();
+                ステージ選択画面 form2 = new ステージ選択画面();
+                form2.stageName = "stage5-2";
+                form2.Show();
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (button17.Text == "裏ステージへ")
+            {
+                this.Close();
+                ステージ選択画面 form2 = new ステージ選択画面();
+                form2.stageName = "裏stage";
+                form2.Show();
+            }
+            else
             {
                 this.Close();
                 ステージ選択画面 form2 = new ステージ選択画面();
