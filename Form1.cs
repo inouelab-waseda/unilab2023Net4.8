@@ -634,7 +634,7 @@ namespace unilab2023
             Bitmap bmp = new Bitmap(pictureBox3.Width, pictureBox3.Height);
             Graphics g = Graphics.FromImage(bmp);
 
-            Font fnt = new Font("MS UI Gothic", 15);
+            Font fnt = new Font("游明朝", 20);
             int sp = 8;
 
             g.DrawImage(img, 0, 0, bmp.Height - 1, bmp.Height - 1);
