@@ -448,7 +448,14 @@ namespace unilab2023
             if (type == "quit")
             {
                 ステージ選択画面 form2 = new ステージ選択画面();
-                form2.stageName = "stage5-2";
+                if ((stageName == "stage1-4") || (stageName == "stage2-3") || (stageName == "stage3-3") || (stageName == "stage4-3") || (stageName == "stage5-2") || (stageName == "stage5-3"))
+                {
+                    form2.stageName = "裏stage";
+                }
+                else
+                {
+                    form2.stageName = "stage5-2";
+                }
                 form2.Show();
                 this.Close();
                 return;
