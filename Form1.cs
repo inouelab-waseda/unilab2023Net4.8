@@ -518,6 +518,8 @@ namespace unilab2023
                 Global.count = 0;
                 Global.miss_count = 0;
                 label6.Text = "ミス！";
+                label6.Visible = false;
+                label1.Visible = false;
             }
         }
 
