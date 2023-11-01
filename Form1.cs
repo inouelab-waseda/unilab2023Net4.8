@@ -203,7 +203,7 @@ namespace unilab2023
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            button5.Visible = false;
+            //button5.Visible = false;
             //_stageName = "stage2-3";
 
             Global.map = CreateStage(stageName); //ステージ作成
@@ -255,7 +255,7 @@ namespace unilab2023
             if (height_LB1 == 1)
             {
                 listBox1.Visible = false;
-                textBox1.Visible = false;
+                label4.Visible = false;
                 listBox5.Items.Remove("A");
                 button2.Visible = false;
                 button2.Enabled = false;
@@ -265,7 +265,7 @@ namespace unilab2023
             if (height_LB3 == 1)
             {
                 listBox3.Visible = false;
-                textBox2.Visible = false;
+                label5.Visible = false;
                 listBox5.Items.Remove("B");
                 button3.Visible = false;
                 button3.Enabled = false;
@@ -644,7 +644,7 @@ namespace unilab2023
             g.DrawString(text, fnt, Brushes.Black, bmp.Height + sp, 0 + sp);
 
             pictureBox.Image = bmp;
-            textBox3.Text = Global.hint_name;
+            label2.Text = Global.hint_name;
 
 
             g.Dispose();
@@ -1778,14 +1778,14 @@ namespace unilab2023
             Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
             Graphics g3 = Graphics.FromImage(bmp3);
 
-            Font fnt = new Font("MS UI Gothic", 15);
+            Font fnt = new Font("游明朝", 20);
             int sp = 8;
 
             g3.DrawImage(Draw_Icon(Global.Conversations[conversationCounter].character), 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             if (visible)
             {
-                textBox3.Text = Global.Conversations[conversationCounter].character;
+                label2.Text = Global.Conversations[conversationCounter].character;
                 g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
                 g3.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
 
@@ -1900,6 +1900,16 @@ namespace unilab2023
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }

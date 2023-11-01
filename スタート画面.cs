@@ -149,7 +149,7 @@ namespace unilab2023
             Graphics g1 = Graphics.FromImage(bmp1);
 
             Pen pen = new Pen(Color.FromArgb(100, 255, 100), 2);
-            Font fnt = new Font("游明朝", 20);
+            Font fnt = new Font("游明朝", 33);
             int sp = 5;
 
             int face = 100;
