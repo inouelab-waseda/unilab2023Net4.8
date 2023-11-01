@@ -224,12 +224,18 @@ namespace unilab2023
             }
             
         }
-
+        private void createForm1(string selectedStageName)
+        {
+            Form1 form1 = new Form1();
+            form1.stageName = selectedStageName;
+            //this.Close();
+            form1.Show();
+        }
         private void button2_Click(object sender, EventArgs e)
         {
-
-            ステージ選択画面 form2 = new ステージ選択画面();
-            form2.Show();
+            //ステージ選択画面 form2 = new ステージ選択画面();
+            //form2.Show();
+            createForm1("stage1-1");
         }
 
         /* button fin */
