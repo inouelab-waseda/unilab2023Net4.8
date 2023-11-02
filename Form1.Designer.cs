@@ -367,7 +367,7 @@
             this.label7.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.label7.Font = new System.Drawing.Font("游明朝", 37F);
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(1047, 83);
+            this.label7.Location = new System.Drawing.Point(1030, 80);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(890, 682);
             this.label7.TabIndex = 28;
