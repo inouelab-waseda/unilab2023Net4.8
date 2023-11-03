@@ -205,11 +205,11 @@ namespace unilab2023
             bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             bmp2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
             bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-            bmp4 = new Bitmap(pictureBox4.Width, pictureBox4.Height);
+            //bmp4 = new Bitmap(pictureBox4.Width, pictureBox4.Height);
             pictureBox1.Image = bmp1;
             pictureBox2.Image = bmp2;
             pictureBox3.Image = bmp3;
-            pictureBox4.Image = bmp4;
+            //pictureBox4.Image = bmp4;
             this.Load += Form1_Load;
         }
 
