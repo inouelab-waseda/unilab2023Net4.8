@@ -30,6 +30,13 @@ namespace unilab2023
             set { _stageName = value; }
         }
 
+        private bool[] _stageClear=new bool[16];//ステージをクリアしたか
+        public bool[] stageClear
+        {
+            get { return _stageClear; }
+            set { _stageClear = value; }
+        }
+
 
 
         private void ステージ選択画面_Load(object sender, EventArgs e)
