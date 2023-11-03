@@ -189,7 +189,7 @@ namespace unilab2023
             else
             {
                 button1.Enabled = true;
-                button2.Text = "次へ";
+                button2.Text = "はじめる";
                 return;
             }
         }

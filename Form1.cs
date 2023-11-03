@@ -18,7 +18,7 @@ namespace unilab2023
 {
     public partial class Form1 : Form
     {
-        Bitmap bmp1, bmp2, bmp3;
+        Bitmap bmp1, bmp2, bmp3, bmp4;
 
         Brush goalBackgroundColor = new SolidBrush(Color.Yellow);
         Brush startBackgroundColor = new SolidBrush(Color.Blue);
@@ -40,6 +40,7 @@ namespace unilab2023
             Image.FromFile("キャラ_ヤマタノオロチ.png")
         };
 
+        Image img_maki = Image.FromFile("マップ_巻物.png");
         Image img_way = Image.FromFile("マップ_草原.png");
         Image img_noway = Image.FromFile("マップ_岩場.png");
         Image img_ice = Image.FromFile("マップ_氷.png");
@@ -82,6 +83,8 @@ namespace unilab2023
 
                 case "ヤマタノオロチ":
                     return character_enemy[5];
+                case "ナレ":
+                    return img_maki;
             }
             Bitmap bmp = new Bitmap(1, 1);
             bmp.SetPixel(0, 0, Color.White);
@@ -93,7 +96,7 @@ namespace unilab2023
         {
             switch (_stageName)
             {
-                case "stage1-2":
+                case "stage1-3":
                     return img_otomo[0];
                 case "stage1-4":
                     return character_enemy[0];
@@ -110,13 +113,12 @@ namespace unilab2023
                 case "stage4-3":
                     return character_enemy[3];
                 case "stage5-1":
-                    return character_enemy[4];
-                case "stage5-2":
-                    return character_enemy[4];
-                case "stage5-3":
                     return character_enemy[5];
+                case "stage5-2":
+                case "stage5-3":
+                    return character_enemy[4];
             }
-            return Image.FromFile("マップ_巻物.png");
+            return img_maki;
         }
 
         //MemoryStream stream = new MemoryStream();
@@ -124,19 +126,63 @@ namespace unilab2023
         //stream.Write(bytes, 0, bytes.Length);
         //Bitmap animatedImage_right = new Bitmap(stream);
 
-            //アニメ開始
-            //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
-            //DoubleBuffered = true;
+        //アニメ開始
+        //ImageAnimator.Animate(animatedImage_right, Image_FrameChanged);
+        //DoubleBuffered = true;
 
 
-            //ステージ名の受け渡し
+        //ステージ名の受け渡し
         private string _stageName;
         public string stageName
         {
             get { return _stageName; }
             set { _stageName = value; }
         }
-
+        //private bool[] _stageClear=new bool[16];//ステージを1度クリアしたかどうか
+        //public bool[] stageClear
+        //{
+        //    get { return _stageClear; }
+        //    set { _stageClear = value; }
+        //}
+        //public int Name2Number(string _stageName)//ステージ名から番号に変換
+        //{
+        //    switch (_stageName)
+        //    {
+        //        case "stage1-1"://チュートリアル
+        //            return 0;
+        //        case "stage1-2":
+        //            return 1;
+        //        case "stage1-3"://たぬき
+        //            return 2;
+        //        case "stage1-4"://一つ目小僧
+        //            return 3;
+        //        case "stage2-1":
+        //            return 4;
+        //        case "stage2-2"://きつね
+        //            return 5;
+        //        case "stage2-3"://唐傘一反
+        //            return 6;
+        //        case "stage3-1":
+        //            return 7;
+        //        case "stage3-2"://あざらし
+        //            return 8;
+        //        case "stage3-3"://カッパ
+        //            return 9;
+        //        case "stage4-1":
+        //            return 10;
+        //        case "stage4-2"://ふくろう
+        //            return 11;
+        //        case "stage4-3"://てんぐ
+        //            return 12;
+        //        case "stage5-1"://ヤマタノオロチ
+        //            return 13;
+        //        case "stage5-2"://鬼
+        //            return 14;
+        //        case "stage5-3"://鬼
+        //            return 15;
+        //    }
+        //    return 1;
+        //}
 
         //おとも状況受け渡し
         private static bool[] _stageClear = new bool[4]; //たぬき、きつね、あざらし、フクロウ
@@ -168,9 +214,11 @@ namespace unilab2023
             bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             bmp2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
             bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            //bmp4 = new Bitmap(pictureBox4.Width, pictureBox4.Height);
             pictureBox1.Image = bmp1;
             pictureBox2.Image = bmp2;
             pictureBox3.Image = bmp3;
+            //pictureBox4.Image = bmp4;
             this.Load += Form1_Load;
         }
 
@@ -214,7 +262,6 @@ namespace unilab2023
         {
             //button5.Visible = false;
             //_stageName = "stage2-3";
-
             Global.map = CreateStage(stageName); //ステージ作成
 
             string str_num = Regex.Replace(stageName, @"[^0-9]", "");
@@ -344,6 +391,11 @@ namespace unilab2023
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             g3.Dispose();
 
+            //チュートリアルステージでは、マップに戻るボタンを消す。ゴールしたら見える
+            if(stageName == "stage1-1")
+            {
+                button5.Visible = false;
+            }
             //for文をステージ1-1,1-2で消す
             if(stageName == "stage1-1" || stageName == "stage1-2")
             {
@@ -459,6 +511,8 @@ namespace unilab2023
                 resetStage("miss");
             }
         }
+
+        
 
         // 枠からはみ出す大きさ
         int extra_length = 7;
@@ -698,7 +752,7 @@ namespace unilab2023
             g.DrawString(text, fnt, Brushes.Black, bmp.Height + sp, 0 + sp);
 
             pictureBox.Image = bmp;
-            label2.Text = Global.hint_name;
+            //label2.Text = Global.hint_name;
 
 
             g.Dispose();
@@ -1920,7 +1974,7 @@ namespace unilab2023
             g3.DrawRectangle(Pens.Black, 0, 0, bmp3.Height - 1, bmp3.Height - 1);
             if (visible)
             {
-                label2.Text = Global.Conversations[conversationCounter].character;
+                //label2.Text = Global.Conversations[conversationCounter].character;
                 g3.DrawRectangle(Pens.White, 100, 100, 100, 100);
                 g3.DrawString(Global.Conversations[conversationCounter].dialogue, fnt, Brushes.Black, bmp3.Height + sp, 0 + sp);
 
@@ -1982,6 +2036,32 @@ namespace unilab2023
             conversation();
         }
 
+        //public void OtomoDraw(bool[] stageClear)
+        //{
+        //    //    Graphics g1 = Graphics.FromImage(bmp1);
+        //    //g1.DrawImage(Image.FromFile("マップ_草原.png"), 0, 0, 190, 960);
+        //    Graphics g = Graphics.FromImage(bmp4);
+        //        g.DrawImage(img_maki, pictureBox4.Location.X, pictureBox4.Location.Y, 150, 150);
+        //    if (stageClear[2])
+        //    {
+        //        g.DrawImage(img_otomo[0], pictureBox4.Location.X, pictureBox4.Location.Y, 150, 150);
+        //    }
+        //    else
+        //    {
+        //    }
+        //    if (stageClear[5])
+        //    {
+        //        g.DrawImage(img_otomo[1], pictureBox4.Location.X+150, pictureBox4.Location.Y, 150, 150);
+        //    }
+        //    if (stageClear[8])
+        //    {
+        //        g.DrawImage(img_otomo[2], pictureBox4.Location.X, pictureBox4.Location.Y+150, 150, 150) ;
+        //    }
+        //    if (stageClear[11])
+        //    {
+        //        g.DrawImage(img_otomo[3], pictureBox4.Location.X+150, pictureBox4.Location.Y+150, 150, 150);
+        //    }
+        //}
         /*******関数 fin******/
 
 
