@@ -261,6 +261,7 @@ namespace unilab2023
             string file_name = "わせ忍" + num.ToString() + "章.csv";
 
             Global.Conversations = LoadConversation(file_name); //会話読み込み
+            
 
             // 1行文の高さ
             int ItemHeight = 20;
@@ -345,7 +346,7 @@ namespace unilab2023
                     }
                 }
             }
-            
+
             if (Global.hint == null)
             {
                 button8.Visible = false;
@@ -396,6 +397,8 @@ namespace unilab2023
             //ストーリー強制視聴
             listBox2.Enabled = false;
             listBox5.Enabled = false;
+            button1.Enabled = false;
+            button6.Enabled = false;
             drawConversation();
         }
 
@@ -484,7 +487,10 @@ namespace unilab2023
             {
                 label1.Text = "クリア！！";
                 label1.Visible = true;
+                button5.Enabled = false;
+                button6.Enabled = false;
                 button5.Visible = true;
+                label7.Visible = true;
             }
             else
             {
@@ -502,7 +508,14 @@ namespace unilab2023
             if (type == "quit")
             {
                 ステージ選択画面 form2 = new ステージ選択画面();
-                form2.stageName = "stage5-2";
+                if ((stageName == "stage1-4") || (stageName == "stage2-3") || (stageName == "stage3-3") || (stageName == "stage4-3") || (stageName == "stage5-2") || (stageName == "stage5-3"))
+                {
+                    form2.stageName = "裏stage";
+                }
+                else
+                {
+                    form2.stageName = "stage5-2";
+                }
                 form2.Show();
                 this.Close();
                 return;
@@ -572,6 +585,9 @@ namespace unilab2023
                 Global.count = 0;
                 Global.miss_count = 0;
                 label6.Text = "ミス！";
+                label6.Visible = false;
+                label1.Visible = false;
+                label7.Visible = false;
             }
         }
 
@@ -894,6 +910,8 @@ namespace unilab2023
 
             Graphics g1 = Graphics.FromImage(bmp1);
             Graphics g2 = Graphics.FromImage(bmp2);
+            label7.BackgroundImage = Image.FromFile("focus.png");
+            label7.BackgroundImageLayout = ImageLayout.Stretch;
 
             int cell_length = pictureBox1.Width / 12;
 
@@ -1823,10 +1841,17 @@ namespace unilab2023
                 //ストーリー強制視聴解除
                 listBox2.Enabled = true;
                 listBox5.Enabled = true;
-
+                label7.Visible = false;
+                button1.Enabled = true;
+                button6.Enabled = true;
+                button5.Enabled = true;
                 return;
             }
-            else if (play_num > 0) conversationCounter += 1;
+            else if (play_num > 0)
+            {
+                label7.Visible = true;
+                conversationCounter += 1;
+            }
 
             //描画準備
             Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
@@ -1854,8 +1879,12 @@ namespace unilab2023
                 //ストーリー強制視聴解除
                 if (Global.Conversations[conversationCounter].dialogue.IndexOf("play") > 0)
                 {
+                    label7.Visible = false;
                     listBox2.Enabled = true;
                     listBox5.Enabled = true;
+                    button1.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
                 }
             }
             else
