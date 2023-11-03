@@ -51,6 +51,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -361,13 +362,26 @@
             this.label5.Text = "Bの術";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.label7.Font = new System.Drawing.Font("游明朝", 37F);
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label7.Location = new System.Drawing.Point(1030, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(890, 682);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "             　　　　　　　　　　　　　　　　　　　　　　 まずは左下のストーリー　 を見てね！     　　　　　  　左下の画面にクリック　　 す" +
+    "るとストーリーが進　　 むよ！";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.YellowGreen;
+            this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1924, 1052);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -428,6 +442,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
     }
 }
 

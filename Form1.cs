@@ -527,6 +527,7 @@ namespace unilab2023
                 label6.Text = "ミス！";
                 label6.Visible = false;
                 label1.Visible = false;
+                label7.Visible = false;
             }
         }
 
@@ -849,6 +850,8 @@ namespace unilab2023
 
             Graphics g1 = Graphics.FromImage(bmp1);
             Graphics g2 = Graphics.FromImage(bmp2);
+            label7.BackgroundImage = Image.FromFile("focus.png");
+            label7.BackgroundImageLayout = ImageLayout.Stretch;
 
             int cell_length = pictureBox1.Width / 12;
 
@@ -1778,10 +1781,14 @@ namespace unilab2023
                 //ストーリー強制視聴解除
                 listBox2.Enabled = true;
                 listBox5.Enabled = true;
-
+                label7.Visible = false;
                 return;
             }
-            else if (play_num > 0) conversationCounter += 1;
+            else if (play_num > 0)
+            {
+                label7.Visible = true;
+                conversationCounter += 1;
+            }
 
             //描画準備
             Bitmap bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
@@ -1809,6 +1816,7 @@ namespace unilab2023
                 //ストーリー強制視聴解除
                 if (Global.Conversations[conversationCounter].dialogue.IndexOf("play") > 0)
                 {
+                    label7.Visible = false;
                     listBox2.Enabled = true;
                     listBox5.Enabled = true;
                 }
