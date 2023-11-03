@@ -214,6 +214,7 @@ namespace unilab2023
             string file_name = "わせ忍" + num.ToString() + "章.csv";
 
             Global.Conversations = LoadConversation(file_name); //会話読み込み
+            
 
             // 1行文の高さ
             int ItemHeight = 20;
@@ -298,7 +299,7 @@ namespace unilab2023
                     }
                 }
             }
-            
+
             if (Global.hint == null)
             {
                 button8.Visible = false;
@@ -344,6 +345,8 @@ namespace unilab2023
             //ストーリー強制視聴
             listBox2.Enabled = false;
             listBox5.Enabled = false;
+            button1.Enabled = false;
+            button6.Enabled = false;
             drawConversation();
         }
 
@@ -432,7 +435,10 @@ namespace unilab2023
             {
                 label1.Text = "クリア！！";
                 label1.Visible = true;
+                button5.Enabled = false;
+                button6.Enabled = false;
                 button5.Visible = true;
+                label7.Visible = true;
             }
             else
             {
@@ -1782,6 +1788,9 @@ namespace unilab2023
                 listBox2.Enabled = true;
                 listBox5.Enabled = true;
                 label7.Visible = false;
+                button1.Enabled = true;
+                button6.Enabled = true;
+                button5.Enabled = true;
                 return;
             }
             else if (play_num > 0)
@@ -1819,6 +1828,9 @@ namespace unilab2023
                     label7.Visible = false;
                     listBox2.Enabled = true;
                     listBox5.Enabled = true;
+                    button1.Enabled = true;
+                    button6.Enabled = true;
+                    button5.Enabled = true;
                 }
             }
             else
