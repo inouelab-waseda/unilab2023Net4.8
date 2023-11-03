@@ -138,6 +138,15 @@ namespace unilab2023
         }
 
 
+        //おとも状況受け渡し
+        private static bool[] _stageClear = new bool[4]; //たぬき、きつね、あざらし、フクロウ
+        public bool[] stageClear
+        {
+            get { return _stageClear; }
+            set { _stageClear = value; }
+        }
+
+
         public Form1()
         {
             InitializeComponent();
@@ -433,6 +442,9 @@ namespace unilab2023
                 label1.Text = "クリア！！";
                 label1.Visible = true;
                 button5.Visible = true;
+
+                
+                
             }
             else
             {
@@ -456,6 +468,30 @@ namespace unilab2023
                 {
                     form2.stageName = "stage5-2";
                 }
+
+                //stageClear = form2.stageClear;
+
+                if(label1.Text == "クリア！！")
+                {
+                    if (stageName == "stage1-3")
+                    {
+                        form2.stageClear[0] = true;
+                    }
+                    else if (stageName == "stage2-2")
+                    {
+                        form2.stageClear[1] = true;
+                    }
+                    else if (stageName == "stage3-2")
+                    {
+                        form2.stageClear[2] = true;
+                    }
+                    else if (stageName == "stage4-2")
+                    {
+                        form2.stageClear[3] = true;
+                    }
+                }
+
+                form2.stageClear = stageClear;
                 form2.Show();
                 this.Close();
                 return;
