@@ -369,7 +369,7 @@ namespace unilab2023
                     button10.Visible = true;
                     button9.Visible = true;
                     //button8.Visible = true;
-                    button13.Visible = true;
+                    //button13.Visible = true;
                     //button12.Visible = true;
                     //button11.Visible = true;
 
@@ -385,9 +385,17 @@ namespace unilab2023
                     button10.Enabled = true;
                     button9.Enabled = true;
                     //button8.Enabled = true;
-                    button13.Enabled = true;
+                    //button13.Enabled = true;
                     //button12.Enabled = true;
                     //button11.Enabled = true;
+
+                    //groupBox5.Visible = false;
+                    if (stageClear[0] && stageClear[1] && stageClear[2] && stageClear[3])
+                    {
+                        button13.Enabled = true;
+                        button13.Visible = true;
+                        //groupBox5.Visible = true;
+                    }
                     break;
             }
 

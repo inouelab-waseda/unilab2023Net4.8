@@ -392,7 +392,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(125, 490);
+            this.pictureBox1.Location = new System.Drawing.Point(49, 432);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(191, 192);
             this.pictureBox1.TabIndex = 9;
@@ -412,7 +412,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Location = new System.Drawing.Point(914, 726);
+            this.pictureBox3.Location = new System.Drawing.Point(1067, 225);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(191, 192);
             this.pictureBox3.TabIndex = 11;
@@ -422,7 +422,7 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.Location = new System.Drawing.Point(1246, 509);
+            this.pictureBox4.Location = new System.Drawing.Point(1157, 717);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(191, 192);
             this.pictureBox4.TabIndex = 12;

@@ -1881,7 +1881,7 @@ namespace unilab2023
                 return;
             }else if(stageName != "stage1-1"){
                 listBox2.Visible = true;
-                listBox5.Visible = true;
+                //listBox5.Visible = true;
 
                 pictureBox4.Visible = true;
                 pictureBox5.Visible = true;
@@ -1935,7 +1935,7 @@ namespace unilab2023
                 else if (stageName != "stage1-1")
                 {
                     listBox2.Visible = true;
-                    listBox5.Visible = true;
+                    
 
                     pictureBox4.Visible = true;
                     pictureBox5.Visible = true;
