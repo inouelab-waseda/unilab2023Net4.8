@@ -138,6 +138,15 @@ namespace unilab2023
         }
 
 
+        //おとも状況受け渡し
+        private static bool[] _stageClear = new bool[4]; //たぬき、きつね、あざらし、フクロウ
+        public bool[] stageClear
+        {
+            get { return _stageClear; }
+            set { _stageClear = value; }
+        }
+
+
         public Form1()
         {
             InitializeComponent();
@@ -439,6 +448,11 @@ namespace unilab2023
                 button6.Enabled = false;
                 button5.Visible = true;
                 label7.Visible = true;
+                pictureBox4.Visible = false;
+                pictureBox5.Visible = false;
+                pictureBox6.Visible = false;
+                pictureBox7.Visible = false;
+
             }
             else
             {
@@ -462,6 +476,30 @@ namespace unilab2023
                 {
                     form2.stageName = "stage5-2";
                 }
+
+                //stageClear = form2.stageClear;
+
+                if(label1.Text == "クリア！！")
+                {
+                    if (stageName == "stage1-3")
+                    {
+                        form2.stageClear[0] = true;
+                    }
+                    else if (stageName == "stage2-2")
+                    {
+                        form2.stageClear[1] = true;
+                    }
+                    else if (stageName == "stage3-2")
+                    {
+                        form2.stageClear[2] = true;
+                    }
+                    else if (stageName == "stage4-2")
+                    {
+                        form2.stageClear[3] = true;
+                    }
+                }
+
+                form2.stageClear = stageClear;
                 form2.Show();
                 this.Close();
                 return;
@@ -948,6 +986,61 @@ namespace unilab2023
                     }
                 }
             }
+
+
+            Bitmap bmp5, bmp6, bmp7, bmp8;
+            Image[] img_otomo = new Image[4] {
+                Image.FromFile("キャラ_たぬき.png"),
+                Image.FromFile("キャラ_きつね.png"),
+                Image.FromFile("キャラ_あざらし.png"),
+                Image.FromFile("キャラ_ふくろう.png")
+            };
+            bmp5 = new Bitmap(pictureBox4.Width, pictureBox4.Height);
+            bmp6 = new Bitmap(pictureBox5.Width, pictureBox5.Height);
+            bmp7 = new Bitmap(pictureBox6.Width, pictureBox6.Height);
+            bmp8 = new Bitmap(pictureBox7.Width, pictureBox7.Height);
+            pictureBox4.Image = bmp5;
+            pictureBox5.Image = bmp6;
+            pictureBox6.Image = bmp7;
+            pictureBox7.Image = bmp8;
+
+
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    // pictureBox2を同期的にRefreshする
+            //    pictureBox2.Refresh();
+            //});
+
+            if (stageClear[0])
+            {
+                //pictureBox4.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp5);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[0], 0, 0, 100, 100);
+
+            }
+            if (stageClear[1])
+            {
+                //pictureBox5.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp6);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[1], 0, 0, 100, 100);
+            }
+            if (stageClear[2])
+            {
+                //pictureBox6.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp7);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[2], 0, 0, 100, 100);
+            }
+            if (stageClear[3])
+            {
+                //pictureBox7.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp8);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[3], 0, 0, 100, 100);
+            }
+
 
             return map;
         }
@@ -1787,11 +1880,28 @@ namespace unilab2023
                 //ストーリー強制視聴解除
                 listBox2.Enabled = true;
                 listBox5.Enabled = true;
+
+                pictureBox4.Visible = true;
+                pictureBox5.Visible = true;
+                pictureBox6.Visible = true;
+                pictureBox7.Visible = true;
                 label7.Visible = false;
                 button1.Enabled = true;
                 button6.Enabled = true;
                 button5.Enabled = true;
                 return;
+                //}else if(stageName != "stage1-1")
+                //{
+                //    listBox2.Visible = true;
+                //    //listBox5.Visible = true;
+
+                //    pictureBox4.Visible = true;
+                //    pictureBox5.Visible = true;
+                //    pictureBox6.Visible = true;
+                //    pictureBox7.Visible = true;
+                //    label7.Visible = false;
+                //    conversationCounter += 1;
+                //}
             }
             else if (play_num > 0)
             {
@@ -1828,10 +1938,28 @@ namespace unilab2023
                     label7.Visible = false;
                     listBox2.Enabled = true;
                     listBox5.Enabled = true;
+
+
+                    pictureBox4.Visible = true;
+                    pictureBox5.Visible = true;
+                    pictureBox6.Visible = true;
+                    pictureBox7.Visible = true;
                     button1.Enabled = true;
                     button6.Enabled = true;
                     button5.Enabled = true;
                 }
+                //else if (stageName != "stage1-1")
+                //{
+                //    listBox2.Visible = true;
+                    
+
+                //    pictureBox4.Visible = true;
+                //    pictureBox5.Visible = true;
+                //    pictureBox6.Visible = true;
+                //    pictureBox7.Visible = true;
+                //    //label7.Visible = false;
+                //    //conversationCounter += 1;
+                //}
             }
             else
             {
@@ -1845,7 +1973,7 @@ namespace unilab2023
             int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
             if (end_num > 0)
             {
-                button5.Enabled = true;
+                //button5.Enabled = true;
             }
         }
 
@@ -1939,6 +2067,11 @@ namespace unilab2023
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

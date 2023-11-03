@@ -11,11 +11,13 @@ using System.Windows.Forms;
 namespace unilab2023
 {
 
+    
 
 
     public partial class ステージ選択画面 : Form
     {
         string selectedStageName;
+        bool[] otomo;
 
         public ステージ選択画面()
         {
@@ -30,6 +32,13 @@ namespace unilab2023
             set { _stageName = value; }
         }
 
+
+        public static bool[] _stageClear = new bool[4];  //たぬき、きつね、あざらし、フクロウ
+        public bool[] stageClear
+        {
+            get { return _stageClear; }
+            set { _stageClear = value; }
+        }
 
 
         private void ステージ選択画面_Load(object sender, EventArgs e)
@@ -360,7 +369,7 @@ namespace unilab2023
                     button10.Visible = true;
                     button9.Visible = true;
                     //button8.Visible = true;
-                    button13.Visible = true;
+                    //button13.Visible = true;
                     //button12.Visible = true;
                     //button11.Visible = true;
 
@@ -376,17 +385,86 @@ namespace unilab2023
                     button10.Enabled = true;
                     button9.Enabled = true;
                     //button8.Enabled = true;
-                    button13.Enabled = true;
+                    //button13.Enabled = true;
                     //button12.Enabled = true;
                     //button11.Enabled = true;
+
+                    //groupBox5.Visible = false;
+                    if (stageClear[0] && stageClear[1] && stageClear[2] && stageClear[3])
+                    {
+                        button13.Enabled = true;
+                        button13.Visible = true;
+                        //groupBox5.Visible = true;
+                    }
                     break;
             }
+
+
+            //おとも表示
+            Bitmap bmp1, bmp2, bmp3, bmp4;
+            Image[] img_otomo = new Image[4] {
+                Image.FromFile("キャラ_たぬき.png"),
+                Image.FromFile("キャラ_きつね.png"),
+                Image.FromFile("キャラ_あざらし.png"),
+                Image.FromFile("キャラ_ふくろう.png")
+            };
+            bmp1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            bmp2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            bmp3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            bmp4 = new Bitmap(pictureBox4.Width, pictureBox4.Height);
+            pictureBox1.Image = bmp1;
+            pictureBox2.Image = bmp2;
+            pictureBox3.Image = bmp3;
+            pictureBox4.Image = bmp4;
+
+
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    // pictureBox2を同期的にRefreshする
+            //    pictureBox2.Refresh();
+            //});
+
+            if (stageClear[0])
+            {
+                pictureBox1.Visible = true;
+                Graphics g1 = Graphics.FromImage(bmp1);
+                g1.Clear(Color.Transparent);
+                g1.DrawImage(img_otomo[0], 0, 0, 100, 100);
+
+            }
+            if (stageClear[1])
+            {
+                pictureBox2.Visible = true;
+                Graphics g1 = Graphics.FromImage(bmp2);
+                g1.Clear(Color.Transparent);
+                g1.DrawImage(img_otomo[1], 0, 0, 100, 100);
+            }
+            if (stageClear[2])
+            {
+                pictureBox3.Visible = true;
+                Graphics g1 = Graphics.FromImage(bmp3);
+                g1.Clear(Color.Transparent);
+                g1.DrawImage(img_otomo[2], 0, 0, 100, 100);
+            }
+            if (stageClear[3])
+            {
+                pictureBox4.Visible = true;
+                Graphics g1 = Graphics.FromImage(bmp4);
+                g1.Clear(Color.Transparent);
+                g1.DrawImage(img_otomo[3], 0, 0, 100, 100);
+            }
+
+
         }
-        
+
         private void createForm1(string selectedStageName)
         {
             Form1 form1 = new Form1();
             form1.stageName = selectedStageName;
+            form1.stageClear[0] = stageClear[0];
+            form1.stageClear[1] = stageClear[1];
+            form1.stageClear[2] = stageClear[2];
+            form1.stageClear[3] = stageClear[3];
             this.Close();
             form1.Show();
         }
