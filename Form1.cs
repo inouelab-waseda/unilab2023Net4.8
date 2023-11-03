@@ -447,7 +447,12 @@ namespace unilab2023
                 button5.Enabled = false;
                 button6.Enabled = false;
                 button5.Visible = true;
-                //label7.Visible = true;
+                label7.Visible = true;
+                pictureBox4.Visible = false;
+                pictureBox5.Visible = false;
+                pictureBox6.Visible = false;
+                pictureBox7.Visible = false;
+
             }
             else
             {
@@ -1885,16 +1890,18 @@ namespace unilab2023
                 button6.Enabled = true;
                 button5.Enabled = true;
                 return;
-            }else if(stageName != "stage1-1"){
-                listBox2.Visible = true;
-                //listBox5.Visible = true;
+                //}else if(stageName != "stage1-1")
+                //{
+                //    listBox2.Visible = true;
+                //    //listBox5.Visible = true;
 
-                pictureBox4.Visible = true;
-                pictureBox5.Visible = true;
-                pictureBox6.Visible = true;
-                pictureBox7.Visible = true;
-                label7.Visible = false;
-                conversationCounter += 1;
+                //    pictureBox4.Visible = true;
+                //    pictureBox5.Visible = true;
+                //    pictureBox6.Visible = true;
+                //    pictureBox7.Visible = true;
+                //    label7.Visible = false;
+                //    conversationCounter += 1;
+                //}
             }
             else if (play_num > 0)
             {
@@ -1941,18 +1948,18 @@ namespace unilab2023
                     button6.Enabled = true;
                     button5.Enabled = true;
                 }
-                else if (stageName != "stage1-1")
-                {
-                    listBox2.Visible = true;
+                //else if (stageName != "stage1-1")
+                //{
+                //    listBox2.Visible = true;
                     
 
-                    pictureBox4.Visible = true;
-                    pictureBox5.Visible = true;
-                    pictureBox6.Visible = true;
-                    pictureBox7.Visible = true;
-                    label7.Visible = false;
-                    //conversationCounter += 1;
-                }
+                //    pictureBox4.Visible = true;
+                //    pictureBox5.Visible = true;
+                //    pictureBox6.Visible = true;
+                //    pictureBox7.Visible = true;
+                //    //label7.Visible = false;
+                //    //conversationCounter += 1;
+                //}
             }
             else
             {
