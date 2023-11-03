@@ -371,7 +371,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(890, 682);
             this.label7.TabIndex = 28;
-            this.label7.Text = "             　　　　　　　　　　　　　　　　　　　　　　 まずは左下のストーリー　 を見てね！     　　　　　  　左下の画面にクリック　　 す" +
+            this.label7.Text = "             　　　　　　　　　　　　　　　　　　　　　　 まずは左下のストーリー　 を見てね！     　　　　　  　左下の画面をクリック　　 す" +
     "るとストーリーが進　　 むよ！";
             // 
             // Form1
