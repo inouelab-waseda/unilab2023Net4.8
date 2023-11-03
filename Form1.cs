@@ -979,6 +979,61 @@ namespace unilab2023
                 }
             }
 
+
+            Bitmap bmp5, bmp6, bmp7, bmp8;
+            Image[] img_otomo = new Image[4] {
+                Image.FromFile("キャラ_たぬき.png"),
+                Image.FromFile("キャラ_きつね.png"),
+                Image.FromFile("キャラ_あざらし.png"),
+                Image.FromFile("キャラ_ふくろう.png")
+            };
+            bmp5 = new Bitmap(pictureBox4.Width, pictureBox4.Height);
+            bmp6 = new Bitmap(pictureBox5.Width, pictureBox5.Height);
+            bmp7 = new Bitmap(pictureBox6.Width, pictureBox6.Height);
+            bmp8 = new Bitmap(pictureBox7.Width, pictureBox7.Height);
+            pictureBox4.Image = bmp5;
+            pictureBox5.Image = bmp6;
+            pictureBox6.Image = bmp7;
+            pictureBox7.Image = bmp8;
+
+
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    // pictureBox2を同期的にRefreshする
+            //    pictureBox2.Refresh();
+            //});
+
+            if (stageClear[0])
+            {
+                pictureBox4.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp5);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[0], 0, 0, 100, 100);
+
+            }
+            if (stageClear[1])
+            {
+                pictureBox5.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp6);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[1], 0, 0, 100, 100);
+            }
+            if (stageClear[2])
+            {
+                pictureBox6.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp7);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[2], 0, 0, 100, 100);
+            }
+            if (stageClear[3])
+            {
+                pictureBox7.Visible = true;
+                Graphics graphi = Graphics.FromImage(bmp8);
+                graphi.Clear(Color.Transparent);
+                graphi.DrawImage(img_otomo[3], 0, 0, 100, 100);
+            }
+
+
             return map;
         }
 

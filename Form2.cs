@@ -410,11 +410,11 @@ namespace unilab2023
             pictureBox4.Image = bmp4;
 
 
-            this.Invoke((MethodInvoker)delegate
-            {
-                // pictureBox2を同期的にRefreshする
-                pictureBox2.Refresh();
-            });
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    // pictureBox2を同期的にRefreshする
+            //    pictureBox2.Refresh();
+            //});
 
             if (stageClear[0])
             {
