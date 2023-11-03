@@ -1973,7 +1973,7 @@ namespace unilab2023
             int end_num = Global.Conversations[conversationCounter].dialogue.IndexOf("終わり");
             if (end_num > 0)
             {
-                button5.Enabled = true;
+                //button5.Enabled = true;
             }
         }
 
