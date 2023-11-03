@@ -32,12 +32,12 @@ namespace unilab2023
             set { _stageName = value; }
         }
 
-        private bool[] _stageClear=new bool[16];//ステージをクリアしたか
-        public bool[] stageClear
-        {
-            get { return _stageClear; }
-            set { _stageClear = value; }
-        }
+        //private bool[] _stageClear=new bool[16];//ステージをクリアしたか
+        //public bool[] stageClear
+        //{
+        //    get { return _stageClear; }
+        //    set { _stageClear = value; }
+        //}
 
 
         public static bool[] _stageClear = new bool[4];  //たぬき、きつね、あざらし、フクロウ
@@ -602,6 +602,10 @@ namespace unilab2023
                 ステージ選択画面 form2 = new ステージ選択画面();
                 form2.stageName = "stage5-2";
                 form2.Show();
+                for(int i = 0; i < 4; i++)
+                {
+                    stageClear[i] = true;
+                }
             }
         }
 

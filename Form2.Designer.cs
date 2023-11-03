@@ -33,9 +33,9 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -138,20 +138,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
-            // button14
-            // 
-            this.button14.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
-            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button14.Font = new System.Drawing.Font("游明朝 Demibold", 22.2F, System.Drawing.FontStyle.Bold);
-            this.button14.Location = new System.Drawing.Point(105, 170);
-            this.button14.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(300, 70);
-            this.button14.TabIndex = 5;
-            this.button14.Text = "3 - 裏";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
             // button15
             // 
             this.button15.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
@@ -181,6 +167,20 @@
             this.button16.UseMnemonic = false;
             this.button16.UseVisualStyleBackColor = false;
             this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button14
+            // 
+            this.button14.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
+            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button14.Font = new System.Drawing.Font("游明朝 Demibold", 22.2F, System.Drawing.FontStyle.Bold);
+            this.button14.Location = new System.Drawing.Point(105, 170);
+            this.button14.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(300, 70);
+            this.button14.TabIndex = 5;
+            this.button14.Text = "3 - 裏";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // groupBox4
             // 
@@ -352,7 +352,7 @@
             this.button2.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.Font = new System.Drawing.Font("游明朝 Demibold", 16F, System.Drawing.FontStyle.Bold);
-            this.button2.Location = new System.Drawing.Point(10, 170);
+            this.button2.Location = new System.Drawing.Point(10, 180);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 50);
@@ -377,10 +377,10 @@
             // 
             // button17
             // 
-            this.button17.Font = new System.Drawing.Font("游明朝", 18F);
-            this.button17.Location = new System.Drawing.Point(1547, 27);
+            this.button17.Font = new System.Drawing.Font("游明朝 Demibold", 22.2F, System.Drawing.FontStyle.Bold);
+            this.button17.Location = new System.Drawing.Point(1750, 12);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(246, 51);
+            this.button17.Size = new System.Drawing.Size(250, 51);
             this.button17.TabIndex = 8;
             this.button17.Text = "裏ステージへ";
             this.button17.UseVisualStyleBackColor = true;
