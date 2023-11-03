@@ -45,10 +45,10 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -65,7 +65,7 @@
             this.groupBox5.Controls.Add(this.button11);
             this.groupBox5.Controls.Add(this.button12);
             this.groupBox5.Controls.Add(this.button13);
-            this.groupBox5.Location = new System.Drawing.Point(1349, 170);
+            this.groupBox5.Location = new System.Drawing.Point(1384, 168);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -118,9 +118,9 @@
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.BackgroundImage = global::unilab2023.Properties.Resources.あざらしの湖;
             this.groupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox3.Controls.Add(this.button14);
             this.groupBox3.Controls.Add(this.button15);
             this.groupBox3.Controls.Add(this.button16);
+            this.groupBox3.Controls.Add(this.button14);
             this.groupBox3.Location = new System.Drawing.Point(777, 409);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
@@ -182,7 +182,7 @@
             this.groupBox4.Controls.Add(this.button9);
             this.groupBox4.Controls.Add(this.button10);
             this.groupBox4.Controls.Add(this.button8);
-            this.groupBox4.Location = new System.Drawing.Point(1384, 578);
+            this.groupBox4.Location = new System.Drawing.Point(1349, 668);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -201,7 +201,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 70);
             this.button9.TabIndex = 4;
-            this.button9.Text = "4 の 2";
+            this.button9.Text = "4 - 2";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -229,7 +229,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(300, 70);
             this.button8.TabIndex = 5;
-            this.button8.Text = "4 の裏";
+            this.button8.Text = "4 - 裏";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -302,7 +302,7 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Cursor = System.Windows.Forms.Cursors.No;
-            this.groupBox1.Location = new System.Drawing.Point(97, 549);
+            this.groupBox1.Location = new System.Drawing.Point(71, 698);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
@@ -310,20 +310,6 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Font = new System.Drawing.Font("游明朝 Demibold", 22.2F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(162, 170);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(301, 70);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "1  - 裏";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button4
             // 
@@ -335,7 +321,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 70);
             this.button4.TabIndex = 5;
-            this.button4.Text = "1 - 3";
+            this.button4.Text = "1 - 2";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -366,6 +352,20 @@
             this.button2.Text = "1 - 0";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::unilab2023.Properties.Resources.ボタン枠140_65;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Font = new System.Drawing.Font("游明朝 Demibold", 22.2F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(162, 170);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(301, 70);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "1  - 裏";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button17
             // 

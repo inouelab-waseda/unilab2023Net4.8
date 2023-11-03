@@ -139,5 +139,25 @@ namespace unilab2023.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap わせ忍_背景_薄白 {
+            get {
+                object obj = ResourceManager.GetObject("わせ忍_背景_薄白", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap わせ忍_背景_表 {
+            get {
+                object obj = ResourceManager.GetObject("わせ忍_背景_表", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
