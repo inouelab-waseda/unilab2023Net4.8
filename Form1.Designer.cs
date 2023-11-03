@@ -381,6 +381,7 @@
             this.label7.TabIndex = 28;
             this.label7.Text = "             　　　　　　　　　　　　　　　　　　　　　　 まずは左下のストーリー　 を見てね！     　　　　　  　左下の画面をクリック　　 す" +
     "るとストーリーが進　　 むよ！";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // pictureBox4
             // 

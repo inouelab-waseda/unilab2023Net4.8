@@ -1005,7 +1005,7 @@ namespace unilab2023
 
             if (stageClear[0])
             {
-                pictureBox4.Visible = true;
+                //pictureBox4.Visible = true;
                 Graphics graphi = Graphics.FromImage(bmp5);
                 graphi.Clear(Color.Transparent);
                 graphi.DrawImage(img_otomo[0], 0, 0, 100, 100);
@@ -1013,21 +1013,21 @@ namespace unilab2023
             }
             if (stageClear[1])
             {
-                pictureBox5.Visible = true;
+                //pictureBox5.Visible = true;
                 Graphics graphi = Graphics.FromImage(bmp6);
                 graphi.Clear(Color.Transparent);
                 graphi.DrawImage(img_otomo[1], 0, 0, 100, 100);
             }
             if (stageClear[2])
             {
-                pictureBox6.Visible = true;
+                //pictureBox6.Visible = true;
                 Graphics graphi = Graphics.FromImage(bmp7);
                 graphi.Clear(Color.Transparent);
                 graphi.DrawImage(img_otomo[2], 0, 0, 100, 100);
             }
             if (stageClear[3])
             {
-                pictureBox7.Visible = true;
+                //pictureBox7.Visible = true;
                 Graphics graphi = Graphics.FromImage(bmp8);
                 graphi.Clear(Color.Transparent);
                 graphi.DrawImage(img_otomo[3], 0, 0, 100, 100);
@@ -1872,8 +1872,23 @@ namespace unilab2023
                 //ストーリー強制視聴解除
                 listBox2.Enabled = true;
                 listBox5.Enabled = true;
+
+                pictureBox4.Visible = true;
+                pictureBox5.Visible = true;
+                pictureBox6.Visible = true;
+                pictureBox7.Visible = true;
                 label7.Visible = false;
                 return;
+            }else if(stageName != "stage1-1"){
+                listBox2.Visible = true;
+                listBox5.Visible = true;
+
+                pictureBox4.Visible = true;
+                pictureBox5.Visible = true;
+                pictureBox6.Visible = true;
+                pictureBox7.Visible = true;
+                label7.Visible = false;
+                conversationCounter += 1;
             }
             else if (play_num > 0)
             {
@@ -1910,6 +1925,24 @@ namespace unilab2023
                     label7.Visible = false;
                     listBox2.Enabled = true;
                     listBox5.Enabled = true;
+
+
+                    pictureBox4.Visible = true;
+                    pictureBox5.Visible = true;
+                    pictureBox6.Visible = true;
+                    pictureBox7.Visible = true;
+                }
+                else if (stageName != "stage1-1")
+                {
+                    listBox2.Visible = true;
+                    listBox5.Visible = true;
+
+                    pictureBox4.Visible = true;
+                    pictureBox5.Visible = true;
+                    pictureBox6.Visible = true;
+                    pictureBox7.Visible = true;
+                    label7.Visible = false;
+                    //conversationCounter += 1;
                 }
             }
             else
@@ -2018,6 +2051,11 @@ namespace unilab2023
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
