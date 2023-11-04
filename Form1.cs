@@ -408,6 +408,7 @@ namespace unilab2023
             listBox5.Enabled = false;
             button1.Enabled = false;
             button6.Enabled = false;
+            button8.Enabled = false;
             drawConversation();
         }
 
@@ -499,6 +500,8 @@ namespace unilab2023
                 button5.Enabled = false;
                 button6.Enabled = false;
                 button5.Visible = true;
+                button5.Location = new Point(800, 600);
+                button5.Size = new Size(200, 50);
                 label7.Visible = true;
                 pictureBox4.Visible = false;
                 pictureBox5.Visible = false;
@@ -1960,6 +1963,7 @@ namespace unilab2023
                 button1.Enabled = true;
                 button6.Enabled = true;
                 button5.Enabled = true;
+                button8.Enabled = true;
                 return;
                 //}else if(stageName != "stage1-1")
                 //{
@@ -2018,6 +2022,7 @@ namespace unilab2023
                     button1.Enabled = true;
                     button6.Enabled = true;
                     button5.Enabled = true;
+                    button8.Enabled = true;
                 }
                 //else if (stageName != "stage1-1")
                 //{
@@ -2053,6 +2058,13 @@ namespace unilab2023
             conversation();
         }
 
+        private void Form1_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.M)
+            {
+                resetStage("quit");
+            }
+        }
         //public void OtomoDraw(bool[] stageClear)
         //{
         //    //    Graphics g1 = Graphics.FromImage(bmp1);

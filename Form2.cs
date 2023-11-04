@@ -601,11 +601,11 @@ namespace unilab2023
                 this.Close();
                 ステージ選択画面 form2 = new ステージ選択画面();
                 form2.stageName = "stage5-2";
-                form2.Show();
                 for(int i = 0; i < 4; i++)
                 {
                     stageClear[i] = true;
                 }
+                form2.Show();
             }
         }
 
