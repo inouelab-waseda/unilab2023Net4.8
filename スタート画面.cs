@@ -189,6 +189,7 @@ namespace unilab2023
             else
             {
                 button1.Enabled = true;
+                button2.Visible = true;
                 button2.Text = "はじめる";
                 return;
             }
@@ -206,7 +207,6 @@ namespace unilab2023
 
             button1.Visible = false;
             button1.Enabled = false;
-            button2.Visible = true;
             Graphics g1 = Graphics.FromImage(bmp1);
             g1.Clear(TransparencyKey);
             flag_button = true;
@@ -238,6 +238,14 @@ namespace unilab2023
             createForm1("stage1-1");
         }
 
+        private void スタート画面_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.M)
+            {
+                createForm1("stage1-1");
+            }
+        }
         /* button fin */
+
     }
 }
