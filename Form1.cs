@@ -1186,6 +1186,11 @@ namespace unilab2023
 
                             do
                             {
+                                if (k >= get_move_a_list.Count)
+                                {
+                                    MessageBox.Show("「連チャンの術」と「連チャンの術おわり」はセットで使ってください");
+                                    return new List<int[]>();
+                                }
                                 if (get_move_a_list[k].StartsWith("for")) //二重ループ
                                 {
                                     int trial2 = int.Parse(Regex.Replace(get_move_a_list[k], @"[^0-9]", ""));
@@ -1285,6 +1290,11 @@ namespace unilab2023
                             int k = start;
                             do
                             {
+                                if (k >= get_move_b_list.Count)
+                                {
+                                    MessageBox.Show("「連チャンの術」と「連チャンの術おわり」はセットで使ってください");
+                                    return new List<int[]>();
+                                }
                                 if (get_move_b_list[k].StartsWith("for")) //二重ループ
                                 {
                                     int trial2 = int.Parse(Regex.Replace(get_move_b_list[k], @"[^0-9]", ""));
@@ -1388,6 +1398,11 @@ namespace unilab2023
                             int k = start;
                             do
                             {
+                                if (k >= get_move_main.Length)
+                                {
+                                    MessageBox.Show("「連チャンの術」と「連チャンの術おわり」はセットで使ってください");
+                                    return new List<int[]>();
+                                }
                                 if (get_move_main[k].StartsWith("for")) //二重ループ
                                 {
                                     int trial2 = int.Parse(Regex.Replace(get_move_main[k], @"[^0-9]", ""));
@@ -1523,7 +1538,7 @@ namespace unilab2023
                 {
                     string str_num = Regex.Replace(newget_move[i], @"[^0-9]", "");
                     int num = int.Parse(str_num);
-                    newget_move[i] = "for (" + (num % 9).ToString() + ")";
+                    newget_move[i] = "for (" + (num % 10).ToString() + ")";
                 }
                 if (newget_move[i].StartsWith("連チャンの術おわり"))
                 {
@@ -1628,6 +1643,8 @@ namespace unilab2023
                         //忍者を動かしてからミスの表示を出す
                         x += move_copy[0][0];
                         y += move_copy[0][1];
+                        Global.x_now = x;
+                        Global.y_now = y;
                         g2.Clear(Color.Transparent);
                         character_me = Ninja_Image(move_copy[0][0], move_copy[0][1], Global.count, jump, character_me);
                         g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
@@ -1730,7 +1747,7 @@ namespace unilab2023
                     pictureBox2.Refresh();
                 });
 
-                if (Map[y, x] == 101)
+                if (Map[y, x] == 101 && Map[y - move_copy[0][1], x - move_copy[0][0]] != 3)
                 {
                     character_me = Image.FromFile("忍者_正面.png");
                     g2.DrawImage(character_me, x * cell_length - extra_length, y * cell_length - 2 * extra_length, cell_length + 2 * extra_length, cell_length + 2 * extra_length);
