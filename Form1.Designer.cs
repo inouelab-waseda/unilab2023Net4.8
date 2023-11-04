@@ -379,9 +379,9 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.Location = new System.Drawing.Point(1082, 501);
+            this.pictureBox4.Location = new System.Drawing.Point(1050, 501);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox4.Size = new System.Drawing.Size(130, 130);
             this.pictureBox4.TabIndex = 29;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Visible = false;
@@ -389,9 +389,9 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox5.Location = new System.Drawing.Point(1202, 501);
+            this.pictureBox5.Location = new System.Drawing.Point(1200, 501);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox5.Size = new System.Drawing.Size(130, 130);
             this.pictureBox5.TabIndex = 30;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Visible = false;
@@ -399,9 +399,9 @@
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox6.Location = new System.Drawing.Point(1082, 621);
+            this.pictureBox6.Location = new System.Drawing.Point(1050, 621);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox6.Size = new System.Drawing.Size(130, 130);
             this.pictureBox6.TabIndex = 31;
             this.pictureBox6.TabStop = false;
             this.pictureBox6.Visible = false;
@@ -409,9 +409,9 @@
             // pictureBox7
             // 
             this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox7.Location = new System.Drawing.Point(1202, 621);
+            this.pictureBox7.Location = new System.Drawing.Point(1200, 621);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox7.Size = new System.Drawing.Size(130, 130);
             this.pictureBox7.TabIndex = 32;
             this.pictureBox7.TabStop = false;
             this.pictureBox7.Visible = false;
